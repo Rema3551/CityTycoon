@@ -35,6 +35,9 @@ class Building:
     
     def setNiveau(self, nouveauNiveau):
         self.niveau = nouveauNiveau
+
+    def ajouterNiveau(self):
+        self.setNiveau((self.getNiveau()+1))
     
     def setMultiplicateur(self, nouveauMultiplicateur):
         self.multiplicateur = nouveauMultiplicateur
