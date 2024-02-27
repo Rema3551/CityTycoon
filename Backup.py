@@ -14,4 +14,9 @@ def backup(source, destination):
 source = '/chemin/vers/le/dossier/source'
 destination = '/chemin/vers/le/dossier/de/sauvegarde'
 
+<<<<<<< Updated upstream
 backup(source, destination)
+=======
+backup(source, destination)
+#coucou je suis trop le boss
+>>>>>>> Stashed changes
