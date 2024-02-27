@@ -15,4 +15,3 @@ source = '/chemin/vers/le/dossier/source'
 destination = '/chemin/vers/le/dossier/de/sauvegarde'
 
 backup(source, destination)
-#jkdzabkjzjkbndzqkjbnzbkj
