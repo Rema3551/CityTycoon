@@ -1,8 +1,10 @@
 import pygame
+import pytmx
+import pyscroll
 from Button import *
 from Game import *
 
-class Display:
+class Affichage:
     """
     Attributs:
         -map

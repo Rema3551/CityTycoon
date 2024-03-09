@@ -1,9 +1,6 @@
-import pygame
-import pytmx
-import pyscroll
 from Building import * 
-from Display import *
-from Player import * 
+from Player import *
+from Affichage import *
 
 class Game:
     def __init__(self):
@@ -11,9 +8,9 @@ class Game:
         self.bidonville2 = Building(30,10)
         self.bidonville = [self.bidonville1, self.bidonville2]
         
-        self.display = Display()
+        self.affichage = Affichage()
         self.player = Player()
 
     def print(self):
-        self.display.draw()
-        self.display.flip()
+        self.affichage.draw()
+        self.affichage.flip()
