@@ -1,4 +1,6 @@
 import pygame
+import pytmx
+import pyscroll
 from Building import * 
 from Display import *
 from Player import * 
