@@ -1,17 +1,33 @@
-import shutil
-import os
-
-def backup(source, destination):
+import pickle
+ 
+class MyClass():
+    def __init__(self, param):
+        self.param = param
+ 
+def save_object(obj):
     try:
-        shutil.copytree(source, destination)
-        print("Sauvegarde réussie !")
-    except shutil.Error as e:
-        print(f"Erreur lors de la sauvegarde : {e}")
-    except Exception as e:
-        print(f"Erreur inattendue : {e}")
+        with open("data.pickle", "wb") as f:
+            pickle.dump(obj, f, protocol=pickle.HIGHEST_PROTOCOL)
+    except Exception as ex:
+        print("Error during pickling object (Possibly unsupported):", ex)
+ 
+obj = MyClass(10)
+save_object(obj)
 
-# Exemple d'utilisation :
-source = '/chemin/vers/le/dossier/source'
-destination = '/chemin/vers/le/dossier/de/sauvegarde'
-
-backup(source, destination)
+import pickle
+ 
+class MyClass():
+    def __init__(self, param):
+        self.param = param
+ 
+def load_object(filename):
+    try:
+        with open(filename, "rb") as f:
+            return pickle.load(f)
+    except Exception as ex:
+        print("Error during unpickling object (Possibly unsupported):", ex)
+ 
+obj = load_object("data.pickle")
+ 
+print(obj.param)
+print(isinstance(obj, MyClass))
