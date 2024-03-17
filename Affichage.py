@@ -16,6 +16,8 @@ class Affichage:
     def __init__(self):
         pygame.init()
         pygame.display.set_caption("City Tycoon")
+        icon = pygame.image.load('assets/pdp.png')
+        pygame.display.set_icon(icon)
         self.screen = pygame.display.set_mode((800,800))
         self.green = (0, 255, 0)
         self.blue = (0, 0, 128)
@@ -29,7 +31,8 @@ class Affichage:
         self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=1)
         self.group.add(self.player)
         
-        #self.dollars = pygame.image.load("assets/Images/dollars.png").convert_alpha()
+        
+        self.dollars = pygame.image.load("assets/Images/dollars.png").convert_alpha()
 
     def flip(self):
         pygame.display.flip()
@@ -41,7 +44,7 @@ class Affichage:
         affichage du jeu
         """
         self.group.draw(self.screen)
-        #self.screen.blit(self.dollars,(0,0))
+        self.screen.blit(self.dollars,(0,0))
         
         
         #textDollars = pygame.font.SysFont('comicsansms', 12).render(str(game.player.getDollars()), True, self.green)
