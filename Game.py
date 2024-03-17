@@ -12,22 +12,11 @@ class Game:
         #self.player = Player()
 
     def printGame(self):
-        self.inputGame()
+        self.affichage.player.sauvegardeLocation()
+        self.affichage.inputJoueur()
         self.affichage.update()
         self.affichage.draw(self)
         self.affichage.flip()
-        
-    def inputGame(self):
-        pressed = pygame.key.get_pressed()
-        
-        if pressed[pygame.K_UP]:
-            print("haut")
-        elif pressed[pygame.K_DOWN]:
-            print("bad")
-        elif pressed[pygame.K_LEFT]:
-            print("gauche")
-        elif pressed[pygame.K_RIGHT]:
-            print("droite")
         
         
         

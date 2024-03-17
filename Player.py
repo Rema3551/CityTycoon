@@ -26,9 +26,30 @@ class Player(pygame.sprite.Sprite):
         self.image.set_colorkey([0,0,0])
         self.rect = self.image.get_rect()
         self.position = [x, y]
-    
+        self.images = {
+            'down': self.get_image(0,0),
+            'left': self.get_image(2,82),
+            'right': self.get_image(3,163),
+            'up': self.get_image(0,246)
+        }
+        self.pieds = pygame.Rect(0,0,self.rect.width*0.5,12)
+        self.anciennePosition = self.position.copy()
+
+    def sauvegardeLocation(self):
+        self.anciennePosition = self.position.copy()
+        
+    def animation(self, name):
+        self.image = self.images[name]
+        self.image.set_colorkey([0,0,0])
+
     def update(self):
         self.rect.topleft = self.position
+        self.pieds.midbottom = self.rect.midbottom
+
+    def revenirEnArriere(self):
+        self.position = self.anciennePosition
+        self.rect.topleft = self.position
+        self.pieds.midbottom = self.rect.midbottom
         
     def get_image(self,x,y):
         image=pygame.Surface([49,69])

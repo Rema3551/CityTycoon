@@ -30,22 +30,37 @@ class Affichage:
         
         player_position = tmx_data.get_object_by_name("player")
         self.player = Player(player_position.x, player_position.y)
+
+        self.walls = []
+        
+        for obj in tmx_data.objects:
+            if obj.type == "collision":
+                self.walls.append(pygame.Rect(obj.x, obj.y, obj.width, obj.height))
+
+
         self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=1)
         self.group.add(self.player)
         
+
         
         #self.dollars = pygame.image.load("assets/Images/dollars.png").convert_alpha()
+
+
     def inputJoueur(self):
         pressed = pygame.key.get_pressed()
         
         if pressed[pygame.K_UP]:
             self.player.bougerHaut()
+            self.player.animation('up')
         elif pressed[pygame.K_DOWN]:
             self.player.bougerBas()
+            self.player.animation('down')
         elif pressed[pygame.K_LEFT]:
             self.player.bougerGauche()
+            self.player.animation('left')
         elif pressed[pygame.K_RIGHT]:
             self.player.bougerDroite()
+            self.player.animation('up')
 
     def flip(self):
         pygame.display.flip()
@@ -53,6 +68,10 @@ class Affichage:
     def update(self):
         self.group.update()
         self.group.center(self.player.rect)
+
+        for sprite in self.group.sprites():
+            if sprite.pieds.collidelist(self.walls) > -1:
+                sprite.revenirEnArriere()
         
 
     def draw(self, game:Game):

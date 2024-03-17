@@ -2,7 +2,7 @@ from Game import *
 import pygame
 game = Game()
 
-
+clock = pygame.time.Clock()
 
 running = True
 
@@ -15,3 +15,5 @@ while running:
             running=False
             pygame.quit()
             print("Fermeture du jeu")
+    
+    clock.tick(60)
