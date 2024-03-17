@@ -18,6 +18,7 @@ class Player(pygame.sprite.Sprite):
         self.niveau = 1
         self.electricite = 0
         self.eau = 0 
+        self.speed = 3
         
         super().__init__()
         self.sprite_sheet = pygame.image.load('assets/Images/player.png')
@@ -64,14 +65,16 @@ class Player(pygame.sprite.Sprite):
     def setEau(self, newEau):
         self.eau = newEau
     
-    def inputJoueur(self):
-        pressed = pygme.key.get_pressed()
-        
-        if pressed[pygame.K_UP]:
-            print("haut")
-        elif pressed[pygame.K_DOWN]:
-            print("bas")
-        elif pressed[pygame.K_LEFT]:
-            print("gauche")
-        elif pressed[pygame.K_RIGHT]:
-            print("droite")
+    
+    def bougerDroite(self) : 
+        self.position[0] += self.speed
+
+    def bougerGauche(self) : 
+        self.position[0] -= self.speed
+
+    def bougerHaut(self) : 
+        self.position[1] -= self.speed
+
+    def bougerBas(self) : 
+        self.position[1] += self.speed
+    

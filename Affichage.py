@@ -35,6 +35,17 @@ class Affichage:
         
         
         #self.dollars = pygame.image.load("assets/Images/dollars.png").convert_alpha()
+    def inputJoueur(self):
+        pressed = pygame.key.get_pressed()
+        
+        if pressed[pygame.K_UP]:
+            self.player.bougerHaut()
+        elif pressed[pygame.K_DOWN]:
+            self.player.bougerBas()
+        elif pressed[pygame.K_LEFT]:
+            self.player.bougerGauche()
+        elif pressed[pygame.K_RIGHT]:
+            self.player.bougerDroite()
 
     def flip(self):
         pygame.display.flip()
