@@ -12,7 +12,7 @@ class Player(pygame.sprite.Sprite):
         -mutateur
         -accesseur
     """
-    def __init__(self,x ,y):
+    def __init__(self,x,y):
         self.dollars = 0
         self.diamants = 0
         self.niveau = 1
@@ -27,11 +27,11 @@ class Player(pygame.sprite.Sprite):
         self.position = [x, y]
     
     def update(self):
-        self.rect.topleft = self.position 
+        self.rect.topleft = self.position
         
     def get_image(self,x,y):
-        image=pygame.Surface([32,32])
-        image.blit(self.sprite_sheet,(0,0),(x,y,32,32))
+        image=pygame.Surface([49,69])
+        image.blit(self.sprite_sheet,(0,0),(x,y,49,69))
         return image
         
     def getDollars(self):

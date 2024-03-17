@@ -166,8 +166,8 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="5" name="Objects">
-  <object id="1" name="player" x="151.19" y="513.095">
+ <objectgroup id="5" name="player">
+  <object id="1" name="player" x="143.454" y="515.305">
    <point/>
   </object>
  </objectgroup>

@@ -22,24 +22,26 @@ class Affichage:
         self.green = (0, 255, 0)
         self.blue = (0, 0, 128)
 
-        tmx_data = pytmx.util_pygame.load_pygame('assets/map/testMap.tmx')
+        tmx_data = pytmx.util_pygame.load_pygame('assets/map/ville1.tmx')
         map_data = pyscroll.data.TiledMapData(tmx_data)
         map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
         
         
-        self.player = Player(player_position.x, player_position.y)
+        
         player_position = tmx_data.get_object_by_name("player")
+        self.player = Player(player_position.x, player_position.y)
         self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=1)
         self.group.add(self.player)
         
         
-        self.dollars = pygame.image.load("assets/Images/dollars.png").convert_alpha()
+        #self.dollars = pygame.image.load("assets/Images/dollars.png").convert_alpha()
 
     def flip(self):
         pygame.display.flip()
     
     def update(self):
         self.group.update()
+        self.group.center(self.player.rect)
         
 
     def draw(self, game:Game):
@@ -47,7 +49,7 @@ class Affichage:
         affichage du jeu
         """
         self.group.draw(self.screen)
-        self.screen.blit(self.dollars,(0,0))
+        #self.screen.blit(self.dollars,(0,0))
         
         
         #textDollars = pygame.font.SysFont('comicsansms', 12).render(str(game.player.getDollars()), True, self.green)
