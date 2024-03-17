@@ -13,6 +13,7 @@ class Game:
 
     def printGame(self):
         self.inputGame()
+        self.affichage.update()
         self.affichage.draw(self)
         self.affichage.flip()
         

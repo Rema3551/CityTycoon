@@ -13,16 +13,16 @@ class Player(pygame.sprite.Sprite):
         -accesseur
     """
     def __init__(self,x ,y):
-        super().__init__()
         self.dollars = 0
         self.diamants = 0
         self.niveau = 1
         self.electricite = 0
         self.eau = 0 
         
-        self.sprite_sheet = pygame.image.load('assets/Images/testJoueur.png')
-        self.image = self.get_image(0 ,0)
-        self.image.set_colorkey([0, 0 ,0])
+        super().__init__()
+        self.sprite_sheet = pygame.image.load('assets/Images/player.png')
+        self.image = self.get_image(0,0)
+        self.image.set_colorkey([0,0,0])
         self.rect = self.image.get_rect()
         self.position = [x, y]
     

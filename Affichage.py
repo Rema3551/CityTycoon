@@ -26,8 +26,9 @@ class Affichage:
         map_data = pyscroll.data.TiledMapData(tmx_data)
         map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
         
-        player_position = tmx_data.get_object_by_name("player")
+        
         self.player = Player(player_position.x, player_position.y)
+        player_position = tmx_data.get_object_by_name("player")
         self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=1)
         self.group.add(self.player)
         
@@ -36,6 +37,8 @@ class Affichage:
 
     def flip(self):
         pygame.display.flip()
+    
+    def update(self):
         self.group.update()
         
 
