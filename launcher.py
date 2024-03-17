@@ -8,7 +8,7 @@ running = True
 
 while running:
 
-    game.print()
+    game.printGame()
 
     for event in pygame.event.get():
         if event.type==pygame.QUIT:
