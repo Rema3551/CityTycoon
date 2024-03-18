@@ -22,29 +22,32 @@ class Affichage:
         self.green = (0, 255, 0)
         self.blue = (0, 0, 128)
 
-        tmx_data = pytmx.util_pygame.load_pygame('assets/map/ville1.tmx')
-        map_data = pyscroll.data.TiledMapData(tmx_data)
+        self.tmx_data = pytmx.util_pygame.load_pygame('assets/map/ville1.tmx')
+        map_data = pyscroll.data.TiledMapData(self.tmx_data)
         map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
         
         
         
-        player_position = tmx_data.get_object_by_name("player")
+        player_position = self.tmx_data.get_object_by_name("player")
         self.player = Player(player_position.x, player_position.y)
 
         self.walls = []
         
-        for obj in tmx_data.objects:
+        for obj in self.tmx_data.objects:
             if obj.type == "collision":
                 self.walls.append(pygame.Rect(obj.x, obj.y, obj.width, obj.height))
 
+        
 
         self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=2)
         self.group.add(self.player)
         
-
         
         self.cashDiamond = pygame.image.load("assets/Images/cashDiamond.png").convert_alpha()
 
+        signTuto = self.tmx_data.get_object_by_name("signTuto")
+        self.signTutoRect = pygame.Rect(signTuto.x, signTuto.y, signTuto.width, signTuto.height)
+        self.signTutoImg = pygame.image.load("assets/Images/signTuto.png")
 
     def inputJoueur(self):
         pressed = pygame.key.get_pressed()
@@ -84,8 +87,9 @@ class Affichage:
         self.group.center(self.player.rect)
 
         for sprite in self.group.sprites():
-            if sprite.pieds.collidelist(self.walls) > -1:
+            if sprite.feet.collidelist(self.walls) > -1:
                 sprite.revenirEnArriere()
+        
         
 
     def draw(self, game:Game):
@@ -100,3 +104,6 @@ class Affichage:
         self.screen.blit(textDollars,(350,25))
         textDiamonds = pygame.font.SysFont('comicsansms', 50).render(self.player.strDiamonds(), True, self.green)
         self.screen.blit(textDiamonds,(575,25))
+        
+        if self.player.feet.colliderect(self.signTutoRect):
+            self.screen.blit(self.signTutoImg,(100,100))

@@ -32,7 +32,7 @@ class Player(pygame.sprite.Sprite):
             'right': self.get_image(3,163),
             'up': self.get_image(0,246)
         }
-        self.pieds = pygame.Rect(0,0,self.rect.width*0.5,12)
+        self.feet = pygame.Rect(0,0,self.rect.width*0.5,12)
         self.anciennePosition = self.position.copy()
 
     def sauvegardeLocation(self):
@@ -44,12 +44,12 @@ class Player(pygame.sprite.Sprite):
 
     def update(self):
         self.rect.topleft = self.position
-        self.pieds.midbottom = self.rect.midbottom
+        self.feet.midbottom = self.rect.midbottom
 
     def revenirEnArriere(self):
         self.position = self.anciennePosition
         self.rect.topleft = self.position
-        self.pieds.midbottom = self.rect.midbottom
+        self.feet.midbottom = self.rect.midbottom
         
     def get_image(self,x,y):
         image=pygame.Surface([49,69])
@@ -63,7 +63,7 @@ class Player(pygame.sprite.Sprite):
         if self.dollars<1000:
             return str(int(self.dollars))
         elif self.dollars<1000000:
-            return str(int(self.dollars/1000)) + "k"
+            return str(int(self.dollars/1000)) + "K"
         elif self.dollars<1000000000 :
             return str(int(self.dollars/1000000)) + "M"
     
