@@ -14,7 +14,7 @@ class Player(pygame.sprite.Sprite):
     """
     def __init__(self,x,y):
         self.dollars = 0
-        self.diamants = 0
+        self.diamonds = 0
         self.niveau = 1
         self.electricite = 0
         self.eau = 0 
@@ -58,9 +58,25 @@ class Player(pygame.sprite.Sprite):
         
     def getDollars(self):
         return self.dollars
+        
+    def strDollars(self):
+        if self.dollars<1000:
+            return str(self.dollars)
+        elif self.dollars<1000000:
+            return str(int(self.dollars/1000)) + "k"
+        elif self.dollars<1000000000 :
+            return str(int(self.dollars/1000000)) + "M"
     
-    def getDiamants(self):
-        return self.diamants
+    def getDiamonds(self):
+        return self.diamonds
+    
+    def strDiamonds(self):
+        if self.diamonds<1000:
+            return str(self.diamonds)
+        elif self.diamonds<1000000:
+            return str(int(self.diamonds/1000)) + "k"
+        elif self.diamonds<1000000000 :
+            return str(int(self.diamonds/1000000)) + "M"
     
     def getNiveau(self):
         return self.niveau
@@ -74,7 +90,7 @@ class Player(pygame.sprite.Sprite):
     def setDollars(self, newDollars):
         self.dollars = newDollars
     
-    def setDiamants(self, newDiamants):
+    def setDiamonds(self, newDiamants):
         self.diamants = newDiamants
     
     def setNiveau(self, newNiveau):
