@@ -61,7 +61,7 @@ class Player(pygame.sprite.Sprite):
         
     def strDollars(self):
         if self.dollars<1000:
-            return str(self.dollars)
+            return str(int(self.dollars))
         elif self.dollars<1000000:
             return str(int(self.dollars/1000)) + "k"
         elif self.dollars<1000000000 :
@@ -72,7 +72,7 @@ class Player(pygame.sprite.Sprite):
     
     def strDiamonds(self):
         if self.diamonds<1000:
-            return str(self.diamonds)
+            return str(int(self.diamonds))
         elif self.diamonds<1000000:
             return str(int(self.diamonds/1000)) + "k"
         elif self.diamonds<1000000000 :
