@@ -54,6 +54,9 @@ class Affichage:
         self.poubelle1TmxRect = pygame.Rect(poubelle1Tmx.x, poubelle1Tmx.y, poubelle1Tmx.width, poubelle1Tmx.height)
         self.payementPoubelleImg = pygame.image.load("assets/Images/signTuto.png")
         
+        self.acheterBatimentImg = pygame.image.load("assets/Images/acheterBatiment.png")
+        self.ameliorerBatimentImg = pygame.image.load("assets/Images/ameliorerBatiment.png")
+
     def inputJoueur(self):
         pressed = pygame.key.get_pressed()
         
@@ -114,8 +117,12 @@ class Affichage:
             self.screen.blit(self.signTutoImg,(100,100))
             
         if self.player.feet.colliderect(self.poubelle1TmxRect):
-            self.screen.blit(self.payementPoubelleImg,(100,100))
-            self.player.setListeBatiment(game.poubelle1)
+            if self.player.verificationListe(game.poubelle1) == False :
+                self.screen.blit(self.acheterBatimentImg,(0,500))
+                self.player.setListeBatiment(game.poubelle1)
+            else :
+                self.screen.blit(self.ameliorerBatimentImg,(0,500))
+        
         self.player.revenuPassif(game)
             
             

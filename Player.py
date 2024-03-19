@@ -127,5 +127,12 @@ class Player(pygame.sprite.Sprite):
         for i in range (len(self.listeBatiment)):
             if self.listeBatiment[i] == game.poubelle1:
                 self.setDollars(self.getDollars()+game.poubelle1.gain)
+    
+    def verificationListe(self, batiment)->bool:
+        for i in range (len(self.listeBatiment)):
+            if self.listeBatiment[i] == batiment:
+                return True
+        return False
+
                 
     
