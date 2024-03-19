@@ -1,4 +1,5 @@
 import pygame
+import Game
 
 class Player(pygame.sprite.Sprite):
     """
@@ -19,6 +20,7 @@ class Player(pygame.sprite.Sprite):
         self.electricite = 0
         self.eau = 0 
         self.speed = 3
+        self.listeBatiment = []
         
         super().__init__()
         self.sprite_sheet = pygame.image.load('assets/Images/player.png')
@@ -91,7 +93,7 @@ class Player(pygame.sprite.Sprite):
         self.dollars = newDollars
     
     def setDiamonds(self, newDiamants):
-        self.diamants = newDiamants
+        self.diamonds = newDiamants
     
     def setNiveau(self, newNiveau):
         self.niveau = newNiveau
@@ -114,4 +116,16 @@ class Player(pygame.sprite.Sprite):
 
     def bougerBas(self) : 
         self.position[1] += self.speed
+        
+    def getListeBatiment(self):
+        self.listeBatiment
+    
+    def setListeBatiment(self, nouveauBatiment):
+        self.listeBatiment.append(nouveauBatiment)
+        
+    def revenuPassif(self,game:Game):
+        for i in range (len(self.listeBatiment)):
+            if self.listeBatiment[i] == game.poubelle1:
+                self.setDollars(self.getDollars()+game.poubelle1.gain)
+                
     
