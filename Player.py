@@ -130,7 +130,7 @@ class Player(pygame.sprite.Sprite):
         for batiment in self.listeBatiment:
             #print("le batiment rapporte " + str(batiment.getGain()))
             self.addDollars(batiment.getGain())
-            print(self.dollars)
+            #print(self.dollars)
 
 
     def ownBuilding(self, building)->bool:

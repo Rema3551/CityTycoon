@@ -79,12 +79,12 @@ class Affichage:
             buildingImg = pygame.image.load("assets/Images/buildings/"+building.getImage()+".png")
             buildingImg = pygame.transform.scale(buildingImg,(175,175))
             if(player.feet.colliderect(building.getCollideArea())):
-                print("player entering in building " + str(building.libelle))
+                #print("player entering in building " + str(building.libelle))
                 # afficher prix batiment.price   
                 textPrice = pygame.font.SysFont('comicsansms', 50).render("Price : " + str(building.getPrice()), True, self.green)
                 self.screen.blit(textPrice,(5,500))
                 if game.player.ownBuilding(building):
-                    print("player already own the building " + str(building.libelle))
+                    #print("player already own the building " + str(building.libelle))
                     self.boutonAmeliorer.draw()
                     self.screen.blit(textPrice,(5,500))
                     self.screen.blit(buildingImg,(40,575))
@@ -94,8 +94,8 @@ class Affichage:
                             player.addDollars(-building.getPrice())
                             building.newPrice(5)
                             building.newGain(5)
-                else: 
-                    self.boutonAmeliorer.draw()
+                else:
+                    self.boutonAcheter.draw()
                     self.screen.blit(textPrice,(5,500))
                     self.screen.blit(buildingImg,(40,575))
                     if self.boutonAcheter.touched():
