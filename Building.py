@@ -1,7 +1,9 @@
+import pygame
+
 class Building:
     """
     Attributs :
-        -seuil
+        -price
         -gain
         -niveau
         -multiplicateur
@@ -9,14 +11,16 @@ class Building:
         -mutateurs  (set...())
         -accesseurs (get...())
     """
-    def __init__(self, seuil : int , gain : int):
-        self.seuil = seuil
+    def __init__(self, price : int , gain : int, libelle: str):
+        self.price = price
         self.gain = gain
         self.niveau = 0
         self.multiplicateur = 0
+        self.libelle = libelle
+        self.collideArea = 0
 
-    def getSeuil(self):
-        return self.seuil
+    def getPrice(self):
+        return self.price
     
     def getGain(self):
         return self.gain
@@ -27,8 +31,8 @@ class Building:
     def getMultiplicateur(self):
         return self.multiplicateur
     
-    def setSeuil(self, nouveauSeuil):
-        self.seuil = nouveauSeuil
+    def setPrice(self, nouveauSeuil):
+        self.price = nouveauSeuil
     
     def setGain(self, nouveauGain):
         self.gain = nouveauGain
@@ -41,3 +45,15 @@ class Building:
     
     def setMultiplicateur(self, nouveauMultiplicateur):
         self.multiplicateur = nouveauMultiplicateur
+
+    def setCollideArea(self, x, y, width, height):
+        self.collideArea = pygame.Rect(x, y, width, height)
+
+    def getCollideArea(self):
+        return self.collideArea
+    
+    def newPrice(self,multiple):
+        self.price = self.price * multiple
+    
+    def newGain(self, multiple):
+        self.gain = self.gain * multiple

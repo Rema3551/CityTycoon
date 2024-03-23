@@ -13,7 +13,8 @@ class Player(pygame.sprite.Sprite):
         -mutateur
         -accesseur
     """
-    def __init__(self,x,y):
+    def __init__(self,x=0,y=0):
+        super().__init__()
         self.dollars = 0
         self.diamonds = 0
         self.niveau = 1
@@ -22,10 +23,9 @@ class Player(pygame.sprite.Sprite):
         self.speed = 3
         self.listeBatiment = []
         
-        super().__init__()
         self.sprite_sheet = pygame.image.load('assets/Images/player.png')
         self.image = self.get_image(0,0)
-        self.image.set_colorkey([0,0,0])
+        self.image.set_colorkey([0,0,0]) #fait en sorte que ça soit transparent
         self.rect = self.image.get_rect()
         self.position = [x, y]
         self.images = {
@@ -124,18 +124,16 @@ class Player(pygame.sprite.Sprite):
         self.listeBatiment.append(nouveauBatiment)
         
     def revenuPassif(self,game:Game):
-        for i in range (len(self.listeBatiment)):
-            if self.listeBatiment[i] == game.poubelle1:
-                self.setDollars(self.getDollars()+game.poubelle1.gain)
-        
-        for i in range (len(self.listeBatiment)):
-            if self.listeBatiment[i] == game.poubelle2:
-                self.setDollars(self.getDollars()+game.poubelle2.gain)
-    
-    def verificationListe(self, batiment)->bool:
+        for batiment in self.listeBatiment:
+            #print("le batiment rapporte " + str(batiment.getGain()))
+            self.addDollars(batiment.getGain())
+            print(self.dollars)
+
+
+    def ownBuilding(self, building)->bool:
         result = False 
         for i in range (len(self.listeBatiment)):
-            if self.listeBatiment[i] == batiment:
+            if self.listeBatiment[i] == building:
                 result = True
         return result
 
