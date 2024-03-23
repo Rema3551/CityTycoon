@@ -26,6 +26,7 @@ class Game:
         self.poubelle8 = Building(350,0.004, "poubelle8")
         self.poubelle9 = Building(400,0.004, "poubelle9")
         self.poubelle10 = Building(450,0.004, "poubelle10")
+        self.rouge = Building(450,0.04, "rouge")
         self.Help = Building(600,0.001, "help")
         self.Orange = Building(1000,0.002, "orange")
         self.buildings = [self.poubelle1, self.poubelle2, self.poubelle3, self.poubelle4, self.poubelle5, self.poubelle6, self.poubelle7, self.poubelle8, self.poubelle9, self.poubelle10, self.rouge, self.Help, self.Orange]
