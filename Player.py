@@ -91,6 +91,9 @@ class Player(pygame.sprite.Sprite):
     
     def setDollars(self, newDollars):
         self.dollars = newDollars
+
+    def addDollars(self, newDollars):
+        self.dollars+=newDollars
     
     def setDiamonds(self, newDiamants):
         self.diamonds = newDiamants
