@@ -5,7 +5,7 @@ class Building:
     Attributs :
         -price
         -gain
-        -niveau
+        -lvl
         -multiplicateur
     Méthodes :
         -mutateurs  (set...())
@@ -14,7 +14,7 @@ class Building:
     def __init__(self, price : int , gain : int, libelle: str, image: str):
         self.price = price
         self.gain = gain
-        self.niveau = 0
+        self.lvl = 0
         self.multiplicateur = 0
         self.libelle = libelle
         self.collideArea = 0
@@ -26,8 +26,8 @@ class Building:
     def getGain(self):
         return self.gain
     
-    def getNiveau(self):
-        return self.niveau
+    def getLvl(self):
+        return self.lvl
     
     def getMultiplicateur(self):
         return self.multiplicateur
@@ -38,11 +38,11 @@ class Building:
     def setGain(self, nouveauGain):
         self.gain = nouveauGain
     
-    def setNiveau(self, nouveauNiveau):
-        self.niveau = nouveauNiveau
+    def setLvl(self, nouveauLvl):
+        self.lvl = nouveauLvl
 
-    def ajouterNiveau(self):
-        self.setNiveau((self.getNiveau()+1))
+    def addLvl(self):
+        self.setLvl((self.getLvl()+1))
     
     def setMultiplicateur(self, nouveauMultiplicateur):
         self.multiplicateur = nouveauMultiplicateur

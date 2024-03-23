@@ -21,6 +21,7 @@ class Affichage:
         self.screen = pygame.display.set_mode((800,800))
         self.green = (0, 255, 0)
         self.blue = (0, 0, 128)
+        self.colorWood = (144,51,42)
 
         self.tmx_data = pytmx.util_pygame.load_pygame('assets/map/ville1.tmx')
         map_data = pyscroll.data.TiledMapData(self.tmx_data)
@@ -46,8 +47,8 @@ class Affichage:
         self.acheterBatimentImg = pygame.image.load("assets/Images/acheterBatiment.png")
         self.ameliorerBatimentImg = pygame.image.load("assets/Images/ameliorerBatiment.png")
         
-        self.boutonAcheter = Bouton(self.screen, 0,525,self.acheterBatimentImg,1)
-        self.boutonAmeliorer = Bouton(self.screen,0,525,self.ameliorerBatimentImg,1)
+        self.boutonAcheter = Bouton(self.screen, 0,510,self.acheterBatimentImg,1)
+        self.boutonAmeliorer = Bouton(self.screen,0,510,self.ameliorerBatimentImg,1)
 
     def flip(self):
         pygame.display.flip()
@@ -81,28 +82,32 @@ class Affichage:
             if(player.feet.colliderect(building.getCollideArea())):
                 #print("player entering in building " + str(building.libelle))
                 # afficher prix batiment.price   
-                textPrice = pygame.font.SysFont('comicsansms', 50).render("Price : " + str(building.getPrice()), True, self.green)
-                self.screen.blit(textPrice,(5,500))
+                textPrice = pygame.font.SysFont('comicsansms', 50).render(str(building.getPrice()), True, self.colorWood)
+                textLvl = pygame.font.SysFont('comicsansms', 50).render(str(building.getLvl()), True, self.colorWood)
                 if game.player.ownBuilding(building):
                     #print("player already own the building " + str(building.libelle))
                     self.boutonAmeliorer.draw()
-                    self.screen.blit(textPrice,(5,500))
-                    self.screen.blit(buildingImg,(40,575))
+                    self.screen.blit(textPrice,(380,727))
+                    self.screen.blit(textLvl,(600,712))
+                    self.screen.blit(buildingImg,(40,560))
 
                     if self.boutonAmeliorer.touched():
                         if player.getDollars()>= building.getPrice():
                             player.addDollars(-building.getPrice())
                             building.newPrice(5)
                             building.newGain(5)
+                            building.addLvl()
                 else:
                     self.boutonAcheter.draw()
-                    self.screen.blit(textPrice,(5,500))
-                    self.screen.blit(buildingImg,(40,575))
+                    self.screen.blit(textPrice,(380,727))
+                    self.screen.blit(textLvl,(600,712))
+                    self.screen.blit(buildingImg,(40,560))
                     if self.boutonAcheter.touched():
                         if player.getDollars()>= building.getPrice():
                             player.addDollars(-building.getPrice())
                             player.setListeBatiment(building)
                             building.newPrice(5)
+                            building.addLvl()
                         
 
         if player.feet.colliderect(self.signTutoRect):
