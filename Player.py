@@ -21,7 +21,7 @@ class Player(pygame.sprite.Sprite):
         self.electricite = 0
         self.eau = 0 
         self.speed = 3
-        self.listeBatiment = []
+        self.listBuilding = []
         
         self.sprite_sheet = pygame.image.load('assets/Images/player.png')
         self.image = self.get_image(0,0)
@@ -120,14 +120,14 @@ class Player(pygame.sprite.Sprite):
     def bougerBas(self) : 
         self.position[1] += self.speed
         
-    def getListeBatiment(self):
-        self.listeBatiment
+    def getListBuilding(self):
+        self.listBuilding
     
-    def setListeBatiment(self, nouveauBatiment):
-        self.listeBatiment.append(nouveauBatiment)
+    def setListBuilding(self, nouveauBatiment):
+        self.listBuilding.append(nouveauBatiment)
         
     def revenuPassif(self,game:Game):
-        for batiment in self.listeBatiment:
+        for batiment in self.listBuilding:
             #print("le batiment rapporte " + str(batiment.getGain()))
             self.addDollars(batiment.getGain()/60)
 
@@ -136,8 +136,8 @@ class Player(pygame.sprite.Sprite):
 
     def ownBuilding(self, building)->bool:
         result = False 
-        for i in range (len(self.listeBatiment)):
-            if self.listeBatiment[i] == building:
+        for i in range (len(self.listBuilding)):
+            if self.listBuilding[i] == building:
                 result = True
         return result
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="1178">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="1179">
  <tileset firstgid="1" source="ville3.tsx"/>
  <tileset firstgid="4097" source="ville1.tsx"/>
  <tileset firstgid="4865" source="arbre.tsx"/>
@@ -440,5 +440,6 @@
   <object id="1175" name="help" type="help" x="239.833" y="462.167" width="47" height="35.6667"/>
   <object id="1176" name="rouge" type="rouge" x="383.833" y="462.833" width="63.6667" height="35.6667"/>
   <object id="1177" name="orange" type="orange" x="271.5" y="255.5" width="63.6667" height="35.6667"/>
+  <object id="1178" name="car" type="car" x="563.833" y="445.167" width="54.3333" height="52.6667"/>
  </objectgroup>
 </map>

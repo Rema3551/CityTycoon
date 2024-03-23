@@ -44,6 +44,9 @@ class Affichage:
         self.signTutoRect = pygame.Rect(signTuto.x, signTuto.y, signTuto.width, signTuto.height)
         self.signTutoImg = pygame.image.load("assets/Images/signTuto.png")
         
+        car = self.tmx_data.get_object_by_name("car")
+        self.carRect = pygame.Rect(car.x, car.y, car.width, car.height)
+
         self.acheterBatimentImg = pygame.image.load("assets/Images/acheterBatiment.png")
         self.ameliorerBatimentImg = pygame.image.load("assets/Images/ameliorerBatiment.png")
         
@@ -77,7 +80,7 @@ class Affichage:
         self.screen.blit(textDiamonds,(575,25))
         
         for building in game.buildings: 
-            buildingImg = pygame.image.load("assets/Images/buildings/"+building.getImage())
+            buildingImg = pygame.image.load(building.getImagePath())
             buildingImg = pygame.transform.scale(buildingImg,(175,175))
             if(player.feet.colliderect(building.getCollideArea())):
                 #print("player entering in building " + str(building.libelle))
@@ -112,7 +115,7 @@ class Affichage:
                         if self.boutonAcheter.touched():
                             if player.getDollars()>= building.getPrice():
                                 player.addDollars(-building.getPrice())
-                                player.setListeBatiment(building)
+                                player.setListBuilding(building)
                                 building.newPrice(2)
                                 building.addLvl()
                             
@@ -120,6 +123,11 @@ class Affichage:
         if player.feet.colliderect(self.signTutoRect):
             self.screen.blit(self.signTutoImg,(100,100))
             
+        if player.feet.colliderect(self.carRect):
+            if game.verificationFinVille1():
+                print("vous avez assez")
+            else:
+                print("pour prendre la voiture et aller à la prochaine ville, vous devez avoir tous les batiments aux niveau maximum et posséder au moins 2000 dollars")
         player.revenuPassif(game)
             
                 

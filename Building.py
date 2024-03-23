@@ -60,8 +60,8 @@ class Building:
     def newGain(self, multiple):
         self.gain = self.gain * multiple
     
-    def getImage(self):
-        return self.buildingType.value
+    def getImagePath(self):
+        return "assets/Images/buildings/" + self.buildingType.value
     
     def getLvlMax(self):
         return self.lvlMax
