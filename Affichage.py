@@ -85,33 +85,37 @@ class Affichage:
                 textPrice = pygame.font.SysFont('comicsansms', 50).render(str(building.getPrice()), True, self.colorWood)
                 if building.getLvl() == building.getLvlMax():
                     textLvl = pygame.font.SysFont('comicsansms', 50).render("MAX", True, self.colorWood)
-                else:
-                    textLvl = pygame.font.SysFont('comicsansms', 50).render(str(building.getLvl()), True, self.colorWood)
-                if game.player.ownBuilding(building):
-                    #print("player already own the building " + str(building.libelle))
                     self.boutonAmeliorer.draw()
                     self.screen.blit(textPrice,(380,727))
                     self.screen.blit(textLvl,(600,712))
                     self.screen.blit(buildingImg,(40,560))
-
-                    if self.boutonAmeliorer.touched():
-                        if player.getDollars()>= building.getPrice():
-                            player.addDollars(-building.getPrice())
-                            building.newPrice(5)
-                            building.newGain(5)
-                            building.addLvl()
                 else:
-                    self.boutonAcheter.draw()
-                    self.screen.blit(textPrice,(380,727))
-                    self.screen.blit(textLvl,(600,712))
-                    self.screen.blit(buildingImg,(40,560))
-                    if self.boutonAcheter.touched():
-                        if player.getDollars()>= building.getPrice():
-                            player.addDollars(-building.getPrice())
-                            player.setListeBatiment(building)
-                            building.newPrice(5)
-                            building.addLvl()
-                        
+                    textLvl = pygame.font.SysFont('comicsansms', 50).render(str(building.getLvl()), True, self.colorWood)
+                    if game.player.ownBuilding(building):
+                        #print("player already own the building " + str(building.libelle))
+                        self.boutonAmeliorer.draw()
+                        self.screen.blit(textPrice,(380,727))
+                        self.screen.blit(textLvl,(600,712))
+                        self.screen.blit(buildingImg,(40,560))
+
+                        if self.boutonAmeliorer.touched():
+                            if player.getDollars()>= building.getPrice():
+                                player.addDollars(-building.getPrice())
+                                building.newPrice(2)
+                                building.newGain(2)
+                                building.addLvl()
+                    else:
+                        self.boutonAcheter.draw()
+                        self.screen.blit(textPrice,(380,727))
+                        self.screen.blit(textLvl,(600,712))
+                        self.screen.blit(buildingImg,(40,560))
+                        if self.boutonAcheter.touched():
+                            if player.getDollars()>= building.getPrice():
+                                player.addDollars(-building.getPrice())
+                                player.setListeBatiment(building)
+                                building.newPrice(2)
+                                building.addLvl()
+                            
 
         if player.feet.colliderect(self.signTutoRect):
             self.screen.blit(self.signTutoImg,(100,100))
