@@ -77,13 +77,16 @@ class Affichage:
         self.screen.blit(textDiamonds,(575,25))
         
         for building in game.buildings: 
-            buildingImg = pygame.image.load("assets/Images/buildings/"+building.getImage()+".png")
+            buildingImg = pygame.image.load("assets/Images/buildings/"+building.getImage())
             buildingImg = pygame.transform.scale(buildingImg,(175,175))
             if(player.feet.colliderect(building.getCollideArea())):
                 #print("player entering in building " + str(building.libelle))
                 # afficher prix batiment.price   
                 textPrice = pygame.font.SysFont('comicsansms', 50).render(str(building.getPrice()), True, self.colorWood)
-                textLvl = pygame.font.SysFont('comicsansms', 50).render(str(building.getLvl()), True, self.colorWood)
+                if building.getLvl() == building.getLvlMax():
+                    textLvl = pygame.font.SysFont('comicsansms', 50).render("MAX", True, self.colorWood)
+                else:
+                    textLvl = pygame.font.SysFont('comicsansms', 50).render(str(building.getLvl()), True, self.colorWood)
                 if game.player.ownBuilding(building):
                     #print("player already own the building " + str(building.libelle))
                     self.boutonAmeliorer.draw()

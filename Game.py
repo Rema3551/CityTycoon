@@ -1,11 +1,10 @@
 from Building import * 
 from Affichage import *
-
+from BuildingType import *
 class Game:
     def __init__(self):
         self.player = Player()
         self.affichage = Affichage(self)
-
     
     def start(self, tmx_data):
         self.createPlayer(tmx_data)
@@ -17,19 +16,19 @@ class Game:
 
     def createBuildings(self, tmx_data):
         # TODO : lvl max building
-        self.poubelle1 = Building(5,1,"poubelle1","poubelle")
-        self.poubelle2 = Building(15,1,"poubelle2","poubelle")
-        self.poubelle3 = Building(20,1,"poubelle3","poubelle")
-        self.poubelle4 = Building(25,1,"poubelle4","poubelle")
-        self.poubelle5 = Building(30,1,"poubelle5","poubelle")
-        self.poubelle6 = Building(35,1,"poubelle6","poubelle")
-        self.poubelle7 = Building(40,1,"poubelle7","poubelle")
-        self.poubelle8 = Building(45,1,"poubelle8","poubelle")
-        self.poubelle9 = Building(50,1,"poubelle9","poubelle")
-        self.poubelle10 = Building(55,1, "poubelle10","poubelle")
-        self.rouge = Building(100,10, "rouge", "rouge")
-        self.help = Building(1000,50, "help","help")
-        self.orange = Building(500,25, "orange","orange")
+        self.poubelle1 = Building(5,1,1,"poubelle1",BuildingType.POUBELLE)
+        self.poubelle2 = Building(15,1,1,"poubelle2",BuildingType.POUBELLE)
+        self.poubelle3 = Building(20,1,1,"poubelle3",BuildingType.POUBELLE)
+        self.poubelle4 = Building(25,1,1,"poubelle4",BuildingType.POUBELLE)
+        self.poubelle5 = Building(30,1,1,"poubelle5",BuildingType.POUBELLE)
+        self.poubelle6 = Building(35,1,1,"poubelle6",BuildingType.POUBELLE)
+        self.poubelle7 = Building(40,1,1,"poubelle7",BuildingType.POUBELLE)
+        self.poubelle8 = Building(45,1,1,"poubelle8",BuildingType.POUBELLE)
+        self.poubelle9 = Building(50,1,1,"poubelle9",BuildingType.POUBELLE)
+        self.poubelle10 = Building(55,1,1, "poubelle10",BuildingType.POUBELLE)
+        self.rouge = Building(100,10,1,"rouge", BuildingType.ROUGE)
+        self.help = Building(1000,50,1,"help",BuildingType.HELP)
+        self.orange = Building(500,25,1,"orange",BuildingType.ORANGE)
         self.buildings = [self.poubelle1, self.poubelle2, self.poubelle3, self.poubelle4, self.poubelle5, self.poubelle6, self.poubelle7, self.poubelle8, self.poubelle9, self.poubelle10, self.rouge, self.help, self.orange]
         
         for building in self.buildings:

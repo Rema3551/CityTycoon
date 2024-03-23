@@ -1,5 +1,5 @@
 import pygame
-
+from BuildingType import *
 class Building:
     """
     Attributs :
@@ -11,14 +11,15 @@ class Building:
         -mutateurs  (set...())
         -accesseurs (get...())
     """
-    def __init__(self, price : int , gain : int, libelle: str, image: str):
+    def __init__(self, price : int , gain : int, lvlMax : int, libelle: str, buildingType: BuildingType):
         self.price = price
         self.gain = gain
         self.lvl = 0
+        self.lvlMax = lvlMax
         self.multiplicateur = 0
         self.libelle = libelle
         self.collideArea = 0
-        self.image = image
+        self.buildingType = buildingType
 
     def getPrice(self):
         return self.price
@@ -60,4 +61,7 @@ class Building:
         self.gain = self.gain * multiple
     
     def getImage(self):
-        return self.image
+        return self.buildingType.value
+    
+    def getLvlMax(self):
+        return self.lvlMax
