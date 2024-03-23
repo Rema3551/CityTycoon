@@ -54,8 +54,56 @@ class Affichage:
         self.poubelle1TmxRect = pygame.Rect(poubelle1Tmx.x, poubelle1Tmx.y, poubelle1Tmx.width, poubelle1Tmx.height)
         self.payementPoubelleImg = pygame.image.load("assets/Images/signTuto.png")
         
+        poubelle2Tmx = self.tmx_data.get_object_by_name("poubelle2")
+        self.poubelle2TmxRect = pygame.Rect(poubelle2Tmx.x, poubelle2Tmx.y, poubelle2Tmx.width, poubelle2Tmx.height)
+        
+        
+        poubelle3Tmx = self.tmx_data.get_object_by_name("poubelle3")
+        self.poubelle3TmxRect = pygame.Rect(poubelle3Tmx.x, poubelle3Tmx.y, poubelle3Tmx.width, poubelle3Tmx.height)
+        
+        
+        poubelle4Tmx = self.tmx_data.get_object_by_name("poubelle4")
+        self.poubelle4TmxRect = pygame.Rect(poubelle4Tmx.x, poubelle4Tmx.y, poubelle4Tmx.width, poubelle4Tmx.height)
+        self.payementPoubelleImg = pygame.image.load("assets/Images/signTuto.png")
+        
+        poubelle5Tmx = self.tmx_data.get_object_by_name("poubelle5")
+        self.poubelle5TmxRect = pygame.Rect(poubelle2Tmx.x, poubelle5Tmx.y, poubelle5Tmx.width, poubelle5Tmx.height)
+        
+        
+        poubelle6Tmx = self.tmx_data.get_object_by_name("poubelle6")
+        self.poubelle6TmxRect = pygame.Rect(poubelle6Tmx.x, poubelle6Tmx.y, poubelle6Tmx.width, poubelle6Tmx.height)
+        
+        
+        poubelle7Tmx = self.tmx_data.get_object_by_name("poubelle7")
+        self.poubelle7TmxRect = pygame.Rect(poubelle7Tmx.x, poubelle7Tmx.y, poubelle7Tmx.width, poubelle7Tmx.height)
+        
+        
+        poubelle8Tmx = self.tmx_data.get_object_by_name("poubelle8")
+        self.poubelle8TmxRect = pygame.Rect(poubelle8Tmx.x, poubelle8Tmx.y, poubelle8Tmx.width, poubelle8Tmx.height)
+        self.payementPoubelleImg = pygame.image.load("assets/Images/signTuto.png")
+        
+        poubelle9Tmx = self.tmx_data.get_object_by_name("poubelle9")
+        self.poubelle9TmxRect = pygame.Rect(poubelle9Tmx.x, poubelle9Tmx.y, poubelle9Tmx.width, poubelle9Tmx.height)
+        
+        
+        poubelle10Tmx = self.tmx_data.get_object_by_name("poubelle10")
+        self.poubelle10TmxRect = pygame.Rect(poubelle10Tmx.x, poubelle10Tmx.y, poubelle10Tmx.width, poubelle10Tmx.height)
+        
+        HelpTmx = self.tmx_data.get_object_by_name("help")
+        self.HelpTmxRect = pygame.Rect(HelpTmx.x, HelpTmx.y, HelpTmx.width, HelpTmx.height)
+        self.payementHelpImg = pygame.image.load("assets/Images/signTuto.png")
+        
+        OrangeTmx = self.tmx_data.get_object_by_name("orange")
+        self.OrangeTmxRect = pygame.Rect(OrangeTmx.x, OrangeTmx.y, OrangeTmx.width, OrangeTmx.height)
+        self.payementOrangeImg = pygame.image.load("assets/Images/signTuto.png")
+        
+        
         self.acheterBatimentImg = pygame.image.load("assets/Images/acheterBatiment.png")
         self.ameliorerBatimentImg = pygame.image.load("assets/Images/ameliorerBatiment.png")
+        
+        self.boutonAcheter = Bouton(self.screen, 1,1,self.acheterBatimentImg,1)
+        self.boutonAmeliorer = Bouton(self.screen,1,1,self.ameliorerBatimentImg,1)
+        
 
     def inputJoueur(self):
         pressed = pygame.key.get_pressed()
@@ -118,11 +166,82 @@ class Affichage:
             
         if self.player.feet.colliderect(self.poubelle1TmxRect):
             if self.player.verificationListe(game.poubelle1) == False :
+                if self.boutonAcheter.draw():
+                    self.player.setListeBatiment(game.poubelle1)
+            else :
+                if self.boutonAmeliorer.draw():
+                    pass
+                
+        if self.player.feet.colliderect(self.poubelle2TmxRect):
+            if self.player.verificationListe(game.poubelle2) == False :
                 self.screen.blit(self.acheterBatimentImg,(0,500))
-                self.player.setListeBatiment(game.poubelle1)
+                self.player.setListeBatiment(game.poubelle2)
+            else :
+                self.screen.blit(self.ameliorerBatimentImg,(0,500))
+                
+        if self.player.feet.colliderect(self.poubelle3TmxRect):
+            if self.player.verificationListe(game.poubelle3) == False :
+                self.screen.blit(self.acheterBatimentImg,(0,500))
+                self.player.setListeBatiment(game.poubelle3)
+            else :
+                self.screen.blit(self.ameliorerBatimentImg,(0,500))
+                
+        if self.player.feet.colliderect(self.poubelle4TmxRect):
+            if self.player.verificationListe(game.poubelle4) == False :
+                self.screen.blit(self.acheterBatimentImg,(0,500))
+                self.player.setListeBatiment(game.poubelle4)
+            else :
+                self.screen.blit(self.ameliorerBatimentImg,(0,500))
+                
+        if self.player.feet.colliderect(self.poubelle5TmxRect):
+            if self.player.verificationListe(game.poubelle5) == False :
+                self.screen.blit(self.acheterBatimentImg,(0,500))
+                self.player.setListeBatiment(game.poubelle5)
+            else :
+                self.screen.blit(self.ameliorerBatimentImg,(0,500))
+                
+        if self.player.feet.colliderect(self.poubelle6TmxRect):
+            if self.player.verificationListe(game.poubelle6) == False :
+                self.screen.blit(self.acheterBatimentImg,(0,500))
+                self.player.setListeBatiment(game.poubelle6)
+            else :
+                self.screen.blit(self.ameliorerBatimentImg,(0,500))
+                
+        if self.player.feet.colliderect(self.poubelle7TmxRect):
+            if self.player.verificationListe(game.poubelle7) == False :
+                self.screen.blit(self.acheterBatimentImg,(0,500))
+                self.player.setListeBatiment(game.poubelle7)
+            else :
+                self.screen.blit(self.ameliorerBatimentImg,(0,500))
+                
+        if self.player.feet.colliderect(self.poubelle8TmxRect):
+            if self.player.verificationListe(game.poubelle8) == False :
+                self.screen.blit(self.acheterBatimentImg,(0,500))
+                self.player.setListeBatiment(game.poubelle8)
+            else :
+                self.screen.blit(self.ameliorerBatimentImg,(0,500))
+                
+        if self.player.feet.colliderect(self.poubelle9TmxRect):
+            if self.player.verificationListe(game.poubelle9) == False :
+                self.screen.blit(self.acheterBatimentImg,(0,500))
+                self.player.setListeBatiment(game.poubelle9)
+            else :
+                self.screen.blit(self.ameliorerBatimentImg,(0,500))
+                
+        if self.player.feet.colliderect(self.poubelle10TmxRect):
+            if self.player.verificationListe(game.poubelle10) == False :
+                self.screen.blit(self.acheterBatimentImg,(0,500))
+                self.player.setListeBatiment(game.poubelle10)
+            else :
+                self.screen.blit(self.ameliorerBatimentImg,(0,500))
+        
+        if self.player.feet.colliderect(self.HelpTmxRect):
+            if self.player.verificationListe(game.Help) == False :
+                self.screen.blit(self.acheterBatimentImg,(0,500))
+                self.player.setListeBatiment(game.Help)
             else :
                 self.screen.blit(self.ameliorerBatimentImg,(0,500))
         
         self.player.revenuPassif(game)
             
-            
+                
