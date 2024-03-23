@@ -46,8 +46,8 @@ class Affichage:
         self.acheterBatimentImg = pygame.image.load("assets/Images/acheterBatiment.png")
         self.ameliorerBatimentImg = pygame.image.load("assets/Images/ameliorerBatiment.png")
         
-        self.boutonAcheter = Bouton(self.screen, 1,1,self.acheterBatimentImg,1)
-        self.boutonAmeliorer = Bouton(self.screen,1,1,self.ameliorerBatimentImg,1)
+        self.boutonAcheter = Bouton(self.screen, 0,525,self.acheterBatimentImg,1)
+        self.boutonAmeliorer = Bouton(self.screen,0,525,self.ameliorerBatimentImg,1)
 
     def flip(self):
         pygame.display.flip()
@@ -76,22 +76,29 @@ class Affichage:
         self.screen.blit(textDiamonds,(575,25))
         
         for building in game.buildings: 
-           if(player.feet.colliderect(building.getCollideArea())):
+            buildingImg = pygame.image.load("assets/Images/buildings/"+building.getImage()+".png")
+            buildingImg = pygame.transform.scale(buildingImg,(175,175))
+            if(player.feet.colliderect(building.getCollideArea())):
                 print("player entering in building " + str(building.libelle))
                 # afficher prix batiment.price   
                 textPrice = pygame.font.SysFont('comicsansms', 50).render("Price : " + str(building.getPrice()), True, self.green)
                 self.screen.blit(textPrice,(5,500))
                 if game.player.ownBuilding(building):
                     print("player already own the building " + str(building.libelle))
-                    if self.boutonAmeliorer.draw():
-                        self.screen.blit(self.ameliorerBatimentImg,(5,1000))
+                    self.boutonAmeliorer.draw()
+                    self.screen.blit(textPrice,(5,500))
+                    self.screen.blit(buildingImg,(40,575))
+
+                    if self.boutonAmeliorer.touched():
                         if player.getDollars()>= building.getPrice():
                             player.addDollars(-building.getPrice())
                             building.newPrice(5)
                             building.newGain(5)
                 else: 
-                    if self.boutonAcheter.draw():
-                        self.screen.blit(self.acheterBatimentImg,(5,1000))
+                    self.boutonAmeliorer.draw()
+                    self.screen.blit(textPrice,(5,500))
+                    self.screen.blit(buildingImg,(40,575))
+                    if self.boutonAcheter.touched():
                         if player.getDollars()>= building.getPrice():
                             player.addDollars(-building.getPrice())
                             player.setListeBatiment(building)

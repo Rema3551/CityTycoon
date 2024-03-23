@@ -11,7 +11,7 @@ class Bouton():
         self.clicked = False
         self.screen = screen
 
-    def draw(self):
+    def touched(self):
         action = False
         #prend la position de la souris
         pos = pygame.mouse.get_pos()
@@ -22,6 +22,8 @@ class Bouton():
                 action = True
         if pygame.mouse.get_pressed()[0] == 0:
             self.clicked = False
-        #affiche/dessine le bouton sur l'écran
-        self.screen.blit(self.image,(self.rect.x, self.rect.y))  
         return action
+    
+    def draw(self):
+        self.screen.blit(self.image,(self.rect.x, self.rect.y))  
+        

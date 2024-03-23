@@ -227,7 +227,7 @@
   <object id="1" name="player" x="2.12067" y="461.972">
    <point/>
   </object>
-  <object id="17" type="collision" x="271.861" y="198.923" width="62.9921" height="70.728"/>
+  <object id="17" type="collision" x="271.861" y="209.923" width="62.9921" height="59.728"/>
   <object id="19" type="collision" x="434.314" y="224.34" width="46.4153" height="46.4153"/>
   <object id="21" type="collision" x="290.648" y="332.643" width="46.4153" height="49.7306"/>
   <object id="23" type="collision" x="432.104" y="331.538" width="48.6255" height="51.9409"/>

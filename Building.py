@@ -11,13 +11,14 @@ class Building:
         -mutateurs  (set...())
         -accesseurs (get...())
     """
-    def __init__(self, price : int , gain : int, libelle: str):
+    def __init__(self, price : int , gain : int, libelle: str, image: str):
         self.price = price
         self.gain = gain
         self.niveau = 0
         self.multiplicateur = 0
         self.libelle = libelle
         self.collideArea = 0
+        self.image = image
 
     def getPrice(self):
         return self.price
@@ -57,3 +58,6 @@ class Building:
     
     def newGain(self, multiple):
         self.gain = self.gain * multiple
+    
+    def getImage(self):
+        return self.image
