@@ -115,7 +115,7 @@ class Affichage:
                         if self.boutonAcheter.touched():
                             if player.getDollars()>= building.getPrice():
                                 player.addDollars(-building.getPrice())
-                                player.setListBuilding(building)
+                                player.addListBuilding(building)
                                 building.newPrice(2)
                                 building.addLvl()
                             

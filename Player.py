@@ -107,7 +107,6 @@ class Player(pygame.sprite.Sprite):
     def setEau(self, newEau):
         self.eau = newEau
     
-    
     def bougerDroite(self) : 
         self.position[0] += self.speed
 
@@ -119,11 +118,18 @@ class Player(pygame.sprite.Sprite):
 
     def bougerBas(self) : 
         self.position[1] += self.speed
+
+    def setPosition(self, x, y):
+        self.position[0] = x
+        self.position[1] = y
         
     def getListBuilding(self):
-        self.listBuilding
+        return self.listBuilding
     
-    def setListBuilding(self, nouveauBatiment):
+    def setListBuilding(self, newListBuilding):
+        self.listBuilding = newListBuilding
+
+    def addListBuilding(self, nouveauBatiment):
         self.listBuilding.append(nouveauBatiment)
         
     def revenuPassif(self,game:Game):
@@ -135,11 +141,9 @@ class Player(pygame.sprite.Sprite):
 
 
     def ownBuilding(self, building)->bool:
-        result = False 
         for i in range (len(self.listBuilding)):
-            if self.listBuilding[i] == building:
-                result = True
-        return result
+            return self.listBuilding[i].libelle == building.libelle
+        return False
 
                 
     

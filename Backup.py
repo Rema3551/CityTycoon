@@ -1,33 +1,31 @@
 import pickle
- 
-class MyClass():
-    def __init__(self, param):
-        self.param = param
- 
-def save_object(obj):
-    try:
-        with open("data.pickle", "wb") as f:
-            pickle.dump(obj, f, protocol=pickle.HIGHEST_PROTOCOL)
-    except Exception as ex:
-        print("Error during pickling object (Possibly unsupported):", ex)
- 
-obj = MyClass(10)
-save_object(obj)
+import Game
 
-import pickle
- 
-class MyClass():
-    def __init__(self, param):
-        self.param = param
- 
-def load_object(filename):
-    try:
-        with open(filename, "rb") as f:
-            return pickle.load(f)
-    except Exception as ex:
-        print("Error during unpickling object (Possibly unsupported):", ex)
- 
-obj = load_object("data.pickle")
- 
-print(obj.param)
-print(isinstance(obj, MyClass))
+class Backup():
+
+    def save(self,game: Game):
+        # Données à sauvegarder
+        data = {
+            'player' : {
+                'dollars': game.player.getDollars(),
+                'diamonds': game.player.getDiamonds(),
+                'position_x' : game.player.position[0],
+                'position_y' : game.player.position[1]
+            },
+            'listBuildingsPlayer': game.player.getListBuilding()
+        }
+        
+
+        # Sauvegarde des données
+        with open('data.pickle', 'wb') as file:
+            pickle.dump(data, file)
+            file.close()
+    
+    def load(self ,game: Game):
+        # Restauration des données
+        with open('data.pickle', 'rb') as f:
+            try: 
+                restored_data = pickle.load(f)
+                game.restoreData(restored_data)
+            except EOFError:
+                print("fichier vide")

@@ -1,14 +1,18 @@
 from Building import * 
 from Affichage import *
 from BuildingType import *
+from Backup import *
 class Game:
     def __init__(self):
         self.player = Player()
+        self.backup = Backup()
         self.affichage = Affichage(self)
+        
     
     def start(self, tmx_data):
         self.createPlayer(tmx_data)
         self.createBuildings(tmx_data)
+        self.backup.load(self)
         
     def createPlayer(self, tmx_data):
         player_position = tmx_data.get_object_by_name("player")
@@ -67,6 +71,8 @@ class Game:
         self.affichage.update(self.player)
         self.affichage.draw(self)
         self.affichage.flip()
+        self.backup.save(self)
+        
 
     def verificationFinVille1(self):
         if self.player.listBuilding == self.listBuildingVille1 and self.player.getDollars() >= 2000 :
@@ -76,3 +82,27 @@ class Game:
             return True
         else: 
             return False
+    
+    def restoreData(self, restored_data):
+        self.restoreBuildings(restored_data['listBuildingsPlayer'])
+        self.restorePlayer(restored_data['player'])
+        
+
+    def restoreBuildings(self, savedBuildings):
+        for building in savedBuildings:
+            
+            for i in range (len(self.buildings)):
+                if building.libelle == self.buildings[i].libelle:
+                    self.buildings[i] = building
+        self.player.setListBuilding(savedBuildings)
+
+    def restorePlayer(self,savedPlayer):
+        self.player.setDollars(savedPlayer['dollars'])
+        self.player.setDiamonds(savedPlayer['diamonds'])
+        self.player.setPosition(
+            savedPlayer['position_x'],
+            savedPlayer['position_y']
+        )
+
+
+        
