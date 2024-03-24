@@ -62,24 +62,26 @@ class Player(pygame.sprite.Sprite):
         return self.dollars
         
     def strDollars(self):
+        dollarsStr = str(int(self.dollars))
         if self.dollars<1000:
-            return str(int(self.dollars))
+            return dollarsStr
         elif self.dollars<1000000:
-            return str(int(self.dollars/1000)) + "K" + str(int(self.dollars))[1]
+            return str(int(self.dollars/1000)) + "K" + dollarsStr[len(dollarsStr)-3]
         elif self.dollars<1000000000 :
-            return str(int(self.dollars/1000000)) + "M" + str(int(self.dollars))[1]
+            return str(int(self.dollars/1000000)) + "M" + dollarsStr[len(dollarsStr)-3]
         
     
     def getDiamonds(self):
         return self.diamonds
     
     def strDiamonds(self):
+        diamondsStr = str(int(self.diamonds))
         if self.diamonds<1000:
-            return str(int(self.diamonds))
+            return diamondsStr
         elif self.diamonds<1000000:
-            return str(int(self.diamonds/1000)) + "K" + str(int(self.diamonds))[1]
+            return str(int(self.diamonds/1000)) + "K" + diamondsStr[len(diamondsStr)-3]
         elif self.diamonds<1000000000 : 
-            return str(int(self.diamonds/1000000)) + "M" + str(int(self.diamonds))[1]
+            return str(int(self.diamonds/1000000)) + "M" + diamondsStr[len(diamondsStr)-3]
     
     def getNiveau(self):
         return self.niveau
