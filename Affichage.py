@@ -27,6 +27,9 @@ class Affichage:
         map_data = pyscroll.data.TiledMapData(self.tmx_data)
         map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
         
+        self.music = pygame.mixer.music.load('assets/music/music.mp3')
+        pygame.mixer.music.play(-1)
+
         game.start(self.tmx_data)
 
         self.walls = []
