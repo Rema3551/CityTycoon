@@ -38,7 +38,7 @@ class Affichage:
             if obj.type == "collision":
                 self.walls.append(pygame.Rect(obj.x, obj.y, obj.width, obj.height))
 
-        self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=2)
+        self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=4)
         self.group.add(game.player)
         
         self.cashDiamond = pygame.image.load("assets/Images/cashDiamond.png").convert_alpha()
