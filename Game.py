@@ -1,14 +1,22 @@
-from Building import * 
+from Building import *
 from Affichage import *
 from BuildingType import *
 from Backup import *
+from GameStep import *
+
 class Game:
     def __init__(self):
         self.player = Player()
         self.backup = Backup()
+        self.gameEnum = GameStep.IDLE
         self.affichage = Affichage(self)
         
+    def getGameStep(self):
+        return self.gameEnum
     
+    def setGameStep(self, newGameStep):
+        self.gameEnum = newGameStep
+
     def start(self, tmx_data):
         self.createPlayer(tmx_data)
         self.createBuildings(tmx_data)
@@ -35,7 +43,7 @@ class Game:
         self.orange = Building(500,25,3,"orange",BuildingType.ORANGE)
         self.listBuildingVille1 = [self.poubelle1, self.poubelle2, self.poubelle3, self.poubelle4, self.poubelle5, self.poubelle6, self.poubelle7, self.poubelle8, self.poubelle9, self.poubelle10, self.rouge, self.help, self.orange]
         self.buildings = [self.poubelle1, self.poubelle2, self.poubelle3, self.poubelle4, self.poubelle5, self.poubelle6, self.poubelle7, self.poubelle8, self.poubelle9, self.poubelle10, self.rouge, self.help, self.orange]
-        
+
 
         for building in self.buildings:
             tmxObject = tmx_data.get_object_by_name(building.libelle)

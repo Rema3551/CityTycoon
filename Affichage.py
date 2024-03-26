@@ -3,6 +3,7 @@ import pytmx
 import pyscroll
 from Button import *
 import Game
+from GameStep import *
 from Player import *
 
 class Affichage:
@@ -52,9 +53,12 @@ class Affichage:
 
         self.acheterBatimentImg = pygame.image.load("assets/Images/acheterBatiment.png")
         self.ameliorerBatimentImg = pygame.image.load("assets/Images/ameliorerBatiment.png")
-        
+        self.videoImg = pygame.image.load("assets/Images/video.png")
+
+
         self.boutonAcheter = Bouton(self.screen, 0,510,self.acheterBatimentImg,1)
         self.boutonAmeliorer = Bouton(self.screen,0,510,self.ameliorerBatimentImg,1)
+        self.boutonVideo = Bouton(self.screen,725,125,self.videoImg,1)
 
     def flip(self):
         pygame.display.flip()
@@ -73,64 +77,80 @@ class Affichage:
         """
         affichage du jeu
         """
+        player = game.player
+
         self.group.draw(self.screen)
         self.screen.blit(self.cashDiamond,(0,0))
-        player = game.player
-        
-        textDollars = pygame.font.SysFont('comicsansms', 50).render(player.strDollars(), True, self.green)
-        self.screen.blit(textDollars,(350,25))
-        textDiamonds = pygame.font.SysFont('comicsansms', 50).render(player.strDiamonds(), True, self.green)
-        self.screen.blit(textDiamonds,(575,25))
-        
-        for building in game.buildings: 
-            buildingImg = pygame.image.load(building.getImagePath())
-            buildingImg = pygame.transform.scale(buildingImg,(175,175))
-            if(player.feet.colliderect(building.getCollideArea())):
-                #print("player entering in building " + str(building.libelle))
-                # afficher prix batiment.price   
-                textPrice = pygame.font.SysFont('comicsansms', 50).render(str(building.getPrice()), True, self.colorWood)
-                if building.getLvl() == building.getLvlMax():
-                    textLvl = pygame.font.SysFont('comicsansms', 50).render("MAX", True, self.colorWood)
-                    self.boutonAmeliorer.draw()
-                    self.screen.blit(textPrice,(380,727))
-                    self.screen.blit(textLvl,(600,712))
-                    self.screen.blit(buildingImg,(40,560))
-                else:
-                    textLvl = pygame.font.SysFont('comicsansms', 50).render(str(building.getLvl()), True, self.colorWood)
-                    if game.player.ownBuilding(building):
-                        #print("player already own the building " + str(building.libelle))
+        if game.getGameStep() == GameStep.IDLE :
+            textDollars = pygame.font.SysFont('comicsansms', 50).render(player.strDollars(), True, self.green)
+            self.screen.blit(textDollars,(350,25))
+            textDiamonds = pygame.font.SysFont('comicsansms', 50).render(player.strDiamonds(), True, self.green)
+            self.screen.blit(textDiamonds,(575,25))
+            
+            self.boutonVideo.draw()
+            if self.boutonVideo.touched():
+                print("la video")
+                game.setGameStep(GameStep.BUTTONVIDEO) 
+
+            for building in game.buildings: 
+                buildingImg = pygame.image.load(building.getImagePath())
+                buildingImg = pygame.transform.scale(buildingImg,(175,175))
+                if(player.feet.colliderect(building.getCollideArea())):
+                    #print("player entering in building " + str(building.libelle))
+                    # afficher prix batiment.price   
+                    textPrice = pygame.font.SysFont('comicsansms', 50).render(str(building.getPrice()), True, self.colorWood)
+                    if building.getLvl() == building.getLvlMax():
+                        textLvl = pygame.font.SysFont('comicsansms', 50).render("MAX", True, self.colorWood)
                         self.boutonAmeliorer.draw()
                         self.screen.blit(textPrice,(380,727))
                         self.screen.blit(textLvl,(600,712))
                         self.screen.blit(buildingImg,(40,560))
-
-                        if self.boutonAmeliorer.touched():
-                            if player.getDollars()>= building.getPrice():
-                                player.addDollars(-building.getPrice())
-                                building.newPrice(2)
-                                building.newGain(2)
-                                building.addLvl()
                     else:
-                        self.boutonAcheter.draw()
-                        self.screen.blit(textPrice,(380,727))
-                        self.screen.blit(textLvl,(600,712))
-                        self.screen.blit(buildingImg,(40,560))
-                        if self.boutonAcheter.touched():
-                            if player.getDollars()>= building.getPrice():
-                                player.addDollars(-building.getPrice())
-                                player.addListBuilding(building)
-                                building.newPrice(2)
-                                building.addLvl()
-                            
+                        textLvl = pygame.font.SysFont('comicsansms', 50).render(str(building.getLvl()), True, self.colorWood)
+                        if game.player.ownBuilding(building):
+                            #print("player already own the building " + str(building.libelle))
+                            self.boutonAmeliorer.draw()
+                            self.screen.blit(textPrice,(380,727))
+                            self.screen.blit(textLvl,(600,712))
+                            self.screen.blit(buildingImg,(40,560))
 
-        if player.feet.colliderect(self.signTutoRect):
-            self.screen.blit(self.signTutoImg,(100,100))
-            
-        if player.feet.colliderect(self.carRect):
-            if game.verificationFinVille1():
-                print("vous avez assez")
-            else:
-                print("pour prendre la voiture et aller à la prochaine ville, vous devez avoir tous les batiments aux niveau maximum et posséder au moins 2000 dollars")
+                            if self.boutonAmeliorer.touched():
+                                if player.getDollars()>= building.getPrice():
+                                    player.addDollars(-building.getPrice())
+                                    building.newPrice(2)
+                                    building.newGain(2)
+                                    building.addLvl()
+                        else:
+                            self.boutonAcheter.draw()
+                            self.screen.blit(textPrice,(380,727))
+                            self.screen.blit(textLvl,(600,712))
+                            self.screen.blit(buildingImg,(40,560))
+                            if self.boutonAcheter.touched():
+                                if player.getDollars()>= building.getPrice():
+                                    player.addDollars(-building.getPrice())
+                                    player.addListBuilding(building)
+                                    building.newPrice(2)
+                                    building.addLvl()
+
+
+                           
+
+            if player.feet.colliderect(self.signTutoRect):
+                self.screen.blit(self.signTutoImg,(100,100))
+                
+            if player.feet.colliderect(self.carRect):
+                if game.verificationFinVille1():
+                    print("vous avez assez")
+                else:
+                    print("pour prendre la voiture et aller à la prochaine ville, vous devez avoir tous les batiments aux niveau maximum et posséder au moins 2000 dollars")
+        
+
+        if game.getGameStep() == GameStep.BUTTONVIDEO :
+            print("fonctionne")
+        
+        
+        
+        
         player.revenuPassif(game)
             
                 
