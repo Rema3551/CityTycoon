@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="1184">
- <tileset firstgid="1" source="ville3.tsx"/>
- <tileset firstgid="4097" source="chemin_terre.tsx"/>
- <tileset firstgid="4241" source="trash.tsx"/>
- <tileset firstgid="5265" source="ville1.tsx"/>
- <tileset firstgid="6033" source="transport.tsx"/>
- <tileset firstgid="9101" source="arbre.tsx"/>
- <tileset firstgid="9257" source="ville2.tsx"/>
+ <tileset firstgid="1" source="tileset/ville3.tsx"/>
+ <tileset firstgid="4097" source="tileset/chemin_terre.tsx"/>
+ <tileset firstgid="4241" source="tileset/trash.tsx"/>
+ <tileset firstgid="5265" source="tileset/ville1.tsx"/>
+ <tileset firstgid="6033" source="tileset/transport.tsx"/>
+ <tileset firstgid="9101" source="tileset/arbre.tsx"/>
+ <tileset firstgid="9257" source="tileset/ville2.tsx"/>
  <layer id="1" name="Calque de Tuiles 1" width="50" height="50">
   <data encoding="csv">
 3270,3270,3270,3270,3270,3270,3270,3270,3270,3270,3270,3270,3270,3270,3270,3270,3270,3270,3270,3270,3270,3270,3270,3270,3270,3270,3270,3270,3270,3270,3270,3270,3270,3270,3270,3270,3270,3270,3270,3270,3270,3270,3270,3270,3270,3270,3270,3270,3270,3270,
