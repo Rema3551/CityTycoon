@@ -24,7 +24,7 @@ class Affichage:
         self.blue = (0, 0, 128)
         self.colorWood = (144,51,42)
 
-        self.tmx_data = pytmx.util_pygame.load_pygame('assets/map/ville1.tmx')
+        self.tmx_data = pytmx.util_pygame.load_pygame('assets/map/ville2.tmx')
         map_data = pyscroll.data.TiledMapData(self.tmx_data)
         map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
         
@@ -44,12 +44,12 @@ class Affichage:
         
         self.cashDiamond = pygame.image.load("assets/Images/cashDiamond.png").convert_alpha()
 
-        signTuto = self.tmx_data.get_object_by_name("signTuto")
-        self.signTutoRect = pygame.Rect(signTuto.x, signTuto.y, signTuto.width, signTuto.height)
-        self.signTutoImg = pygame.image.load("assets/Images/signTuto.png")
+        #signTuto = self.tmx_data.get_object_by_name("signTuto")
+        #self.signTutoRect = pygame.Rect(signTuto.x, signTuto.y, signTuto.width, signTuto.height)
+        #self.signTutoImg = pygame.image.load("assets/Images/signTuto.png")
         
-        car = self.tmx_data.get_object_by_name("car")
-        self.carRect = pygame.Rect(car.x, car.y, car.width, car.height)
+        #car = self.tmx_data.get_object_by_name("car")
+        #self.carRect = pygame.Rect(car.x, car.y, car.width, car.height)
 
         self.acheterBatimentImg = pygame.image.load("assets/Images/acheterBatiment.png")
         self.ameliorerBatimentImg = pygame.image.load("assets/Images/ameliorerBatiment.png")
@@ -134,7 +134,7 @@ class Affichage:
 
 
                            
-
+            """
             if player.feet.colliderect(self.signTutoRect):
                 self.screen.blit(self.signTutoImg,(100,100))
                 
@@ -144,7 +144,8 @@ class Affichage:
                 else:
                     print("pour prendre la voiture et aller à la prochaine ville, vous devez avoir tous les batiments aux niveau maximum et posséder au moins 2000 dollars")
         
-
+        """
+            
         if game.getGameStep() == GameStep.BUTTONVIDEO :
             print("fonctionne")
         
