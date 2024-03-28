@@ -140,7 +140,7 @@ class Player(pygame.sprite.Sprite):
             #print("le batiment rapporte " + str(batiment.getGain()))
             self.addDollars(batiment.getGain()/60)
 
-            print(self.dollars)
+            #print(self.dollars)
 
 
     def ownBuilding(self, building)->bool:
