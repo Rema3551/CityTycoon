@@ -3,6 +3,7 @@ from Affichage import *
 from BuildingType import *
 from Backup import *
 from GameStep import *
+from random import *
 
 class Game:
     def __init__(self):
@@ -40,11 +41,15 @@ class Game:
         self.poubelle9 = Building(50,1,1,"poubelle9",BuildingType.POUBELLE)
         self.poubelle10 = Building(55,1,1, "poubelle10",BuildingType.POUBELLE)
         self.rouge = Building(100,10,3,"rouge", BuildingType.ROUGE)
-        self.help = Building(1000,50,3,"help",BuildingType.HELP)
+        self.help = Building(750,30,3,"help",BuildingType.HELP)
         self.orange = Building(500,25,3,"orange",BuildingType.ORANGE)
         self.listBuildingVille1 = [self.poubelle1, self.poubelle2, self.poubelle3, self.poubelle4, self.poubelle5, self.poubelle6, self.poubelle7, self.poubelle8, self.poubelle9, self.poubelle10, self.rouge, self.help, self.orange]
+        """"""
+        self.hdv = Building(100000,100,2,"bat2",BuildingType.HDV)
+        self.maisonette = Building(1000,35,3,"bat4",BuildingType.MAISONETTE)
+        self.maison = Building(5000,45,3,"bat6",BuildingType.MAISONETTE)
         """
-        self.buildings = [] #self.poubelle1, self.poubelle2, self.poubelle3, self.poubelle4, self.poubelle5, self.poubelle6, self.poubelle7, self.poubelle8, self.poubelle9, self.poubelle10, self.rouge, self.help, self.orange]
+        self.buildings = [] #self.hdv, self.maisonette, self.maison ] #self.poubelle1, self.poubelle2, self.poubelle3, self.poubelle4, self.poubelle5, self.poubelle6, self.poubelle7, self.poubelle8, self.poubelle9, self.poubelle10, self.rouge, self.help, self.orange]
         
 
         for building in self.buildings:
@@ -113,6 +118,10 @@ class Game:
             savedPlayer['position_x'],
             savedPlayer['position_y']
         )
+        
+    def randomAd(self, adList : list):
+        ad = random.choice(adList)
+        return ad
 
 
         

@@ -1,6 +1,7 @@
 import pygame
 import pytmx
 import pyscroll
+import moviepy.editor
 from Button import *
 import Game
 from GameStep import *
@@ -53,12 +54,20 @@ class Affichage:
 
         self.acheterBatimentImg = pygame.image.load("assets/Images/acheterBatiment.png")
         self.ameliorerBatimentImg = pygame.image.load("assets/Images/ameliorerBatiment.png")
-        self.videoImg = pygame.image.load("assets/Images/video.png")
-
-
+        self.videoDiamondImg = pygame.image.load("assets/Images/videoDiamond.png")
+        self.pubImg = pygame.image.load("assets/Images/buttonPub.png")
+        self.buttonYesImg = pygame.image.load("assets/Images/buttonYes.png")
+        self.buttonNoImg = pygame.image.load("assets/Images/buttonNo.png")
+        
         self.boutonAcheter = Bouton(self.screen, 0,510,self.acheterBatimentImg,1)
         self.boutonAmeliorer = Bouton(self.screen,0,510,self.ameliorerBatimentImg,1)
-        self.boutonVideo = Bouton(self.screen,725,125,self.videoImg,1)
+        self.boutonDiamondVideo = Bouton(self.screen,725,125,self.videoDiamondImg,1)
+        self.boutonPub = Bouton(self.screen,125,125,self.pubImg,1.5)
+        self.boutonYes = Bouton(self.screen,450,550,self.buttonYesImg,1)
+        self.boutonNo = Bouton(self.screen,250,550,self.buttonNoImg,1)
+        
+        self.adMouse = moviepy.editor.VideoFileClip("assets/pub/pub1.mp4")
+
 
     def flip(self):
         pygame.display.flip()
@@ -81,17 +90,31 @@ class Affichage:
 
         self.group.draw(self.screen)
         self.screen.blit(self.cashDiamond,(0,0))
-        if game.getGameStep() == GameStep.IDLE :
-            textDollars = pygame.font.SysFont('comicsansms', 50).render(player.strDollars(), True, self.green)
-            self.screen.blit(textDollars,(350,25))
-            textDiamonds = pygame.font.SysFont('comicsansms', 50).render(player.strDiamonds(), True, self.green)
-            self.screen.blit(textDiamonds,(575,25))
+        
+        textDollars = pygame.font.SysFont('comicsansms', 50).render(player.strDollars(), True, self.green)
+        self.screen.blit(textDollars,(350,25))
+        textDiamonds = pygame.font.SysFont('comicsansms', 50).render(player.strDiamonds(), True, self.green)
+        self.screen.blit(textDiamonds,(575,25))
+        
+        self.boutonDiamondVideo.draw()
+        if self.boutonDiamondVideo.touched():
+            print("la video")
+            game.setGameStep(GameStep.BUTTONVIDEO)
+        
+        if game.getGameStep() == GameStep.BUTTONVIDEO:
+            print("fonctionne")
+            self.boutonPub.draw()
+            self.boutonYes.draw()
+            self.boutonNo.draw()
+            if self.boutonYes.touched():
+                print("oooooh")
+                self.adMouse.preview()
+                game.setGameStep(GameStep.IDLE)
+            if self.boutonNo.touched() :
+                print("purééeeee")
+                game.setGameStep(GameStep.IDLE)
             
-            self.boutonVideo.draw()
-            if self.boutonVideo.touched():
-                print("la video")
-                game.setGameStep(GameStep.BUTTONVIDEO) 
-
+        if game.getGameStep() == GameStep.IDLE :
             for building in game.buildings: 
                 buildingImg = pygame.image.load(building.getImagePath())
                 buildingImg = pygame.transform.scale(buildingImg,(175,175))
@@ -146,8 +169,7 @@ class Affichage:
         
         """
             
-        if game.getGameStep() == GameStep.BUTTONVIDEO :
-            print("fonctionne")
+
         
         
         

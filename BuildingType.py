@@ -8,3 +8,6 @@ class BuildingType(Enum):
     ROUGE = "rouge.png"
     HELP = "help.png"
     ORANGE = "orange.png"
+    HDV = "hdv.png"
+    MAISONETTE = "maisonette.png"
+    MAISON = "maison.png"
