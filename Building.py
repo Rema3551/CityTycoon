@@ -65,3 +65,12 @@ class Building:
     
     def getLvlMax(self):
         return self.lvlMax
+    
+    def strPrice(self):
+        priceStr = str(int(self.price))
+        if self.price<1000:
+            return priceStr
+        elif self.price<1000000:
+            return str(int(self.price/1000)) + "K" + priceStr[len(priceStr)-3]
+        elif self.price<1000000000 : 
+            return str(int(self.price/1000000)) + "M" + priceStr[len(priceStr)-3]

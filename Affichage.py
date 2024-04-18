@@ -23,10 +23,9 @@ class Affichage:
         self.green = (0, 255, 0)
         self.blue = (0, 0, 128)
         self.colorWood = (144,51,42)
-        self.counterMap = 1
-        self.player = Player()
 
-        self.tmx_data = pytmx.util_pygame.load_pygame('assets/map/ville2.tmx')
+        self.tmx_data = pytmx.util_pygame.load_pygame('assets/map/ville1.tmx')
+        #self.tmx_data = pytmx.util_pygame.load_pygame('assets/map/ville2.tmx')
         map_data = pyscroll.data.TiledMapData(self.tmx_data)
         map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
         
@@ -41,7 +40,7 @@ class Affichage:
             if obj.type == "collision":
                 self.walls.append(pygame.Rect(obj.x, obj.y, obj.width, obj.height))
 
-        self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=4)
+        self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=6)
         self.group.add(game.player)
         
         self.cashDiamond = pygame.image.load("assets/Images/cashDiamond.png").convert_alpha()
@@ -50,12 +49,10 @@ class Affichage:
         #self.signTutoRect = pygame.Rect(signTuto.x, signTuto.y, signTuto.width, signTuto.height)
         #self.signTutoImg = pygame.image.load("assets/Images/signTuto.png")
         
-        #self.car = self.tmx_data.get_object_by_name("car")
-        #self.car_rect = pygame.Rect(self.car.x, self.car.y, self.car.width, self.car.height)
-
-        #Changer de map
-        self.boat = self.tmx_data.get_object_by_name("boat")
-        self.boat_rect = pygame.Rect(self.boat.x, self.boat.y, self.boat.width, self.boat.height )
+        car = self.tmx_data.get_object_by_name("car")
+        self.carRect = pygame.Rect(car.x, car.y, car.width, car.height)
+        #boat = self.tmx_data.get_object_by_name("boat")
+        #self.boatRect = pygame.Rect(boat.x, boat.y, boat.width, boat.height)
 
         self.acheterBatimentImg = pygame.image.load("assets/Images/acheterBatiment.png")
         self.ameliorerBatimentImg = pygame.image.load("assets/Images/ameliorerBatiment.png")
@@ -63,6 +60,7 @@ class Affichage:
         self.pubImg = pygame.image.load("assets/Images/buttonPub.png")
         self.buttonYesImg = pygame.image.load("assets/Images/buttonYes.png")
         self.buttonNoImg = pygame.image.load("assets/Images/buttonNo.png")
+        #self.afficheChangementVilleImg = pygame.image.load("assets/Images/afficheChangementVille.png")
         
         self.boutonAcheter = Bouton(self.screen, 0,510,self.acheterBatimentImg,1)
         self.boutonAmeliorer = Bouton(self.screen,0,510,self.ameliorerBatimentImg,1)
@@ -70,62 +68,24 @@ class Affichage:
         self.boutonPub = Bouton(self.screen,125,125,self.pubImg,1.5)
         self.boutonYes = Bouton(self.screen,450,550,self.buttonYesImg,1)
         self.boutonNo = Bouton(self.screen,250,550,self.buttonNoImg,1)
+                
         
-        #self.adMouse = moviepy.editor.VideoFileClip("assets/pub/pub1.mp4")
-    
-    def getCounterMap():
-        return self.counterMap
 
-    def setCounterMap(newCounterMap):
-        self.counterMap = newCounterMap
 
-    def switch_map(self):
-        #Liste qui va stocker les rectangles de collision 
-        self.walls = []
-        for obj in self.tmx_data.objects:
-            if obj.type == "collision":
-                self.walls.append(pygame.Rect(obj.x, obj.y, obj.width, obj.height))
-
-        #Dessiner les calques
-        self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=4)
-        self.group.add(game.player)
-
-        #Changement de map
-        if self.counterMap == 1:
-            self.tmx_data = pytmx.util_pygame.load_pygame('assets/map/ville2.tmx')
-            map_data = pyscroll.data.TiledMapData(self.tmx_data)
-            map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
-            #rectangle de collision pour le boat
-            self.boat = self.tmx_data.get_object_by_name("boat")
-            self.boat_rect = pygame.Rect(boat.x, boat.y, boat.width, boat.height)
-            #spawn_boat_point = tmx_data.get_object_by_name("spawn_boat")
-            #self.player.position[0] = spawn_boat_point.position.x
-            #self.player.position[1] = spawn_boat_point.y + 20
-        elif self.counterMap == 2:
-            self.tmx_data = pytmx.util_pygame.load_pygame('assets/map/ville1.tmx')
-            map_data = pyscroll.data.TiledMapData(self.tmx_data)
-            map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
-            #rectangle de collision pour la voiture
-            self.car = self.tmx_data.get_object_by_name("car")
-            self.car_rect = pygame.Rect(car.x, car.y, car.width, car.height)
-            #spawn_car_point = tmx_data.get_object_by_name("spawn_car")
-            #self.player.position[0] = spawn_car_point.position.x
-            #self.player.position[1] = spawn_car_point.y - 20
-        self.setCounterMap(self.getCounterMap()+1)
-        
     def flip(self):
         pygame.display.flip()
     
-    def update(self,player):
+    def update(self, player):
         self.group.update()
         self.group.center(player.rect)
-        #Verification de la collision pour la voiture
-        #if self.player.feet.colliderect(self.car_rect):
-            #self.switch_map()
-        #Verification de la collision pour le boat
-        if self.player.feet.colliderect(self.boat_rect):
-            self.switch_map()
 
+        for sprite in self.group.sprites():
+            if sprite.feet.collidelist(self.walls) > -1:
+                sprite.revenirEnArriere()
+                
+        
+        
+        
 
     def draw(self, game:Game):
         """
@@ -136,8 +96,12 @@ class Affichage:
         self.group.draw(self.screen)
         self.screen.blit(self.cashDiamond,(0,0))
         
+        textRevenuPassif = pygame.font.SysFont('comicsansms', 50).render(player.strRevenuPassif(game), True, self.green)
+        self.screen.blit(textRevenuPassif,(85,25))
+
+        
         textDollars = pygame.font.SysFont('comicsansms', 50).render(player.strDollars(), True, self.green)
-        self.screen.blit(textDollars,(350,25))
+        self.screen.blit(textDollars,(330,25))
         textDiamonds = pygame.font.SysFont('comicsansms', 50).render(player.strDiamonds(), True, self.green)
         self.screen.blit(textDiamonds,(575,25))
         
@@ -153,8 +117,8 @@ class Affichage:
             self.boutonNo.draw()
             if self.boutonYes.touched():
                 print("oooooh")
-                self.adMouse.preview()
-                game.setGameStep(GameStep.IDLE)
+                
+                game.setGameStep(GameStep.BUTTONVIDEO)
             if self.boutonNo.touched() :
                 print("purééeeee")
                 game.setGameStep(GameStep.IDLE)
@@ -166,11 +130,12 @@ class Affichage:
                 if(player.feet.colliderect(building.getCollideArea())):
                     #print("player entering in building " + str(building.libelle))
                     # afficher prix batiment.price   
-                    textPrice = pygame.font.SysFont('comicsansms', 50).render(str(building.getPrice()), True, self.colorWood)
+                    textPrice = pygame.font.SysFont('comicsansms', 45).render(str(building.strPrice()), True, self.colorWood)
                     if building.getLvl() == building.getLvlMax():
                         textLvl = pygame.font.SysFont('comicsansms', 50).render("MAX", True, self.colorWood)
                         self.boutonAmeliorer.draw()
-                        self.screen.blit(textPrice,(380,727))
+                        #self.screen.blit(textPrice,(380,727))
+                        #self.screen.blit(self.cashDiamond,(380,727)) # Faire un détourage pour la piece et le diamant
                         self.screen.blit(textLvl,(600,712))
                         self.screen.blit(buildingImg,(40,560))
                     else:
@@ -186,7 +151,7 @@ class Affichage:
                                 if player.getDollars()>= building.getPrice():
                                     player.addDollars(-building.getPrice())
                                     building.newPrice(2)
-                                    building.newGain(2)
+                                    building.newGain(3)
                                     building.addLvl()
                         else:
                             self.boutonAcheter.draw()
@@ -199,26 +164,81 @@ class Affichage:
                                     player.addListBuilding(building)
                                     building.newPrice(2)
                                     building.addLvl()
+                                    
+            #Verification de la collision pour la voiture
+            if player.feet.colliderect(self.carRect):
+                self.switchMap(game)
+            #Verification de la collision pour le boat
+            #if self.player.feet.colliderect(self.boat_rect):
+               # self.switchMap()
 
-
+        """
+        if game.getMapStep() == MapStep.MAP1 :
                            
-            """
+
             if player.feet.colliderect(self.signTutoRect):
                 self.screen.blit(self.signTutoImg,(100,100))
                 
+        
             if player.feet.colliderect(self.carRect):
                 if game.verificationFinVille1():
                     print("vous avez assez")
+                    game.setMapStep(MapStep.MAP2)
                 else:
-                    print("pour prendre la voiture et aller à la prochaine ville, vous devez avoir tous les batiments aux niveau maximum et posséder au moins 2000 dollars")
-        
+                    print("pour prendre la voiture et aller à la prochaine ville, vous devez avoir tous les batiments aux niveau maximum.")
         """
-            
+        """
+        if player.feet.colliderect(self.boatRect):
+            if   game.verificationFinVille2(): #game.verificationFinVille1() and
+                print("vous avez assez")
+                self.screen.blit(afficheChangementVilleImg,(380,727))
+                game.setMapStep(MapStep.MAP2)
+            else:
+                self.screen.blit(afficheChangementVilleImg,(380,727))
+                print("pour prendre le bateau et aller à la prochaine ville, vous devez avoir tous les batiments aux niveau maximum.")
+        """
 
-        
-        
         
         
         player.revenuPassif(game)
             
-                
+            
+    def switchMap(self, game:Game):
+        #Liste qui va stocker les rectangles de collision 
+        self.walls = []
+        for obj in self.tmx_data.objects:
+            if obj.type == "collision":
+                self.walls.append(pygame.Rect(obj.x, obj.y, obj.width, obj.height))
+
+        #Dessiner les calques
+        #self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=4)
+        #self.group.add(game.player)
+
+        #Changement de map
+        if game.getMapStep() == MapStep.MAP1:
+            self.tmx_data = pytmx.util_pygame.load_pygame('assets/map/ville2.tmx')
+            map_data = pyscroll.data.TiledMapData(self.tmx_data)
+            map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
+            #rectangle de collision pour le boat
+            self.boat = self.tmx_data.get_object_by_name("boat")
+            self.boat_rect = pygame.Rect(boat.x, boat.y, boat.width, boat.height)
+            #spawn_boat_point = tmx_data.get_object_by_name("spawn_boat")
+            #self.player.position[0] = spawn_boat_point.position.x
+            #self.player.position[1] = spawn_boat_point.y + 20
+            game.setMapStep(MapStep.MAP2)
+        elif game.getMapStep() == MapStep.MAP2:
+            self.tmx_data = pytmx.util_pygame.load_pygame('assets/map/ville1.tmx')
+            map_data = pyscroll.data.TiledMapData(self.tmx_data)
+            map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
+            #rectangle de collision pour la voiture
+            self.car = self.tmx_data.get_object_by_name("car")
+            self.car_rect = pygame.Rect(car.x, car.y, car.width, car.height)
+            #spawn_car_point = tmx_data.get_object_by_name("spawn_car")
+            #self.player.position[0] = spawn_car_point.position.x
+            #self.player.position[1] = spawn_car_point.y - 20
+            game.setMapStep(MapStep.MAP1)
+            
+            
+            
+            
+            

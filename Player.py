@@ -141,7 +141,14 @@ class Player(pygame.sprite.Sprite):
             self.addDollars(batiment.getGain()/60)
 
             #print(self.dollars)
-
+    def strRevenuPassif(self,game:Game):
+        revenuPassif = 0
+        for batiment in self.listBuilding:
+            revenuPassif += batiment.getGain()
+        if revenuPassif <10:
+            return str(revenuPassif)[len(str(revenuPassif))-2] + "/s" 
+        else:
+            return str(int(revenuPassif/2)) + "/s"
 
     def ownBuilding(self, building)->bool:
         for i in range (len(self.listBuilding)):

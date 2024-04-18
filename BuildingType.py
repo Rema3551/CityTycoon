@@ -11,3 +11,6 @@ class BuildingType(Enum):
     HDV = "hdv.png"
     MAISONETTE = "maisonette.png"
     MAISON = "maison.png"
+    TOURDEGUET = "tourDeGuet.png"
+    CABANE = "cabane.png"
+    ECURIE = "ecurie.png"

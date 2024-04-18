@@ -3,6 +3,7 @@ from Affichage import *
 from BuildingType import *
 from Backup import *
 from GameStep import *
+from MapStep import *
 from random import *
 
 class Game:
@@ -10,6 +11,7 @@ class Game:
         self.player = Player()
         self.backup = Backup()
         self.gameEnum = GameStep.IDLE
+        self.mapStep = MapStep.MAP1
         self.affichage = Affichage(self)
         
     def getGameStep(self):
@@ -17,6 +19,12 @@ class Game:
     
     def setGameStep(self, newGameStep):
         self.gameEnum = newGameStep
+        
+    def getMapStep(self):
+        return self.mapStep
+    
+    def setMapStep(self, newMapStep):
+        self.mapStep = newMapStep
 
     def start(self, tmx_data):
         self.createPlayer(tmx_data)
@@ -29,7 +37,7 @@ class Game:
 
     def createBuildings(self, tmx_data):
         # TODO : lvl max building
-        """
+        
         self.poubelle1 = Building(5,1,1,"poubelle1",BuildingType.POUBELLE)
         self.poubelle2 = Building(15,1,1,"poubelle2",BuildingType.POUBELLE)
         self.poubelle3 = Building(20,1,1,"poubelle3",BuildingType.POUBELLE)
@@ -43,13 +51,23 @@ class Game:
         self.rouge = Building(100,10,3,"rouge", BuildingType.ROUGE)
         self.help = Building(750,30,3,"help",BuildingType.HELP)
         self.orange = Building(500,25,3,"orange",BuildingType.ORANGE)
+
         self.listBuildingVille1 = [self.poubelle1, self.poubelle2, self.poubelle3, self.poubelle4, self.poubelle5, self.poubelle6, self.poubelle7, self.poubelle8, self.poubelle9, self.poubelle10, self.rouge, self.help, self.orange]
         """
-        self.hdv = Building(100000,100,2,"bat2",BuildingType.HDV)
-        self.maisonette = Building(1000,35,3,"bat4",BuildingType.MAISONETTE)
+        self.hdv = Building(100000,200,2,"bat2",BuildingType.HDV)
+        self.maisonette = Building(1000,40,3,"bat4",BuildingType.MAISONETTE)
         self.maison = Building(5000,45,3,"bat6",BuildingType.MAISON)
-        self.buildings =[self.hdv, self.maisonette, self.maison]# [self.poubelle1, self.poubelle2, self.poubelle3, self.poubelle4, self.poubelle5, self.poubelle6, self.poubelle7, self.poubelle8, self.poubelle9, self.poubelle10, self.rouge, self.help, self.orange] 
+
+            
+        self.tourDeGuet = Building(20000,65,3,"bat5",BuildingType.TOURDEGUET)
+        self.cabane = Building(17500,55,3,"bat3",BuildingType.CABANE)
+        self.ecurie = Building(15000,45,3,"bat1",BuildingType.ECURIE)
         
+        self.listBuildingVille2 = [self.hdv, self.maisonette, self.maison, self.tourDeGuet,self.cabane,self.ecurie]
+        self.buildings = [self.poubelle1, self.poubelle2, self.poubelle3, self.poubelle4, self.poubelle5, self.poubelle6, self.poubelle7, self.poubelle8, self.poubelle9, self.poubelle10, self.rouge, self.help, self.orange]#self.hdv, self.maisonette, self.maison, self.tourDeGuet,self.cabane,self.ecurie]
+        """
+        self.buildings = [self.poubelle1, self.poubelle2, self.poubelle3, self.poubelle4, self.poubelle5, self.poubelle6, self.poubelle7, self.poubelle8, self.poubelle9, self.poubelle10, self.rouge, self.help, self.orange]
+        #Faire une liste pour moyen de deplacement changement de ville
 
         for building in self.buildings:
             tmxObject = tmx_data.get_object_by_name(building.libelle)
@@ -89,7 +107,7 @@ class Game:
         
 
     def verificationFinVille1(self):
-        if self.player.listBuilding == self.listBuildingVille1 and self.player.getDollars() >= 2000 :
+        if self.player.listBuilding == self.listBuildingVille1 :
             for building in self.player.listBuilding:
                 if building.getLvl() != building.getLvlMax():
                     return False
@@ -97,6 +115,14 @@ class Game:
         else: 
             return False
     
+    def verificationFinVille2(self):
+        if self.player.listBuilding == self.listBuildingVille2 :
+            for building in self.player.listBuilding:
+                if building.getLvl() != building.getLvlMax():
+                    return False
+            return True
+        else: 
+            return False
     def restoreData(self, restored_data):
         self.restoreBuildings(restored_data['listBuildingsPlayer'])
         self.restorePlayer(restored_data['player'])

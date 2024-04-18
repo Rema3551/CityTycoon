@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SOURIS ULTRA PERFORMANTE</title>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+        <h1>UNE SOURIS ULTRA PERFORMANTE</h1>
+        
+        <p>
+			<video width="1000" height="1000" controls>
+				<source src="assets/pub/pub3.mp4" type="video/mp4">
+			</video>
+			
+        </p>
+        
+        <h2>Un titre de niveau 2</h2>
+        
+        <p>
+            Un autre paragraphe contenant un lien pour aller
+            sur le site <a href="http://koor.fr">KooR.fr</a>.
+        </p>
+    </body>
+</html>

@@ -7,7 +7,8 @@ game = Game()
 clock = pygame.time.Clock()
 #pip install pygame
 #pip install pytmx
-#pip install pyscroll 
+#pip install pyscroll
+
 
 running = True
 
