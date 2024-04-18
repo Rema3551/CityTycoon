@@ -4,6 +4,7 @@ import pyscroll
 from Button import *
 import Game
 from GameStep import *
+from MapStep import *
 from Player import *
 
 class Affichage:
@@ -51,8 +52,6 @@ class Affichage:
         
         car = self.tmx_data.get_object_by_name("car")
         self.carRect = pygame.Rect(car.x, car.y, car.width, car.height)
-        #boat = self.tmx_data.get_object_by_name("boat")
-        #self.boatRect = pygame.Rect(boat.x, boat.y, boat.width, boat.height)
 
         self.acheterBatimentImg = pygame.image.load("assets/Images/acheterBatiment.png")
         self.ameliorerBatimentImg = pygame.image.load("assets/Images/ameliorerBatiment.png")
@@ -124,53 +123,98 @@ class Affichage:
                 game.setGameStep(GameStep.IDLE)
             
         if game.getGameStep() == GameStep.IDLE :
-            for building in game.buildings: 
-                buildingImg = pygame.image.load(building.getImagePath())
-                buildingImg = pygame.transform.scale(buildingImg,(175,175))
-                if(player.feet.colliderect(building.getCollideArea())):
-                    #print("player entering in building " + str(building.libelle))
-                    # afficher prix batiment.price   
-                    textPrice = pygame.font.SysFont('comicsansms', 45).render(str(building.strPrice()), True, self.colorWood)
-                    if building.getLvl() == building.getLvlMax():
-                        textLvl = pygame.font.SysFont('comicsansms', 50).render("MAX", True, self.colorWood)
-                        self.boutonAmeliorer.draw()
-                        #self.screen.blit(textPrice,(380,727))
-                        #self.screen.blit(self.cashDiamond,(380,727)) # Faire un détourage pour la piece et le diamant
-                        self.screen.blit(textLvl,(600,712))
-                        self.screen.blit(buildingImg,(40,560))
-                    else:
-                        textLvl = pygame.font.SysFont('comicsansms', 50).render(str(building.getLvl()), True, self.colorWood)
-                        if game.player.ownBuilding(building):
-                            #print("player already own the building " + str(building.libelle))
+            if game.getMapStep() == MapStep.MAP1:
+                for building in game.listBuildingVille1: 
+                    buildingImg = pygame.image.load(building.getImagePath())
+                    buildingImg = pygame.transform.scale(buildingImg,(175,175))
+                    if(player.feet.colliderect(building.getCollideArea())):
+                        #print("player entering in building " + str(building.libelle))
+                        # afficher prix batiment.price
+                        textPrice = pygame.font.SysFont('comicsansms', 45).render(str(building.strPrice()), True, self.colorWood)
+                        if building.getLvl() == building.getLvlMax():
+                            textLvl = pygame.font.SysFont('comicsansms', 50).render("MAX", True, self.colorWood)
                             self.boutonAmeliorer.draw()
-                            self.screen.blit(textPrice,(380,727))
+                            #self.screen.blit(textPrice,(380,727))
+                            #self.screen.blit(self.cashDiamond,(380,727)) # Faire un détourage pour la piece et le diamant
                             self.screen.blit(textLvl,(600,712))
                             self.screen.blit(buildingImg,(40,560))
-
-                            if self.boutonAmeliorer.touched():
-                                if player.getDollars()>= building.getPrice():
-                                    player.addDollars(-building.getPrice())
-                                    building.newPrice(2)
-                                    building.newGain(3)
-                                    building.addLvl()
                         else:
-                            self.boutonAcheter.draw()
-                            self.screen.blit(textPrice,(380,727))
+                            textLvl = pygame.font.SysFont('comicsansms', 50).render(str(building.getLvl()), True, self.colorWood)
+                            if game.player.ownBuilding(building):
+                                #print("player already own the building " + str(building.libelle))
+                                self.boutonAmeliorer.draw()
+                                self.screen.blit(textPrice,(380,727))
+                                self.screen.blit(textLvl,(600,712))
+                                self.screen.blit(buildingImg,(40,560))
+
+                                if self.boutonAmeliorer.touched():
+                                    if player.getDollars()>= building.getPrice():
+                                        player.addDollars(-building.getPrice())
+                                        building.newPrice(2)
+                                        building.newGain(3)
+                                        building.addLvl()
+                            else:
+                                self.boutonAcheter.draw()
+                                self.screen.blit(textPrice,(380,727))
+                                self.screen.blit(textLvl,(600,712))
+                                self.screen.blit(buildingImg,(40,560))
+                                if self.boutonAcheter.touched():
+                                    if player.getDollars()>= building.getPrice():
+                                        player.addDollars(-building.getPrice())
+                                        player.addListBuilding(building)
+                                        building.newPrice(2)
+                                        building.addLvl()                       
+                #Verification de la collision pour la voiture
+                if player.feet.colliderect(self.carRect):
+                    self.switchMap(game)
+
+
+            if game.getMapStep() == MapStep.MAP2:
+                for building in game.listBuildingVille2: 
+                    buildingImg = pygame.image.load(building.getImagePath())
+                    buildingImg = pygame.transform.scale(buildingImg,(175,175))
+                    #building.setCollideArea()
+                    if(player.feet.colliderect(building.getCollideArea())):
+                        #print("player entering in building " + str(building.libelle))
+                        # afficher prix batiment.price
+                        textPrice = pygame.font.SysFont('comicsansms', 45).render(str(building.strPrice()), True, self.colorWood)
+                        if building.getLvl() == building.getLvlMax():
+                            textLvl = pygame.font.SysFont('comicsansms', 50).render("MAX", True, self.colorWood)
+                            self.boutonAmeliorer.draw()
+                            #self.screen.blit(textPrice,(380,727))
+                            #self.screen.blit(self.cashDiamond,(380,727)) # Faire un détourage pour la piece et le diamant
                             self.screen.blit(textLvl,(600,712))
                             self.screen.blit(buildingImg,(40,560))
-                            if self.boutonAcheter.touched():
-                                if player.getDollars()>= building.getPrice():
-                                    player.addDollars(-building.getPrice())
-                                    player.addListBuilding(building)
-                                    building.newPrice(2)
-                                    building.addLvl()
-                                    
-            #Verification de la collision pour la voiture
-            if player.feet.colliderect(self.carRect):
-                self.switchMap(game)
-            #Verification de la collision pour le boat
-            #if self.player.feet.colliderect(self.boat_rect):
-               # self.switchMap()
+                        else:
+                            textLvl = pygame.font.SysFont('comicsansms', 50).render(str(building.getLvl()), True, self.colorWood)
+                            if game.player.ownBuilding(building):
+                                #print("player already own the building " + str(building.libelle))
+                                self.boutonAmeliorer.draw()
+                                self.screen.blit(textPrice,(380,727))
+                                self.screen.blit(textLvl,(600,712))
+                                self.screen.blit(buildingImg,(40,560))
+
+                                if self.boutonAmeliorer.touched():
+                                    if player.getDollars()>= building.getPrice():
+                                        player.addDollars(-building.getPrice())
+                                        building.newPrice(2)
+                                        building.newGain(3)
+                                        building.addLvl()
+                            else:
+                                self.boutonAcheter.draw()
+                                self.screen.blit(textPrice,(380,727))
+                                self.screen.blit(textLvl,(600,712))
+                                self.screen.blit(buildingImg,(40,560))
+                                if self.boutonAcheter.touched():
+                                    if player.getDollars()>= building.getPrice():
+                                        player.addDollars(-building.getPrice())
+                                        player.addListBuilding(building)
+                                        building.newPrice(2)
+                                        building.addLvl()
+
+                #Verification de la collision pour le boat
+                if player.feet.colliderect(self.boatRect):
+                    self.switchMap()
 
         """
         if game.getMapStep() == MapStep.MAP1 :
@@ -219,24 +263,31 @@ class Affichage:
             self.tmx_data = pytmx.util_pygame.load_pygame('assets/map/ville2.tmx')
             map_data = pyscroll.data.TiledMapData(self.tmx_data)
             map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
+            self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=6)
+            self.group.add(game.player)
             #rectangle de collision pour le boat
-            self.boat = self.tmx_data.get_object_by_name("boat")
-            self.boat_rect = pygame.Rect(boat.x, boat.y, boat.width, boat.height)
-            #spawn_boat_point = tmx_data.get_object_by_name("spawn_boat")
-            #self.player.position[0] = spawn_boat_point.position.x
-            #self.player.position[1] = spawn_boat_point.y + 20
+            boat = self.tmx_data.get_object_by_name("boat")
+            self.boatRect = pygame.Rect(boat.x, boat.y, boat.width, boat.height)
+            spawnMap2 = self.tmx_data.get_object_by_name("spawn_map2")
+            game.player.position[0] = spawnMap2.x
+            game.player.position[1] = spawnMap2.y
             game.setMapStep(MapStep.MAP2)
         elif game.getMapStep() == MapStep.MAP2:
             self.tmx_data = pytmx.util_pygame.load_pygame('assets/map/ville1.tmx')
             map_data = pyscroll.data.TiledMapData(self.tmx_data)
             map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
+            self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=6)
+            self.group.add(game.player)
             #rectangle de collision pour la voiture
-            self.car = self.tmx_data.get_object_by_name("car")
+            car = self.tmx_data.get_object_by_name("car")
             self.car_rect = pygame.Rect(car.x, car.y, car.width, car.height)
-            #spawn_car_point = tmx_data.get_object_by_name("spawn_car")
-            #self.player.position[0] = spawn_car_point.position.x
-            #self.player.position[1] = spawn_car_point.y - 20
+            spawnMap1 = self.tmx_data.get_object_by_name("spawn_map1")
+            game.player.position[0] = spawnMap1.x
+            game.player.position[1] = spawnMap1.y
             game.setMapStep(MapStep.MAP1)
+
+
+            
             
             
             

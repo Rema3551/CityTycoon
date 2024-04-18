@@ -52,26 +52,27 @@ class Game:
         self.help = Building(750,30,3,"help",BuildingType.HELP)
         self.orange = Building(500,25,3,"orange",BuildingType.ORANGE)
 
-        self.listBuildingVille1 = [self.poubelle1, self.poubelle2, self.poubelle3, self.poubelle4, self.poubelle5, self.poubelle6, self.poubelle7, self.poubelle8, self.poubelle9, self.poubelle10, self.rouge, self.help, self.orange]
-        """
         self.hdv = Building(100000,200,2,"bat2",BuildingType.HDV)
         self.maisonette = Building(1000,40,3,"bat4",BuildingType.MAISONETTE)
         self.maison = Building(5000,45,3,"bat6",BuildingType.MAISON)
-
-            
         self.tourDeGuet = Building(20000,65,3,"bat5",BuildingType.TOURDEGUET)
         self.cabane = Building(17500,55,3,"bat3",BuildingType.CABANE)
         self.ecurie = Building(15000,45,3,"bat1",BuildingType.ECURIE)
         
+        self.listBuildingVille1 = [self.poubelle1, self.poubelle2, self.poubelle3, self.poubelle4, self.poubelle5, self.poubelle6, self.poubelle7, self.poubelle8, self.poubelle9, self.poubelle10, self.rouge, self.help, self.orange]
         self.listBuildingVille2 = [self.hdv, self.maisonette, self.maison, self.tourDeGuet,self.cabane,self.ecurie]
-        self.buildings = [self.poubelle1, self.poubelle2, self.poubelle3, self.poubelle4, self.poubelle5, self.poubelle6, self.poubelle7, self.poubelle8, self.poubelle9, self.poubelle10, self.rouge, self.help, self.orange]#self.hdv, self.maisonette, self.maison, self.tourDeGuet,self.cabane,self.ecurie]
-        """
-        self.buildings = [self.poubelle1, self.poubelle2, self.poubelle3, self.poubelle4, self.poubelle5, self.poubelle6, self.poubelle7, self.poubelle8, self.poubelle9, self.poubelle10, self.rouge, self.help, self.orange]
+        
+        #self.buildings = [self.poubelle1, self.poubelle2, self.poubelle3, self.poubelle4, self.poubelle5, self.poubelle6, self.poubelle7, self.poubelle8, self.poubelle9, self.poubelle10, self.rouge, self.help, self.orange, self.hdv, self.maisonette, self.maison, self.tourDeGuet,self.cabane,self.ecurie]
         #Faire une liste pour moyen de deplacement changement de ville
 
-        for building in self.buildings:
-            tmxObject = tmx_data.get_object_by_name(building.libelle)
-            building.setCollideArea(tmxObject.x, tmxObject.y, tmxObject.width, tmxObject.height)
+        if self.getMapStep() == MapStep.MAP1:
+            for building in self.listBuildingVille1:
+                tmxObject = tmx_data.get_object_by_name(building.libelle)
+                building.setCollideArea(tmxObject.x, tmxObject.y, tmxObject.width, tmxObject.height)
+        if self.getMapStep() == MapStep.MAP2:
+            for building in self.listBuildingVille2:
+                tmxObject = tmx_data.get_object_by_name(building.libelle)
+                building.setCollideArea(tmxObject.x, tmxObject.y, tmxObject.width, tmxObject.height)
 
     def onInputJoueur(self):
         pressedKeys = pygame.key.get_pressed()

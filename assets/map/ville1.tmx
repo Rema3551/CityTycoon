@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="1184">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="1186">
  <tileset firstgid="1" source="tileset/ville3.tsx"/>
  <tileset firstgid="4097" source="tileset/chemin_terre.tsx"/>
  <tileset firstgid="4241" source="tileset/trash.tsx"/>
@@ -319,5 +319,9 @@
   <object id="1177" name="orange" type="orange" x="271.5" y="255.5" width="63.6667" height="35.6667"/>
   <object id="1178" name="car" type="car" x="563.833" y="445.167" width="54.3333" height="52.6667"/>
   <object id="1182" name="collision" type="collision" x="-38.5218" y="105.711" width="840.314" height="39.4177"/>
+  <object id="1184" name="collison" type="collision" x="799.727" y="-31.4422" width="47.8469" height="895.42"/>
+  <object id="1185" name="spawn_map1" type="spawn_map1" x="773.333" y="510.667">
+   <point/>
+  </object>
  </objectgroup>
 </map>
