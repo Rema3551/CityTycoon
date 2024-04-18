@@ -48,8 +48,7 @@ class Game:
         self.hdv = Building(100000,100,2,"bat2",BuildingType.HDV)
         self.maisonette = Building(1000,35,3,"bat4",BuildingType.MAISONETTE)
         self.maison = Building(5000,45,3,"bat6",BuildingType.MAISON)
-        
-        self.buildings = [self.hdv, self.maisonette, self.maison] #self.poubelle1, self.poubelle2, self.poubelle3, self.poubelle4, self.poubelle5, self.poubelle6, self.poubelle7, self.poubelle8, self.poubelle9, self.poubelle10, self.rouge, self.help, self.orange]
+        self.buildings =[self.hdv, self.maisonette, self.maison]# [self.poubelle1, self.poubelle2, self.poubelle3, self.poubelle4, self.poubelle5, self.poubelle6, self.poubelle7, self.poubelle8, self.poubelle9, self.poubelle10, self.rouge, self.help, self.orange] 
         
 
         for building in self.buildings:
