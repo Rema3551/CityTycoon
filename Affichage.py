@@ -169,11 +169,11 @@ class Affichage:
                     self.switchMap(game)
 
 
-            if game.getMapStep() == MapStep.MAP2:
+            elif game.getMapStep() == MapStep.MAP2:
                 for building in game.listBuildingVille2: 
                     buildingImg = pygame.image.load(building.getImagePath())
                     buildingImg = pygame.transform.scale(buildingImg,(175,175))
-                    #building.setCollideArea()
+                    building.setCollideArea(self.tmx_data.get_object_by_name(building.libelle).x,self.tmx_data.get_object_by_name(building.libelle).y,self.tmx_data.get_object_by_name(building.libelle).width,self.tmx_data.get_object_by_name(building.libelle).height)
                     if(player.feet.colliderect(building.getCollideArea())):
                         #print("player entering in building " + str(building.libelle))
                         # afficher prix batiment.price
@@ -214,7 +214,7 @@ class Affichage:
 
                 #Verification de la collision pour le boat
                 if player.feet.colliderect(self.boatRect):
-                    self.switchMap()
+                    self.switchMap(game)
 
         """
         if game.getMapStep() == MapStep.MAP1 :
@@ -265,12 +265,14 @@ class Affichage:
             map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
             self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=6)
             self.group.add(game.player)
+            
+            
             #rectangle de collision pour le boat
             boat = self.tmx_data.get_object_by_name("boat")
             self.boatRect = pygame.Rect(boat.x, boat.y, boat.width, boat.height)
             spawnMap2 = self.tmx_data.get_object_by_name("spawn_map2")
-            game.player.position[0] = spawnMap2.x
-            game.player.position[1] = spawnMap2.y
+            game.player.position[0] = spawnMap2.x-10
+            game.player.position[1] = spawnMap2.y+100
             game.setMapStep(MapStep.MAP2)
         elif game.getMapStep() == MapStep.MAP2:
             self.tmx_data = pytmx.util_pygame.load_pygame('assets/map/ville1.tmx')

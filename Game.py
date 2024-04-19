@@ -52,12 +52,12 @@ class Game:
         self.help = Building(750,30,3,"help",BuildingType.HELP)
         self.orange = Building(500,25,3,"orange",BuildingType.ORANGE)
 
-        self.hdv = Building(100000,200,2,"bat2",BuildingType.HDV)
-        self.maisonette = Building(1000,40,3,"bat4",BuildingType.MAISONETTE)
-        self.maison = Building(5000,45,3,"bat6",BuildingType.MAISON)
-        self.tourDeGuet = Building(20000,65,3,"bat5",BuildingType.TOURDEGUET)
-        self.cabane = Building(17500,55,3,"bat3",BuildingType.CABANE)
-        self.ecurie = Building(15000,45,3,"bat1",BuildingType.ECURIE)
+        self.hdv = Building(100000,200,2,"hdv",BuildingType.HDV)
+        self.maisonette = Building(1000,40,3,"maisonette",BuildingType.MAISONETTE)
+        self.maison = Building(5000,45,3,"maison",BuildingType.MAISON)
+        self.tourDeGuet = Building(20000,65,3,"tourDeGuet",BuildingType.TOURDEGUET)
+        self.cabane = Building(17500,55,3,"cabane",BuildingType.CABANE)
+        self.ecurie = Building(15000,45,3,"ecurie",BuildingType.ECURIE)
         
         self.listBuildingVille1 = [self.poubelle1, self.poubelle2, self.poubelle3, self.poubelle4, self.poubelle5, self.poubelle6, self.poubelle7, self.poubelle8, self.poubelle9, self.poubelle10, self.rouge, self.help, self.orange]
         self.listBuildingVille2 = [self.hdv, self.maisonette, self.maison, self.tourDeGuet,self.cabane,self.ecurie]
