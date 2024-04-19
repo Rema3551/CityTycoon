@@ -265,14 +265,17 @@ class Affichage:
             map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
             self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=6)
             self.group.add(game.player)
-            
-            
+            self.walls=[]
+            for obj in self.tmx_data.objects:
+                if obj.type == "collision":
+                    self.walls.append(pygame.Rect(obj.x, obj.y, obj.width, obj.height))
+                
             #rectangle de collision pour le boat
             boat = self.tmx_data.get_object_by_name("boat")
             self.boatRect = pygame.Rect(boat.x, boat.y, boat.width, boat.height)
             spawnMap2 = self.tmx_data.get_object_by_name("spawn_map2")
-            game.player.position[0] = spawnMap2.x-10
-            game.player.position[1] = spawnMap2.y+100
+            game.player.position[0] = spawnMap2.x
+            game.player.position[1] = spawnMap2.y
             game.setMapStep(MapStep.MAP2)
         elif game.getMapStep() == MapStep.MAP2:
             self.tmx_data = pytmx.util_pygame.load_pygame('assets/map/ville1.tmx')
@@ -280,6 +283,11 @@ class Affichage:
             map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
             self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=6)
             self.group.add(game.player)
+            self.walls=[]
+            for obj in self.tmx_data.objects:
+                if obj.type == "collision":
+                    self.walls.append(pygame.Rect(obj.x, obj.y, obj.width, obj.height))
+
             #rectangle de collision pour la voiture
             car = self.tmx_data.get_object_by_name("car")
             self.car_rect = pygame.Rect(car.x, car.y, car.width, car.height)
