@@ -34,7 +34,7 @@ class Player(pygame.sprite.Sprite):
             'right': self.get_image(3,163),
             'up': self.get_image(0,246)
         }
-        self.feet = pygame.Rect(0,0,self.rect.width*0.5,12)
+        self.feet = pygame.Rect(0,0,self.rect.width*0.5,8)
         self.anciennePosition = self.position.copy()
 
     def sauvegardeLocation(self):
