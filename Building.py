@@ -21,6 +21,9 @@ class Building:
         self.collideArea = 0
         self.buildingType = buildingType
 
+    def getLibelle(self):
+        return self.libelle
+    
     def getPrice(self):
         return self.price
     

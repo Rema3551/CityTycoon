@@ -30,6 +30,7 @@ class Game:
         self.createPlayer(tmx_data)
         self.createBuildings(tmx_data)
         self.backup.load(self)
+        self.createBuildingsCollideArea(tmx_data)
         
     def createPlayer(self, tmx_data):
         player_position = tmx_data.get_object_by_name("player")
@@ -51,7 +52,7 @@ class Game:
         self.rouge = Building(100,10,3,"rouge", BuildingType.ROUGE)
         self.help = Building(750,30,3,"help",BuildingType.HELP)
         self.orange = Building(500,25,3,"orange",BuildingType.ORANGE)
-
+        
         self.hdv = Building(100000,200,2,"hdv",BuildingType.HDV)
         self.maisonette = Building(1000,40,3,"maisonette",BuildingType.MAISONETTE)
         self.maison = Building(5000,45,3,"maison",BuildingType.MAISON)
@@ -62,17 +63,18 @@ class Game:
         self.listBuildingVille1 = [self.poubelle1, self.poubelle2, self.poubelle3, self.poubelle4, self.poubelle5, self.poubelle6, self.poubelle7, self.poubelle8, self.poubelle9, self.poubelle10, self.rouge, self.help, self.orange]
         self.listBuildingVille2 = [self.hdv, self.maisonette, self.maison, self.tourDeGuet,self.cabane,self.ecurie]
         
-        #self.buildings = [self.poubelle1, self.poubelle2, self.poubelle3, self.poubelle4, self.poubelle5, self.poubelle6, self.poubelle7, self.poubelle8, self.poubelle9, self.poubelle10, self.rouge, self.help, self.orange, self.hdv, self.maisonette, self.maison, self.tourDeGuet,self.cabane,self.ecurie]
+        #self.buildings = [self.poubelle1, self.poubelle2, self.poubelle3, self.poubelle4, self.poubelle5, self.poubelle6, self.poubelle7, self.poubelle8, self.poubelle9, self.poubelle10, self.rouge, self.help, self.orange,self.hdv, self.maisonette, self.maison, self.tourDeGuet,self.cabane,self.ecurie]
         #Faire une liste pour moyen de deplacement changement de ville
 
-        if self.getMapStep() == MapStep.MAP1:
-            for building in self.listBuildingVille1:
-                tmxObject = tmx_data.get_object_by_name(building.libelle)
-                building.setCollideArea(tmxObject.x, tmxObject.y, tmxObject.width, tmxObject.height)
-        if self.getMapStep() == MapStep.MAP2:
-            for building in self.listBuildingVille2:
-                tmxObject = tmx_data.get_object_by_name(building.libelle)
-                building.setCollideArea(tmxObject.x, tmxObject.y, tmxObject.width, tmxObject.height)
+    def createBuildingsCollideArea(self,tmx_data):
+        if self.mapStep == MapStep.MAP1:
+            for building1 in self.listBuildingVille1:
+                tmxObject1 = tmx_data.get_object_by_name(building1.getLibelle())
+                building1.setCollideArea(tmxObject1.x, tmxObject1.y, tmxObject1.width, tmxObject1.height)
+        if self.mapStep == MapStep.MAP2:
+            for building2 in self.listBuildingVille2:
+                tmxObject2 = tmx_data.get_object_by_name(building2.getLibelle())
+                building2.setCollideArea(tmxObject2.x, tmxObject2.y, tmxObject2.width, tmxObject2.height)
 
     def onInputJoueur(self):
         pressedKeys = pygame.key.get_pressed()
@@ -124,17 +126,21 @@ class Game:
             return True
         else: 
             return False
-    def restoreData(self, restored_data):
-        self.restoreBuildings(restored_data['listBuildingsPlayer'])
-        self.restorePlayer(restored_data['player'])
-        
+
+    def restoreMap(self, savedMap):
+        self.mapStep = savedMap
+
+    def restoreMapData(self,restored_data):
+        self.restoreMap(restored_data['map'])
 
     def restoreBuildings(self, savedBuildings):
         for building in savedBuildings:
-            
-            for i in range (len(self.buildings)):
-                if building.libelle == self.buildings[i].libelle:
-                    self.buildings[i] = building
+            for i in range (len(self.listBuildingVille1)):
+                if building.libelle == self.listBuildingVille1[i].libelle:
+                    self.listBuildingVille1[i] = building
+            for i in range (len(self.listBuildingVille2)):
+                if building.libelle == self.listBuildingVille2[i].libelle:
+                    self.listBuildingVille2[i] = building
         self.player.setListBuilding(savedBuildings)
 
     def restorePlayer(self,savedPlayer):
@@ -144,10 +150,18 @@ class Game:
             savedPlayer['position_x'],
             savedPlayer['position_y']
         )
-        
+
+
+    def restoreData(self, restored_data):
+        self.restoreMap(restored_data['map'])
+        self.restoreBuildings(restored_data['listBuildingsPlayer'])
+        self.restorePlayer(restored_data['player'])
+
+    """
     def randomAd(self, adList : list):
         ad = random.choice(adList)
         return ad
+    """ 
 
 
         

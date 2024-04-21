@@ -320,7 +320,7 @@
   <object id="1178" name="car" type="car" x="563.833" y="445.167" width="54.3333" height="52.6667"/>
   <object id="1182" name="collision" type="collision" x="-38.5218" y="105.711" width="840.314" height="39.4177"/>
   <object id="1184" name="collison" type="collision" x="799.727" y="-31.4422" width="47.8469" height="895.42"/>
-  <object id="1185" name="spawn_map1" type="spawn_map1" x="773.333" y="510.667">
+  <object id="1185" name="spawn_map1" type="spawn_map1" x="550.33" y="510.667">
    <point/>
   </object>
  </objectgroup>
