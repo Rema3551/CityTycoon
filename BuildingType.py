@@ -14,3 +14,5 @@ class BuildingType(Enum):
     TOURDEGUET = "tourDeGuet.png"
     CABANE = "cabane.png"
     ECURIE = "ecurie.png"
+    TERRAINDENTRAINEMENT = "terrainDentrainement.png"
+    FORGE = "forge.png"
