@@ -159,11 +159,6 @@ class Game:
         self.restoreBuildings(restored_data['listBuildingsPlayer'])
         self.restorePlayer(restored_data['player'])
 
-    """
-    def randomAd(self, adList : list):
-        ad = random.choice(adList)
-        return ad
-    """ 
 
 
         

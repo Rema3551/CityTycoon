@@ -54,7 +54,7 @@ class Affichage:
             if obj.type == "collision":
                 self.walls.append(pygame.Rect(obj.x, obj.y, obj.width, obj.height))
 
-        self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=10)
+        self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=20)
         self.group.add(game.player)
         
         self.cashDiamond = pygame.image.load("assets/Images/cashDiamond.png").convert_alpha()
@@ -72,9 +72,9 @@ class Affichage:
         self.buttonYesImg = pygame.image.load("assets/Images/buttonYes.png")
         self.buttonNoImg = pygame.image.load("assets/Images/buttonNo.png")
         #self.afficheChangementVilleImg = pygame.image.load("assets/Images/afficheChangementVille.png")
-        
-        self.boutonAcheter = Bouton(self.screen, 0,510,self.acheterBatimentImg,1)
-        self.boutonAmeliorer = Bouton(self.screen,0,510,self.ameliorerBatimentImg,1)
+
+        self.boutonAcheter = Bouton(self.screen, -129,125,self.acheterBatimentImg,1)
+        self.boutonAmeliorer = Bouton(self.screen,-129,125,self.ameliorerBatimentImg,1)
         self.boutonDiamondVideo = Bouton(self.screen,725,125,self.videoDiamondImg,1)
         self.boutonPub = Bouton(self.screen,125,125,self.pubImg,1.5)
         self.boutonYes = Bouton(self.screen,450,550,self.buttonYesImg,1)
@@ -137,12 +137,13 @@ class Affichage:
             if game.getMapStep() == MapStep.MAP1:
                 for building in game.listBuildingVille1:
                     buildingImg = pygame.image.load(building.getImagePath())
-                    buildingImg = pygame.transform.scale(buildingImg,(175,175))
-
+                    buildingImg = pygame.transform.scale(buildingImg,(180,180))
+                    
                     tmxObject = self.tmx_data.get_object_by_name(building.getLibelle())
                     building.setCollideArea(tmxObject.x, tmxObject.y, tmxObject.width, tmxObject.height)
 
                     if(player.feet.colliderect(building.getCollideArea())):
+                        self.screen.blit(buildingImg,(40,560))
                         #print("player entering in building " + str(building.libelle))
                         # afficher prix batiment.price
                         textPrice = pygame.font.SysFont('comicsansms', 45).render(str(building.strPrice()), True, self.colorWood)
@@ -152,7 +153,7 @@ class Affichage:
                             #self.screen.blit(textPrice,(380,727))
                             #self.screen.blit(self.cashDiamond,(380,727)) # Faire un détourage pour la piece et le diamant
                             self.screen.blit(textLvl,(600,712))
-                            self.screen.blit(buildingImg,(40,560))
+                            
                         else:
                             textLvl = pygame.font.SysFont('comicsansms', 50).render(str(building.getLvl()), True, self.colorWood)
                             if game.player.ownBuilding(building):
@@ -160,7 +161,6 @@ class Affichage:
                                 self.boutonAmeliorer.draw()
                                 self.screen.blit(textPrice,(380,727))
                                 self.screen.blit(textLvl,(600,712))
-                                self.screen.blit(buildingImg,(40,560))
 
                                 if self.boutonAmeliorer.touched():
                                     if player.getDollars()>= building.getPrice():
@@ -172,7 +172,6 @@ class Affichage:
                                 self.boutonAcheter.draw()
                                 self.screen.blit(textPrice,(380,727))
                                 self.screen.blit(textLvl,(600,712))
-                                self.screen.blit(buildingImg,(40,560))
                                 if self.boutonAcheter.touched():
                                     if player.getDollars()>= building.getPrice():
                                         player.addDollars(-building.getPrice())
@@ -304,7 +303,7 @@ class Affichage:
                 self.tmx_data = pytmx.util_pygame.load_pygame('assets/map/ville3.tmx')
                 map_data = pyscroll.data.TiledMapData(self.tmx_data)
                 map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
-                self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=5)
+                self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=20)
                 self.group.add(game.player)
                 self.walls=[]
                 for obj in self.tmx_data.objects:
