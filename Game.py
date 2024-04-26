@@ -62,17 +62,17 @@ class Game:
         self.terrainDentrainement = Building(15000,45,3,"terrainDentrainement",BuildingType.TERRAINDENTRAINEMENT)
         self.forge = Building(15000,45,3,"forge",BuildingType.FORGE)
 
-        self.listBuildingVille1 = [self.poubelle1, self.poubelle2, self.poubelle3, self.poubelle4, self.poubelle5, self.poubelle6, self.poubelle7, self.poubelle8, self.poubelle9, self.poubelle10, self.rouge, self.help, self.orange]
+        #self.listBuildingVille1 = [self.poubelle1, self.poubelle2, self.poubelle3, self.poubelle4, self.poubelle5, self.poubelle6, self.poubelle7, self.poubelle8, self.poubelle9, self.poubelle10, self.rouge, self.help, self.orange]
         self.listBuildingVille2 = [self.hdv, self.maisonette, self.maison, self.tourDeGuet,self.cabane,self.ecurie,self.terrainDentrainement,self.forge]
         
         #self.buildings = [self.poubelle1, self.poubelle2, self.poubelle3, self.poubelle4, self.poubelle5, self.poubelle6, self.poubelle7, self.poubelle8, self.poubelle9, self.poubelle10, self.rouge, self.help, self.orange,self.hdv, self.maisonette, self.maison, self.tourDeGuet,self.cabane,self.ecurie]
         #Faire une liste pour moyen de deplacement changement de ville
 
     def createBuildingsCollideArea(self,tmx_data):
-        if self.mapStep == MapStep.MAP1:
-            for building1 in self.listBuildingVille1:
-                tmxObject1 = tmx_data.get_object_by_name(building1.getLibelle())
-                building1.setCollideArea(tmxObject1.x, tmxObject1.y, tmxObject1.width, tmxObject1.height)
+        #if self.mapStep == MapStep.MAP1:
+            #for building1 in self.listBuildingVille1:
+                #tmxObject1 = tmx_data.get_object_by_name(building1.getLibelle())
+                #building1.setCollideArea(tmxObject1.x, tmxObject1.y, tmxObject1.width, tmxObject1.height)
         if self.mapStep == MapStep.MAP2:
             for building2 in self.listBuildingVille2:
                 tmxObject2 = tmx_data.get_object_by_name(building2.getLibelle())
