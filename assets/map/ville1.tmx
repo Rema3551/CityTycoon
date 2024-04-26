@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="46" nextobjectid="3">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="46" nextobjectid="4">
  <tileset firstgid="1" source="grass.tsx"/>
  <tileset firstgid="871" source="roads.tsx"/>
  <tileset firstgid="1015" source="trees.tsx"/>
@@ -10,6 +10,7 @@
   <object id="1" name="player" x="254" y="672">
    <point/>
   </object>
+  <object id="3" name="car" type="car" x="741.333" y="472" width="78.6667" height="56"/>
  </objectgroup>
  <layer id="1" name="grass" width="50" height="50">
   <data encoding="csv">

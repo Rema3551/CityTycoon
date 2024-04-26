@@ -29,8 +29,8 @@ class Affichage:
         game.backup.loadMap(game)
         if game.getMapStep()==MapStep.MAP1:       
             self.tmx_data = pytmx.util_pygame.load_pygame('assets/map/ville1.tmx')
-            #car = self.tmx_data.get_object_by_name("car")
-            #self.carRect = pygame.Rect(car.x, car.y, car.width, car.height)
+            car = self.tmx_data.get_object_by_name("car")
+            self.carRect = pygame.Rect(car.x, car.y, car.width, car.height)
         elif game.getMapStep()==MapStep.MAP2:
             self.tmx_data = pytmx.util_pygame.load_pygame('assets/map/ville2.tmx')
             boat = self.tmx_data.get_object_by_name("boat")
@@ -134,8 +134,8 @@ class Affichage:
                 game.setGameStep(GameStep.IDLE)
 
         if game.getGameStep() == GameStep.IDLE:
-            """
             if game.getMapStep() == MapStep.MAP1:
+                """
                 for building in game.listBuildingVille1:
                     buildingImg = pygame.image.load(building.getImagePath())
                     buildingImg = pygame.transform.scale(buildingImg,(180,180))
@@ -179,11 +179,11 @@ class Affichage:
                                         player.addListBuilding(building)
                                         building.newPrice(2)
                                         building.addLvl()
+                                        """
                 #Verification de la collision pour la voiture
                 if player.feet.colliderect(self.carRect):
                     self.switchMap("car",game)
 
-            """
             if game.getMapStep() == MapStep.MAP2:
                 for building in game.listBuildingVille2:
                     buildingImg = pygame.image.load(building.getImagePath())
