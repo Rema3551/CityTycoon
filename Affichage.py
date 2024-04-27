@@ -25,9 +25,16 @@ class Affichage:
         self.green = (0, 255, 0)
         self.blue = (0, 0, 128)
         self.colorWood = (144,51,42)
-        
+
+        player = game.player
+
         game.backup.loadMap(game)
-        if game.getMapStep()==MapStep.MAP1:       
+        if game.getMapStep()==MapStep.MAP1:   
+
+
+
+
+
             self.tmx_data = pytmx.util_pygame.load_pygame('assets/map/ville1.tmx')
             car = self.tmx_data.get_object_by_name("car")
             self.carRect = pygame.Rect(car.x, car.y, car.width, car.height)
@@ -52,6 +59,18 @@ class Affichage:
             self.group.add(game.player)
 
         elif game.getMapStep()==MapStep.MAP3:
+
+            game.player.sprite_sheet = pygame.image.load('assets/Images/playerMap3.png')
+            game.player.image = game.player.get_imageMap3(0,0)
+            game.player.image.set_colorkey([0,0,0]) #fait en sorte que ça soit transparent
+            game.player.rect = game.player.image.get_rect()
+            game.player.images = {
+                'down': game.player.get_imageMap3(0,0),
+                'left': game.player.get_imageMap3(1,49),
+                'right': game.player.get_imageMap3(1,96),
+                'up': game.player.get_imageMap3(0,145)
+            }
+
             self.tmx_data = pytmx.util_pygame.load_pygame('assets/map/ville3.tmx')
             
             map_data = pyscroll.data.TiledMapData(self.tmx_data)
@@ -263,6 +282,8 @@ class Affichage:
             
             
     def switchMap(self, object, game:Game):
+        player = game.player
+
         #Liste qui va stocker les rectangles de collision 
         self.walls = []
         for obj in self.tmx_data.objects:
@@ -319,6 +340,22 @@ class Affichage:
                 game.setMapStep(MapStep.MAP1)
 
             if object == "boat":
+
+                player.sprite_sheet = pygame.image.load('assets/Images/playerMap3.png')
+                player.image = player.get_imageMap3(0,0)
+                player.image.set_colorkey([0,0,0]) #fait en sorte que ça soit transparent
+                player.rect = player.image.get_rect()
+                player.images = {
+                    'down': player.get_imageMap3(0,0),
+                    'left': player.get_imageMap3(1,49),
+                    'right': player.get_imageMap3(1,96),
+                    'up': player.get_imageMap3(0,145)
+                }
+
+
+
+
+
                 self.tmx_data = pytmx.util_pygame.load_pygame('assets/map/ville3.tmx')
                 map_data = pyscroll.data.TiledMapData(self.tmx_data)
                 map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())

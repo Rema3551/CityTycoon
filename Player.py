@@ -23,23 +23,16 @@ class Player(pygame.sprite.Sprite):
         self.speed = 3
         self.listBuilding = []
         
-        self.sprite_sheetOtherMaps = pygame.image.load('assets/Images/player.png')
-        self.sprite_sheetMap3 = pygame.image.load('assets/Images/playerMap3.png')
-        self.imageOtherMaps = self.get_imageOtherMaps(0,0).set_colorkey([0,0,0])
-        self.imageMap3 = self.get_imageMap3(0,0).set_colorkey([0,0,0])
-        self.rect = self.imageOtherMaps.get_rect()
+        self.sprite_sheet = pygame.image.load('assets/Images/player.png')
+        self.image = self.get_image(0,0)
+        self.image.set_colorkey([0,0,0]) #fait en sorte que ça soit transparent
+        self.rect = self.image.get_rect()
         self.position = [x, y]
-        self.imagesOtherMaps = {
-            'down': self.get_imageOtherMaps(0,0),
-            'left': self.get_imageOtherMaps(2,82),
-            'right': self.get_imageOtherMaps(3,163),
-            'up': self.get_imageOtherMaps(0,246)
-        }
-        self.imagesMap3 = {
-            'down': self.get_imageMap3(0,0),
-            'left': self.get_imageMap3(1,49),
-            'right': self.get_imageMap3(1,96),
-            'up': self.get_imageMap3(0,145)
+        self.images = {
+            'down': self.get_image(0,0),
+            'left': self.get_image(2,82),
+            'right': self.get_image(3,163),
+            'up': self.get_image(0,246)
         }
         self.feet = pygame.Rect(0,0,self.rect.width*0.5,8)
         self.anciennePosition = self.position.copy()
@@ -60,14 +53,14 @@ class Player(pygame.sprite.Sprite):
         self.rect.topleft = self.position
         self.feet.midbottom = self.rect.midbottom
         
-    def get_imageOtherMaps(self,x,y):
+    def get_image(self,x,y):
         image=pygame.Surface([49,69])
-        image.blit(self.sprite_sheetOtherMaps,(0,0),(x,y,49,69))
+        image.blit(self.sprite_sheet,(0,0),(x,y,49,69))
         return image
     
     def get_imageMap3(self,x,y):
         image=pygame.Surface([29,41])
-        image.blit(self.sprite_sheetMap3,(0,0),(x,y,29,41))
+        image.blit(self.sprite_sheet,(0,0),(x,y,29,41))
         return image
         
     def getDollars(self):
@@ -147,13 +140,13 @@ class Player(pygame.sprite.Sprite):
     def addListBuilding(self, nouveauBatiment):
         self.listBuilding.append(nouveauBatiment)
         
-    def revenuPassif(self):
+    def revenuPassif(self,game:Game):
         for batiment in self.listBuilding:
             #print("le batiment rapporte " + str(batiment.getGain()))
             self.addDollars(batiment.getGain()/60)
 
             #print(self.dollars)
-    def strRevenuPassif(self):
+    def strRevenuPassif(self,game:Game):
         revenuPassif = 0
         for batiment in self.listBuilding:
             revenuPassif += batiment.getGain()
