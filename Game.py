@@ -36,6 +36,19 @@ class Game:
         player_position = tmx_data.get_object_by_name("player")
         self.player = Player(player_position.x, player_position.y)
 
+        if self.getMapStep()==MapStep.MAP3:
+
+            self.player.sprite_sheet = pygame.image.load('assets/Images/playerMap3.png')
+            self.player.image = self.player.get_imageMap3(0,0)
+            self.player.image.set_colorkey([0,0,0]) #fait en sorte que ça soit transparent
+            self.player.rect = self.player.image.get_rect()
+            self.player.images = {
+                'down': self.player.get_imageMap3(0,0),
+                'left': self.player.get_imageMap3(1,49),
+                'right': self.player.get_imageMap3(1,96),
+                'up': self.player.get_imageMap3(0,145)
+            }
+
     def createBuildings(self, tmx_data):
         # TODO : lvl max building
         
