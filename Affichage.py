@@ -31,22 +31,41 @@ class Affichage:
             self.tmx_data = pytmx.util_pygame.load_pygame('assets/map/ville1.tmx')
             car = self.tmx_data.get_object_by_name("car")
             self.carRect = pygame.Rect(car.x, car.y, car.width, car.height)
+
+            map_data = pyscroll.data.TiledMapData(self.tmx_data)
+            map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
+            game.start(self.tmx_data)
+            self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=53)
+            self.group.add(game.player)
+    
         elif game.getMapStep()==MapStep.MAP2:
             self.tmx_data = pytmx.util_pygame.load_pygame('assets/map/ville2.tmx')
             boat = self.tmx_data.get_object_by_name("boat")
             self.boatRect = pygame.Rect(boat.x, boat.y, boat.width, boat.height)
             car2 = self.tmx_data.get_object_by_name("car2")
             self.car2Rect = pygame.Rect(car2.x, car2.y, car2.width, car2.height)
+
+            map_data = pyscroll.data.TiledMapData(self.tmx_data)
+            map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
+            game.start(self.tmx_data)
+            self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=53)
+            self.group.add(game.player)
+
         elif game.getMapStep()==MapStep.MAP3:
             self.tmx_data = pytmx.util_pygame.load_pygame('assets/map/ville3.tmx')
             
-        map_data = pyscroll.data.TiledMapData(self.tmx_data)
-        map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
-        
+            map_data = pyscroll.data.TiledMapData(self.tmx_data)
+            map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
+            game.start(self.tmx_data)
+            self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=53)
+            self.group.add(game.player)
+
+
+
         self.music = pygame.mixer.music.load('assets/music/music.mp3')
         pygame.mixer.music.play(-1)
 
-        game.start(self.tmx_data)
+        
 
         self.walls = []
         
@@ -54,8 +73,7 @@ class Affichage:
             if obj.name == "collision":
                 self.walls.append(pygame.Rect(obj.x, obj.y, obj.width, obj.height))
 
-        self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=53)
-        self.group.add(game.player)
+        
         
         self.cashDiamond = pygame.image.load("assets/Images/cashDiamond.png").convert_alpha()
 
