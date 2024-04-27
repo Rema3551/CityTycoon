@@ -36,6 +36,7 @@ class Affichage:
 
 
             self.tmx_data = pytmx.util_pygame.load_pygame('assets/map/ville1.tmx')
+<<<<<<< HEAD
             car = self.tmx_data.get_object_by_name("car")
             self.carRect = pygame.Rect(car.x, car.y, car.width, car.height)
 
@@ -45,6 +46,10 @@ class Affichage:
             self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=53)
             self.group.add(game.player)
     
+=======
+            #car = self.tmx_data.get_object_by_name("car")
+            #self.carRect = pygame.Rect(car.x, car.y, car.width, car.height)
+>>>>>>> 3d4014acbbe61e1054dae19d2b2112dd54c4c2e8
         elif game.getMapStep()==MapStep.MAP2:
             self.tmx_data = pytmx.util_pygame.load_pygame('assets/map/ville2.tmx')
             boat = self.tmx_data.get_object_by_name("boat")
@@ -216,10 +221,11 @@ class Affichage:
                                         player.addListBuilding(building)
                                         building.newPrice(2)
                                         building.addLvl()
-                                        """
+                                        
                 #Verification de la collision pour la voiture
                 if player.feet.colliderect(self.carRect):
                     self.switchMap("car",game)
+                    """
 
             if game.getMapStep() == MapStep.MAP2:
                 for building in game.listBuildingVille2:

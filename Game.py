@@ -75,6 +75,7 @@ class Game:
         self.terrainDentrainement = Building(15000,45,3,"terrainDentrainement",BuildingType.TERRAINDENTRAINEMENT)
         self.forge = Building(15000,45,3,"forge",BuildingType.FORGE)
 
+<<<<<<< HEAD
         self.house1 = Building(15000,45,3,"house1",BuildingType.HOUSE1)
         self.house2 = Building(15000,45,3,"house2",BuildingType.HOUSE2)
         self.house3 = Building(15000,45,3,"house3",BuildingType.HOUSE3)
@@ -84,6 +85,10 @@ class Game:
         self.listBuildingVille3 = [self.house1,self.house2,self.house3]
         #self.buildings = [self.poubelle1, self.poubelle2, self.poubelle3, self.poubelle4, self.poubelle5, self.poubelle6, self.poubelle7, self.poubelle8, self.poubelle9, self.poubelle10, self.rouge, self.help, self.orange,self.hdv, self.maisonette, self.maison, self.tourDeGuet,self.cabane,self.ecurie]
         #Faire une liste pour moyen de deplacement changement de ville
+=======
+        #self.listBuildingVille1 = []
+        self.listBuildingVille2 = [self.hdv, self.maisonette, self.maison, self.tourDeGuet,self.cabane,self.ecurie,self.terrainDentrainement,self.forge]
+>>>>>>> 3d4014acbbe61e1054dae19d2b2112dd54c4c2e8
 
     def createBuildingsCollideArea(self,tmx_data):
         #if self.mapStep == MapStep.MAP1:
