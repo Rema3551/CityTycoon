@@ -75,9 +75,13 @@ class Game:
         self.terrainDentrainement = Building(15000,45,3,"terrainDentrainement",BuildingType.TERRAINDENTRAINEMENT)
         self.forge = Building(15000,45,3,"forge",BuildingType.FORGE)
 
+        self.house1 = Building(15000,45,3,"house1",BuildingType.HOUSE1)
+        self.house2 = Building(15000,45,3,"house2",BuildingType.HOUSE2)
+        self.house3 = Building(15000,45,3,"house3",BuildingType.HOUSE3)
+
         #self.listBuildingVille1 = [self.poubelle1, self.poubelle2, self.poubelle3, self.poubelle4, self.poubelle5, self.poubelle6, self.poubelle7, self.poubelle8, self.poubelle9, self.poubelle10, self.rouge, self.help, self.orange]
         self.listBuildingVille2 = [self.hdv, self.maisonette, self.maison, self.tourDeGuet,self.cabane,self.ecurie,self.terrainDentrainement,self.forge]
-        
+        self.listBuildingVille3 = [self.house1,self.house2,self.house3]
         #self.buildings = [self.poubelle1, self.poubelle2, self.poubelle3, self.poubelle4, self.poubelle5, self.poubelle6, self.poubelle7, self.poubelle8, self.poubelle9, self.poubelle10, self.rouge, self.help, self.orange,self.hdv, self.maisonette, self.maison, self.tourDeGuet,self.cabane,self.ecurie]
         #Faire une liste pour moyen de deplacement changement de ville
 
@@ -90,6 +94,10 @@ class Game:
             for building2 in self.listBuildingVille2:
                 tmxObject2 = tmx_data.get_object_by_name(building2.getLibelle())
                 building2.setCollideArea(tmxObject2.x, tmxObject2.y, tmxObject2.width, tmxObject2.height)
+        if self.mapStep == MapStep.MAP3:
+            for building3 in self.listBuildingVille3:
+                tmxObject3 = tmx_data.get_object_by_name(building3.getLibelle())
+                building3.setCollideArea(tmxObject3.x, tmxObject3.y, tmxObject3.width, tmxObject3.height)
 
     def onInputJoueur(self):
         pressedKeys = pygame.key.get_pressed()

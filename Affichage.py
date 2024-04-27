@@ -276,7 +276,51 @@ class Affichage:
                     self.switchMap("car2",game)
 
             elif game.getMapStep() == MapStep.MAP3:
-                pass    
+                for building in game.listBuildingVille3:
+                    buildingImg = pygame.image.load(building.getImagePath())
+                    buildingImg = pygame.transform.scale(buildingImg,(175,175))
+
+                    tmxObject = self.tmx_data.get_object_by_name(building.getLibelle())
+                    building.setCollideArea(tmxObject.x, tmxObject.y, tmxObject.width, tmxObject.height)
+
+                    #building.setCollideArea(self.tmx_data.get_object_by_name(building.libelle).x,self.tmx_data.get_object_by_name(building.libelle).y,self.tmx_data.get_object_by_name(building.libelle).width,self.tmx_data.get_object_by_name(building.libelle).height)
+                    if(player.feet.colliderect(building.getCollideArea())):
+                        #print("player entering in building " + str(building.libelle))
+                        # afficher prix batiment.price
+                        textPrice = pygame.font.SysFont('comicsansms', 45).render(str(building.strPrice()), True, self.colorWood)
+                        if building.getLvl() == building.getLvlMax():
+                            textLvl = pygame.font.SysFont('comicsansms', 50).render("MAX", True, self.colorWood)
+                            self.boutonAmeliorer.draw()
+                            #self.screen.blit(textPrice,(380,727))
+                            #self.screen.blit(self.cashDiamond,(380,727)) # Faire un détourage pour la piece et le diamant
+                            self.screen.blit(textLvl,(600,712))
+                            self.screen.blit(buildingImg,(40,560))
+                        else:
+                            textLvl = pygame.font.SysFont('comicsansms', 50).render(str(building.getLvl()), True, self.colorWood)
+                            if game.player.ownBuilding(building):
+                                #print("player already own the building " + str(building.libelle))
+                                self.boutonAmeliorer.draw()
+                                self.screen.blit(textPrice,(380,727))
+                                self.screen.blit(textLvl,(600,712))
+                                self.screen.blit(buildingImg,(40,560))
+
+                                if self.boutonAmeliorer.touched():
+                                    if player.getDollars()>= building.getPrice():
+                                        player.addDollars(-building.getPrice())
+                                        building.newPrice(2)
+                                        building.newGain(3)
+                                        building.addLvl()
+                            else:
+                                self.boutonAcheter.draw()
+                                self.screen.blit(textPrice,(380,727))
+                                self.screen.blit(textLvl,(600,712))
+                                self.screen.blit(buildingImg,(40,560))
+                                if self.boutonAcheter.touched():
+                                    if player.getDollars()>= building.getPrice():
+                                        player.addDollars(-building.getPrice())
+                                        player.addListBuilding(building)
+                                        building.newPrice(2)
+                                        building.addLvl()   
         
         player.revenuPassif(game)
             
