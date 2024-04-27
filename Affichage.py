@@ -224,11 +224,11 @@ class Affichage:
                                         player.addListBuilding(building)
                                         building.newPrice(2)
                                         building.addLvl()
-                                        
+                """                       
                 #Verification de la collision pour la voiture
                 if player.feet.colliderect(self.carRect):
                     self.switchMap("car",game)
-                    """
+                    
 
             if game.getMapStep() == MapStep.MAP2:
                 for building in game.listBuildingVille2:
