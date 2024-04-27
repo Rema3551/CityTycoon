@@ -57,6 +57,11 @@ class Player(pygame.sprite.Sprite):
         image=pygame.Surface([49,69])
         image.blit(self.sprite_sheet,(0,0),(x,y,49,69))
         return image
+    
+    def get_imageMap3(self,x,y):
+        image=pygame.Surface([29,41])
+        image.blit(self.sprite_sheet,(0,0),(x,y,29,41))
+        return image
         
     def getDollars(self):
         return self.dollars

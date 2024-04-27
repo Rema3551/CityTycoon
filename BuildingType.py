@@ -16,3 +16,7 @@ class BuildingType(Enum):
     ECURIE = "ecurie.png"
     TERRAINDENTRAINEMENT = "terrainDentrainement.png"
     FORGE = "forge.png"
+    
+    HOUSE1 = "house1.png"
+    HOUSE2 = "house2.png"
+    HOUSE3 = "house3.png"
