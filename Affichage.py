@@ -36,10 +36,9 @@ class Affichage:
 
 
             self.tmx_data = pytmx.util_pygame.load_pygame('assets/map/ville1.tmx')
-<<<<<<< HEAD
+
             #car = self.tmx_data.get_object_by_name("car")
             #self.carRect = pygame.Rect(car.x, car.y, car.width, car.height)
-=======
             car = self.tmx_data.get_object_by_name("car")
             self.carRect = pygame.Rect(car.x, car.y, car.width, car.height)
 
@@ -49,7 +48,10 @@ class Affichage:
             self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=53)
             self.group.add(game.player)
     
->>>>>>> 9242aeb3e1d15140bae45591f642c98892acc134
+
+            #car = self.tmx_data.get_object_by_name("car")
+            #self.carRect = pygame.Rect(car.x, car.y, car.width, car.height)
+
         elif game.getMapStep()==MapStep.MAP2:
             self.tmx_data = pytmx.util_pygame.load_pygame('assets/map/ville2.tmx')
             boat = self.tmx_data.get_object_by_name("boat")
@@ -97,12 +99,8 @@ class Affichage:
             if obj.name == "collision":
                 self.walls.append(pygame.Rect(obj.x, obj.y, obj.width, obj.height))
 
-<<<<<<< HEAD
         self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=33)
         self.group.add(game.player)
-=======
-        
->>>>>>> 9242aeb3e1d15140bae45591f642c98892acc134
         
         self.cashDiamond = pygame.image.load("assets/Images/cashDiamond.png").convert_alpha()
 
