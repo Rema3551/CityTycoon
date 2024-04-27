@@ -54,7 +54,7 @@ class Affichage:
             if obj.name == "collision":
                 self.walls.append(pygame.Rect(obj.x, obj.y, obj.width, obj.height))
 
-        self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=500)
+        self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=53)
         self.group.add(game.player)
         
         self.cashDiamond = pygame.image.load("assets/Images/cashDiamond.png").convert_alpha()
@@ -304,7 +304,7 @@ class Affichage:
                 self.tmx_data = pytmx.util_pygame.load_pygame('assets/map/ville3.tmx')
                 map_data = pyscroll.data.TiledMapData(self.tmx_data)
                 map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
-                self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=500)
+                self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=53)
                 self.group.add(game.player)
                 self.walls=[]
                 for obj in self.tmx_data.objects:
