@@ -30,27 +30,18 @@ class Affichage:
 
         game.backup.loadMap(game)
         if game.getMapStep()==MapStep.MAP1:   
-
-
-
-
-
             self.tmx_data = pytmx.util_pygame.load_pygame('assets/map/ville1.tmx')
-
-            #car = self.tmx_data.get_object_by_name("car")
-            #self.carRect = pygame.Rect(car.x, car.y, car.width, car.height)
             car = self.tmx_data.get_object_by_name("car")
             self.carRect = pygame.Rect(car.x, car.y, car.width, car.height)
+            signTuto = self.tmx_data.get_object_by_name("signTuto")
+            self.signTutoRect = pygame.Rect(signTuto.x, signTuto.y, signTuto.width, signTuto.height)
+            self.signTutoImg = pygame.image.load("assets/Images/signTuto.png")
 
             map_data = pyscroll.data.TiledMapData(self.tmx_data)
             map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
             game.start(self.tmx_data)
-            self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=53)
+            self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=42)
             self.group.add(game.player)
-    
-
-            #car = self.tmx_data.get_object_by_name("car")
-            #self.carRect = pygame.Rect(car.x, car.y, car.width, car.height)
 
         elif game.getMapStep()==MapStep.MAP2:
             self.tmx_data = pytmx.util_pygame.load_pygame('assets/map/ville2.tmx')
@@ -103,13 +94,6 @@ class Affichage:
         self.group.add(game.player)
         
         self.cashDiamond = pygame.image.load("assets/Images/cashDiamond.png").convert_alpha()
-
-        #signTuto = self.tmx_data.get_object_by_name("signTuto")
-        #self.signTutoRect = pygame.Rect(signTuto.x, signTuto.y, signTuto.width, signTuto.height)
-        #self.signTutoImg = pygame.image.load("assets/Images/signTuto.png")
-        
-        
-
         self.acheterBatimentImg = pygame.image.load("assets/Images/acheterBatiment.png")
         self.ameliorerBatimentImg = pygame.image.load("assets/Images/ameliorerBatiment.png")
         self.videoDiamondImg = pygame.image.load("assets/Images/videoDiamond.png")
@@ -180,7 +164,6 @@ class Affichage:
 
         if game.getGameStep() == GameStep.IDLE:
             if game.getMapStep() == MapStep.MAP1:
-                """
                 for building in game.listBuildingVille1:
                     buildingImg = pygame.image.load(building.getImagePath())
                     buildingImg = pygame.transform.scale(buildingImg,(180,180))
@@ -211,9 +194,10 @@ class Affichage:
                                 if self.boutonAmeliorer.touched():
                                     if player.getDollars()>= building.getPrice():
                                         player.addDollars(-building.getPrice())
-                                        building.newPrice(2)
-                                        building.newGain(3)
                                         building.addLvl()
+                                        building.setPrice()
+                                        building.setGain()
+                                        
                             else:
                                 self.boutonAcheter.draw()
                                 self.screen.blit(textPrice,(380,727))
@@ -222,15 +206,14 @@ class Affichage:
                                     if player.getDollars()>= building.getPrice():
                                         player.addDollars(-building.getPrice())
                                         player.addListBuilding(building)
-                                        building.newPrice(2)
-                                        building.addLvl()
-                """                       
+                                        building.addLvl() 
+                                        building.setPrice()                  
                 #Verification de la collision pour la voiture
                 if player.feet.colliderect(self.carRect):
                     self.switchMap("car",game)
                     
 
-            if game.getMapStep() == MapStep.MAP2:
+            elif game.getMapStep() == MapStep.MAP2:
                 for building in game.listBuildingVille2:
                     buildingImg = pygame.image.load(building.getImagePath())
                     buildingImg = pygame.transform.scale(buildingImg,(175,175))
@@ -262,9 +245,9 @@ class Affichage:
                                 if self.boutonAmeliorer.touched():
                                     if player.getDollars()>= building.getPrice():
                                         player.addDollars(-building.getPrice())
-                                        building.newPrice(2)
-                                        building.newGain(3)
-                                        building.addLvl()
+                                        building.addLvl() 
+                                        building.setPrice()
+                                        building.setGain()
                             else:
                                 self.boutonAcheter.draw()
                                 self.screen.blit(textPrice,(380,727))
@@ -274,8 +257,8 @@ class Affichage:
                                     if player.getDollars()>= building.getPrice():
                                         player.addDollars(-building.getPrice())
                                         player.addListBuilding(building)
-                                        building.newPrice(2)
                                         building.addLvl()
+                                        building.setPrice()
 
                 #Verification de la collision pour le boat
                 if player.feet.colliderect(self.boatRect):
@@ -316,9 +299,9 @@ class Affichage:
                                 if self.boutonAmeliorer.touched():
                                     if player.getDollars()>= building.getPrice():
                                         player.addDollars(-building.getPrice())
-                                        building.newPrice(2)
-                                        building.newGain(3)
                                         building.addLvl()
+                                        building.setPrice()
+                                        building.setGain()
                             else:
                                 self.boutonAcheter.draw()
                                 self.screen.blit(textPrice,(380,727))
@@ -328,8 +311,8 @@ class Affichage:
                                     if player.getDollars()>= building.getPrice():
                                         player.addDollars(-building.getPrice())
                                         player.addListBuilding(building)
-                                        building.newPrice(2)
-                                        building.addLvl()   
+                                        building.addLvl()
+                                        building.setPrice()   
         
         player.revenuPassif(game)
             

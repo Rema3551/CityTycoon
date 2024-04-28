@@ -36,7 +36,7 @@ class Game:
         player_position = tmx_data.get_object_by_name("player")
         self.player = Player(player_position.x, player_position.y)
 
-        if self.getMapStep()==MapStep.MAP3 or self.getMapStep()==MapStep.MAP1:
+        if self.getMapStep()==MapStep.MAP3:
 
             self.player.sprite_sheet = pygame.image.load('assets/Images/playerMap3.png')
             self.player.image = self.player.get_imageMap3(0,0)
@@ -51,7 +51,15 @@ class Game:
 
     def createBuildings(self, tmx_data):
         # TODO : lvl max building
-        
+        #Map1 Buildings
+        self.flowers_map1 = Building(30,20,4,4,9,"flowers_map1",BuildingType.FLOWERS_MAP1)
+        self.campfire_map1 = Building(25,25,3,3,1,"campfire_map1",BuildingType.CAMPFIRE_MAP1)
+        self.roc_map1 = Building(5,5,1,1,6,"roc_map1",BuildingType.ROC_MAP1)
+        self.house1_map1 = Building(100,50,8,6,2,"house1_map1",BuildingType.HOUSE1_MAP1)
+        self.house2_map1 = Building(400,200,10,8,3,"house2_map1",BuildingType.HOUSE2_MAP1)
+        self.house3_map1 = Building(1000,500,14,10,3,"house3_map1",BuildingType.HOUSE3_MAP1)
+        self.house4_map1 = Building(2500,1000,16,12,3,"house4_map1",BuildingType.HOUSE4_MAP1)
+        """
         self.poubelle1 = Building(5,1,1,"poubelle1",BuildingType.POUBELLE)
         self.poubelle2 = Building(15,1,1,"poubelle2",BuildingType.POUBELLE)
         self.poubelle3 = Building(20,1,1,"poubelle3",BuildingType.POUBELLE)
@@ -65,40 +73,36 @@ class Game:
         self.rouge = Building(100,10,3,"rouge", BuildingType.ROUGE)
         self.help = Building(750,30,3,"help",BuildingType.HELP)
         self.orange = Building(500,25,3,"orange",BuildingType.ORANGE)
-        
-        self.hdv = Building(100000,200,2,"hdv",BuildingType.HDV)
-        self.maisonette = Building(1000,40,3,"maisonette",BuildingType.MAISONETTE)
-        self.maison = Building(5000,45,3,"maison",BuildingType.MAISON)
-        self.tourDeGuet = Building(20000,65,3,"tourDeGuet",BuildingType.TOURDEGUET)
-        self.cabane = Building(17500,55,3,"cabane",BuildingType.CABANE)
-        self.ecurie = Building(15000,45,3,"ecurie",BuildingType.ECURIE)
-        self.terrainDentrainement = Building(15000,45,3,"terrainDentrainement",BuildingType.TERRAINDENTRAINEMENT)
-        self.forge = Building(15000,45,3,"forge",BuildingType.FORGE)
+        """
+        #Map2 Buildings
+        self.hdv = Building(100000,40000,500,100,5,"hdv",BuildingType.HDV)
+        self.maisonette = Building(10000,2500,25,15,1,"maisonette",BuildingType.MAISONETTE)
+        self.maison = Building(35000,2500,30,16,3,"maison",BuildingType.MAISON)
+        self.tourDeGuet = Building(75000,30000,150,50,3,"tourDeGuet",BuildingType.TOURDEGUET)
+        self.cabane = Building(25000,6500,55,20,2,"cabane",BuildingType.CABANE)
+        self.ecurie = Building(15000,5000,45,18,2,"ecurie",BuildingType.ECURIE)
+        self.terrainDentrainement = Building(50000,50000,46,46,1,"terrainDentrainement",BuildingType.TERRAINDENTRAINEMENT)
+        self.forge = Building(40000,6500,55,20,2,"forge",BuildingType.FORGE)
+        #Map3 Buildings
+        self.house1 = Building(1500000,50000,550,300,1,"house1",BuildingType.HOUSE1)
+        self.house2 = Building(2500000,60000,750,500,2,"house2",BuildingType.HOUSE2)
+        self.house3 = Building(3000000,75000,1000,750,3,"house3",BuildingType.HOUSE3)
 
-
-
-        #self.listBuildingVille1 = []
-        self.listBuildingVille2 = [self.hdv, self.maisonette, self.maison, self.tourDeGuet,self.cabane,self.ecurie,self.terrainDentrainement,self.forge]
-
-
-
-        self.house1 = Building(15000,45,3,"house1",BuildingType.HOUSE1)
-        self.house2 = Building(15000,45,3,"house2",BuildingType.HOUSE2)
-        self.house3 = Building(15000,45,3,"house3",BuildingType.HOUSE3)
-
-        #self.listBuildingVille1 = [self.poubelle1, self.poubelle2, self.poubelle3, self.poubelle4, self.poubelle5, self.poubelle6, self.poubelle7, self.poubelle8, self.poubelle9, self.poubelle10, self.rouge, self.help, self.orange]
+        #Listes des buildings en fonction des villes
+        self.listBuildingVille1 = [self.flowers_map1, self.campfire_map1,self.roc_map1, self.house1_map1, self.house2_map1, self.house3_map1, self.house4_map1]
         self.listBuildingVille2 = [self.hdv, self.maisonette, self.maison, self.tourDeGuet,self.cabane,self.ecurie,self.terrainDentrainement,self.forge]
         self.listBuildingVille3 = [self.house1,self.house2,self.house3]
+        #self.listBuildingVille1 = [self.poubelle1, self.poubelle2, self.poubelle3, self.poubelle4, self.poubelle5, self.poubelle6, self.poubelle7, self.poubelle8, self.poubelle9, self.poubelle10, self.rouge, self.help, self.orange]
         #self.buildings = [self.poubelle1, self.poubelle2, self.poubelle3, self.poubelle4, self.poubelle5, self.poubelle6, self.poubelle7, self.poubelle8, self.poubelle9, self.poubelle10, self.rouge, self.help, self.orange,self.hdv, self.maisonette, self.maison, self.tourDeGuet,self.cabane,self.ecurie]
-        #Faire une liste pour moyen de deplacement changement de ville
-        #self.listBuildingVille1 = []
-        self.listBuildingVille2 = [self.hdv, self.maisonette, self.maison, self.tourDeGuet,self.cabane,self.ecurie,self.terrainDentrainement,self.forge]
 
     def createBuildingsCollideArea(self,tmx_data):
-        #if self.mapStep == MapStep.MAP1:
-            #for building1 in self.listBuildingVille1:
-                #tmxObject1 = tmx_data.get_object_by_name(building1.getLibelle())
-                #building1.setCollideArea(tmxObject1.x, tmxObject1.y, tmxObject1.width, tmxObject1.height)
+        if self.mapStep == MapStep.MAP1:
+            for building1 in self.listBuildingVille1:
+                tmxObject1 = tmx_data.get_object_by_name(building1.getLibelle())
+                if tmxObject1 == "house1_map1" or tmxObject1 == "house2_map1" or tmxObject1 == "house3_map1" or tmxObject1 == "house4_map1":
+                    building1.setCollideArea(tmxObject1.x, tmxObject1.y, tmxObject1.width, tmxObject1.height + 150)
+                else:
+                    building1.setCollideArea(tmxObject1.x, tmxObject1.y, tmxObject1.width, tmxObject1.height)
         if self.mapStep == MapStep.MAP2:
             for building2 in self.listBuildingVille2:
                 tmxObject2 = tmx_data.get_object_by_name(building2.getLibelle())

@@ -73,7 +73,7 @@ class Player(pygame.sprite.Sprite):
         elif self.dollars<1000000:
             return str(int(self.dollars/1000)) + "K" + dollarsStr[len(dollarsStr)-3]
         elif self.dollars<1000000000 :
-            return str(int(self.dollars/1000000)) + "M" + dollarsStr[len(dollarsStr)-3]
+            return str(int(self.dollars/1000000)) + "M" + dollarsStr[len(dollarsStr)-6]
         
     
     def getDiamonds(self):
@@ -86,7 +86,7 @@ class Player(pygame.sprite.Sprite):
         elif self.diamonds<1000000:
             return str(int(self.diamonds/1000)) + "K" + diamondsStr[len(diamondsStr)-3]
         elif self.diamonds<1000000000 : 
-            return str(int(self.diamonds/1000000)) + "M" + diamondsStr[len(diamondsStr)-3]
+            return str(int(self.diamonds/1000000)) + "M" + diamondsStr[len(diamondsStr)-6]
     
     def getNiveau(self):
         return self.niveau
@@ -150,15 +150,20 @@ class Player(pygame.sprite.Sprite):
         revenuPassif = 0
         for batiment in self.listBuilding:
             revenuPassif += batiment.getGain()
-        if revenuPassif <10:
+        revenusPassifStr = str(int(revenuPassif))
+        if revenuPassif <1000:
+            return revenusPassifStr + "/s"
+        elif revenuPassif <1000000:
+            return str(int(revenuPassif/1000)) + "K" + revenusPassifStr[len(revenusPassifStr)-3] + "/s"
+        elif revenuPassif <1000000000:
+            return str(int(revenuPassif/1000)) + "M" + revenusPassifStr[len(revenusPassifStr)-6] + "/s"
+            """
             return str(revenuPassif)[len(str(revenuPassif))-2] + "/s" 
         else:
             return str(int(revenuPassif/2)) + "/s"
+            """
 
     def ownBuilding(self, building)->bool:
         for i in range (len(self.listBuilding)):
             return self.listBuilding[i].libelle == building.libelle
         return False
-
-                
-    
