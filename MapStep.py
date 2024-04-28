@@ -7,3 +7,4 @@ class MapStep(Enum):
     MAP1 = 0
     MAP2 = 1
     MAP3 = 2
+    HOUSE1 = 3

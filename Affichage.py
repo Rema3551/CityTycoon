@@ -77,6 +77,25 @@ class Affichage:
             self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=53)
             self.group.add(game.player)
 
+        elif game.getMapStep()==MapStep.HOUSE1:
+
+            game.player.sprite_sheet = pygame.image.load('assets/Images/player.png')
+            game.player.image = game.player.get_image(0,0)
+            game.player.image.set_colorkey([0,0,0]) #fait en sorte que ça soit transparent
+            game.player.rect = game.player.image.get_rect()
+            player.images = {
+            'down': player.get_image(0,0),
+            'left': player.get_image(2,82),
+            'right': player.get_image(3,163),
+            'up': player.get_image(0,246)
+        }
+
+            self.tmx_data = pytmx.util_pygame.load_pygame('assets/map/house1.tmx')
+            map_data = pyscroll.data.TiledMapData(self.tmx_data)
+            map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
+            game.start(self.tmx_data)
+            self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=42)
+            self.group.add(game.player)
 
 
         self.music = pygame.mixer.music.load('assets/music/music.mp3')
@@ -281,12 +300,9 @@ class Affichage:
                         # afficher prix batiment.price
                         textPrice = pygame.font.SysFont('comicsansms', 45).render(str(building.strPrice()), True, self.colorWood)
                         if building.getLvl() == building.getLvlMax():
-                            textLvl = pygame.font.SysFont('comicsansms', 50).render("MAX", True, self.colorWood)
-                            self.boutonAmeliorer.draw()
-                            #self.screen.blit(textPrice,(380,727))
-                            #self.screen.blit(self.cashDiamond,(380,727)) # Faire un détourage pour la piece et le diamant
-                            self.screen.blit(textLvl,(600,712))
-                            self.screen.blit(buildingImg,(40,560))
+                            pass
+                        if building.getLvl() == building.getLvlMax() and building.getLibelle() == "house1":
+                            self.switchMap("house1",game)
                         else:
                             textLvl = pygame.font.SysFont('comicsansms', 50).render(str(building.getLvl()), True, self.colorWood)
                             if game.player.ownBuilding(building):
@@ -313,7 +329,11 @@ class Affichage:
                                         player.addListBuilding(building)
                                         building.addLvl()
                                         building.setPrice()   
-        
+
+
+            elif game.getMapStep() == MapStep.HOUSE1:
+                pass
+
         player.revenuPassif(game)
             
             
@@ -382,15 +402,11 @@ class Affichage:
                 player.image.set_colorkey([0,0,0]) #fait en sorte que ça soit transparent
                 player.rect = player.image.get_rect()
                 player.images = {
-                    'down': player.get_imageMap3(0,0),
-                    'left': player.get_imageMap3(1,49),
-                    'right': player.get_imageMap3(1,96),
-                    'up': player.get_imageMap3(0,145)
+                'down': player.get_image(0,0),
+                'left': player.get_image(2,82),
+                'right': player.get_image(3,163),
+                'up': player.get_image(0,246)
                 }
-
-
-
-
 
                 self.tmx_data = pytmx.util_pygame.load_pygame('assets/map/ville3.tmx')
                 map_data = pyscroll.data.TiledMapData(self.tmx_data)
@@ -408,6 +424,35 @@ class Affichage:
 
                 game.setMapStep(MapStep.MAP3)
         
+        elif game.getMapStep() == MapStep.MAP3:
+            if object == "house1":
+
+                player.sprite_sheet = pygame.image.load('assets/Images/player.png')
+                player.image = player.get_image(0,0)
+                player.image.set_colorkey([0,0,0]) #fait en sorte que ça soit transparent
+                player.rect = player.image.get_rect()
+                player.images = {
+                    'down': player.get_image(0,0),
+                    'left': player.get_image(1,49),
+                    'right': player.get_image(1,96),
+                    'up': player.get_image(0,145)
+                }
+
+                self.tmx_data = pytmx.util_pygame.load_pygame('assets/map/house1.tmx')
+                map_data = pyscroll.data.TiledMapData(self.tmx_data)
+                map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
+                self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=53)
+                self.group.add(game.player)
+                self.walls=[]
+                for obj in self.tmx_data.objects:
+                    if obj.name == "collision":
+                        self.walls.append(pygame.Rect(obj.x, obj.y, obj.width, obj.height))
+                
+                spawnHouse1 = self.tmx_data.get_object_by_name("spawn_house1")
+                game.player.position[0] = spawnHouse1.x
+                game.player.position[1] = spawnHouse1.y
+
+                game.setMapStep(MapStep.HOUSE1)
         elif game.getMapStep() == MapStep.MAP3:
             pass
 

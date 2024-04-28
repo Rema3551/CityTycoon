@@ -547,9 +547,6 @@
 </data>
  </layer>
  <objectgroup id="4" name="Calque d'Objets 1">
-  <object id="8" name="spawn_map3" type="spawn_map3" x="366.667" y="308.667">
-   <point/>
-  </object>
   <object id="9" name="spawn_house1" type="spawn_house1" x="321" y="542">
    <point/>
   </object>

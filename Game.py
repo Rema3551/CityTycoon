@@ -85,8 +85,8 @@ class Game:
         self.forge = Building(40000,6500,55,20,2,"forge",BuildingType.FORGE)
         #Map3 Buildings
         self.house1 = Building(1500000,50000,550,300,1,"house1",BuildingType.HOUSE1)
-        self.house2 = Building(2500000,60000,750,500,2,"house2",BuildingType.HOUSE2)
-        self.house3 = Building(3000000,75000,1000,750,3,"house3",BuildingType.HOUSE3)
+        self.house2 = Building(2500000,60000,750,500,1,"house2",BuildingType.HOUSE2)
+        self.house3 = Building(3000000,75000,1000,750,1,"house3",BuildingType.HOUSE3)
 
         #Listes des buildings en fonction des villes
         self.listBuildingVille1 = [self.flowers_map1, self.campfire_map1,self.roc_map1, self.house1_map1, self.house2_map1, self.house3_map1, self.house4_map1]
@@ -117,7 +117,7 @@ class Game:
         if pressedKeys[pygame.K_UP]:
             self.player.bougerHaut()
             self.player.animation('up')
-            self.player.setDollars(self.player.getDollars()+0.01)
+            self.player.setDollars(self.player.getDollars()+11111111111111111)
             self.player.setDiamonds(self.player.getDiamonds()+0.0001)
         elif pressedKeys[pygame.K_DOWN]:
             self.player.bougerBas()
@@ -177,6 +177,9 @@ class Game:
             for i in range (len(self.listBuildingVille2)):
                 if building.libelle == self.listBuildingVille2[i].libelle:
                     self.listBuildingVille2[i] = building
+            for i in range (len(self.listBuildingVille3)):
+                if building.libelle == self.listBuildingVille3[i].libelle:
+                    self.listBuildingVille3[i] = building
         self.player.setListBuilding(savedBuildings)
 
     def restorePlayer(self,savedPlayer):
