@@ -131,10 +131,7 @@ class Game:
             self.player.setDollars(self.player.getDollars()+0.01)
             self.player.setDiamonds(self.player.getDiamonds()+0.0001)
 
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
     def printGame(self):
         self.player.sauvegardeLocation()
         self.onInputJoueur()
