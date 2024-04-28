@@ -36,7 +36,7 @@ class Game:
         player_position = tmx_data.get_object_by_name("player")
         self.player = Player(player_position.x, player_position.y)
 
-        if self.getMapStep()==MapStep.MAP3:
+        if self.getMapStep()==MapStep.MAP3 or self.getMapStep()==MapStep.MAP1:
 
             self.player.sprite_sheet = pygame.image.load('assets/Images/playerMap3.png')
             self.player.image = self.player.get_imageMap3(0,0)
@@ -131,7 +131,10 @@ class Game:
             self.player.setDollars(self.player.getDollars()+0.01)
             self.player.setDiamonds(self.player.getDiamonds()+0.0001)
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
     def printGame(self):
         self.player.sauvegardeLocation()
         self.onInputJoueur()
