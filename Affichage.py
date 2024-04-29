@@ -77,6 +77,10 @@ class Affichage:
             self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=53)
             self.group.add(game.player)
 
+            house1Rect = self.tmx_data.get_object_by_name("house1")
+            self.house1Rect = pygame.Rect(house1Rect.x, house1Rect.y, house1Rect.width, house1Rect.height)
+
+
         elif game.getMapStep()==MapStep.HOUSE1:
 
             game.player.sprite_sheet = pygame.image.load('assets/Images/player.png')
@@ -97,6 +101,8 @@ class Affichage:
             self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=42)
             self.group.add(game.player)
 
+            house1Rect = self.tmx_data.get_object_by_name("house1")
+            self.house1Rect = pygame.Rect(house1Rect.x, house1Rect.y, house1Rect.width, house1Rect.height)
 
         self.music = pygame.mixer.music.load('assets/music/music.mp3')
         pygame.mixer.music.play(-1)
@@ -300,9 +306,12 @@ class Affichage:
                         # afficher prix batiment.price
                         textPrice = pygame.font.SysFont('comicsansms', 45).render(str(building.strPrice()), True, self.colorWood)
                         if building.getLvl() == building.getLvlMax():
-                            pass
-                        if building.getLvl() == building.getLvlMax() and building.getLibelle() == "house1":
-                            self.switchMap("house1",game)
+                            textLvl = pygame.font.SysFont('comicsansms', 50).render("MAX", True, self.colorWood)
+                            self.boutonAmeliorer.draw()
+                            #self.screen.blit(textPrice,(380,727))
+                            #self.screen.blit(self.cashDiamond,(380,727)) # Faire un détourage pour la piece et le diamant
+                            self.screen.blit(textLvl,(600,712))
+                            self.screen.blit(buildingImg,(40,560))
                         else:
                             textLvl = pygame.font.SysFont('comicsansms', 50).render(str(building.getLvl()), True, self.colorWood)
                             if game.player.ownBuilding(building):
@@ -330,9 +339,14 @@ class Affichage:
                                         building.addLvl()
                                         building.setPrice()   
 
+                
+                if player.feet.colliderect(self.house1Rect) and game.listBuildingVille3[0].getLvl() == game.listBuildingVille3[0].getLvlMax():
+                    self.switchMap("house1Entry",game)
+
 
             elif game.getMapStep() == MapStep.HOUSE1:
-                pass
+                if player.feet.colliderect(self.enterHouse1):
+                    self.switchMap("house1Exit",game)
 
         player.revenuPassif(game)
             
@@ -418,6 +432,9 @@ class Affichage:
                     if obj.name == "collision":
                         self.walls.append(pygame.Rect(obj.x, obj.y, obj.width, obj.height))
                 
+                house1Rect = self.tmx_data.get_object_by_name("house1")
+                self.house1Rect = pygame.Rect(house1Rect.x, house1Rect.y, house1Rect.width, house1Rect.height)
+
                 spawnMap3 = self.tmx_data.get_object_by_name("spawn_map3")
                 game.player.position[0] = spawnMap3.x
                 game.player.position[1] = spawnMap3.y
@@ -425,7 +442,7 @@ class Affichage:
                 game.setMapStep(MapStep.MAP3)
         
         elif game.getMapStep() == MapStep.MAP3:
-            if object == "house1":
+            if object == "house1Entry":
 
                 player.sprite_sheet = pygame.image.load('assets/Images/player.png')
                 player.image = player.get_image(0,0)
@@ -448,12 +465,16 @@ class Affichage:
                     if obj.name == "collision":
                         self.walls.append(pygame.Rect(obj.x, obj.y, obj.width, obj.height))
                 
+                enterHouse1 = self.tmx_data.get_object_by_name("enter_house1")
+                self.enterHouse1 = pygame.Rect(enterHouse1.x, enterHouse1.y, enterHouse1.width, enterHouse1.height)
+                
+
                 spawnHouse1 = self.tmx_data.get_object_by_name("spawn_house1")
                 game.player.position[0] = spawnHouse1.x
                 game.player.position[1] = spawnHouse1.y
 
                 game.setMapStep(MapStep.HOUSE1)
-        elif game.getMapStep() == MapStep.MAP3:
+        elif game.getMapStep() == MapStep.HOUSE1:
             pass
 
             

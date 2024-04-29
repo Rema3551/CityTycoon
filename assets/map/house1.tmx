@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="31">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="32">
  <tileset firstgid="1" source="Interiors_free_16x16.tsx"/>
  <tileset firstgid="1425" source="Room_Builder_free_16x16.tsx"/>
  <tileset firstgid="1816" source="atlas_16x.tsx"/>
@@ -570,5 +570,6 @@
   <object id="28" name="collision" x="562.5" y="557.5" width="41" height="48"/>
   <object id="29" name="collision" x="572" y="399.5" width="92" height="120.5"/>
   <object id="30" name="collision" x="690" y="494" width="44" height="110.5"/>
+  <object id="31" name="enter_house1" x="310" y="604.667" width="134" height="44.6667"/>
  </objectgroup>
 </map>
