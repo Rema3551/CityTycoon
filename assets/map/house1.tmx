@@ -547,10 +547,10 @@
 </data>
  </layer>
  <objectgroup id="4" name="Calque d'Objets 1">
-  <object id="9" name="spawn_house1" type="spawn_house1" x="321" y="542">
+  <object id="9" name="spawn_house1" type="spawn_house1" x="291.667" y="510">
    <point/>
   </object>
-  <object id="10" name="player" x="321" y="540">
+  <object id="10" name="player" x="291.667" y="510">
    <point/>
   </object>
   <object id="11" name="collision" x="39" y="308" width="277" height="105"/>
