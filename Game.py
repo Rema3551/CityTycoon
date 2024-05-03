@@ -59,21 +59,6 @@ class Game:
         self.house2_map1 = Building(400,200,10,8,3,"house2_map1",BuildingType.HOUSE2_MAP1)
         self.house3_map1 = Building(1000,500,14,10,3,"house3_map1",BuildingType.HOUSE3_MAP1)
         self.house4_map1 = Building(2500,1000,16,12,3,"house4_map1",BuildingType.HOUSE4_MAP1)
-        """
-        self.poubelle1 = Building(5,1,1,"poubelle1",BuildingType.POUBELLE)
-        self.poubelle2 = Building(15,1,1,"poubelle2",BuildingType.POUBELLE)
-        self.poubelle3 = Building(20,1,1,"poubelle3",BuildingType.POUBELLE)
-        self.poubelle4 = Building(25,1,1,"poubelle4",BuildingType.POUBELLE)
-        self.poubelle5 = Building(30,1,1,"poubelle5",BuildingType.POUBELLE)
-        self.poubelle6 = Building(35,1,1,"poubelle6",BuildingType.POUBELLE)
-        self.poubelle7 = Building(40,1,1,"poubelle7",BuildingType.POUBELLE)
-        self.poubelle8 = Building(45,1,1,"poubelle8",BuildingType.POUBELLE)
-        self.poubelle9 = Building(50,1,1,"poubelle9",BuildingType.POUBELLE)
-        self.poubelle10 = Building(55,1,1, "poubelle10",BuildingType.POUBELLE)
-        self.rouge = Building(100,10,3,"rouge", BuildingType.ROUGE)
-        self.help = Building(750,30,3,"help",BuildingType.HELP)
-        self.orange = Building(500,25,3,"orange",BuildingType.ORANGE)
-        """
         #Map2 Buildings
         self.hdv = Building(100000,40000,500,100,5,"hdv",BuildingType.HDV)
         self.maisonette = Building(10000,2500,25,15,1,"maisonette",BuildingType.MAISONETTE)
@@ -92,22 +77,17 @@ class Game:
         self.listBuildingVille1 = [self.flowers_map1, self.campfire_map1,self.roc_map1, self.house1_map1, self.house2_map1, self.house3_map1, self.house4_map1]
         self.listBuildingVille2 = [self.hdv, self.maisonette, self.maison, self.tourDeGuet,self.cabane,self.ecurie,self.terrainDentrainement,self.forge]
         self.listBuildingVille3 = [self.house1,self.house2,self.house3]
-        #self.listBuildingVille1 = [self.poubelle1, self.poubelle2, self.poubelle3, self.poubelle4, self.poubelle5, self.poubelle6, self.poubelle7, self.poubelle8, self.poubelle9, self.poubelle10, self.rouge, self.help, self.orange]
-        #self.buildings = [self.poubelle1, self.poubelle2, self.poubelle3, self.poubelle4, self.poubelle5, self.poubelle6, self.poubelle7, self.poubelle8, self.poubelle9, self.poubelle10, self.rouge, self.help, self.orange,self.hdv, self.maisonette, self.maison, self.tourDeGuet,self.cabane,self.ecurie]
 
     def createBuildingsCollideArea(self,tmx_data):
-        if self.mapStep == MapStep.MAP1:
+        if self.mapStep == MapStep.MAP1: 
             for building1 in self.listBuildingVille1:
                 tmxObject1 = tmx_data.get_object_by_name(building1.getLibelle())
-                if tmxObject1 == "house1_map1" or tmxObject1 == "house2_map1" or tmxObject1 == "house3_map1" or tmxObject1 == "house4_map1":
-                    building1.setCollideArea(tmxObject1.x, tmxObject1.y, tmxObject1.width, tmxObject1.height + 150)
-                else:
-                    building1.setCollideArea(tmxObject1.x, tmxObject1.y, tmxObject1.width, tmxObject1.height)
-        if self.mapStep == MapStep.MAP2:
+                building1.setCollideArea(tmxObject1.x, tmxObject1.y, tmxObject1.width, tmxObject1.height)       
+        elif self.mapStep == MapStep.MAP2:
             for building2 in self.listBuildingVille2:
                 tmxObject2 = tmx_data.get_object_by_name(building2.getLibelle())
                 building2.setCollideArea(tmxObject2.x, tmxObject2.y, tmxObject2.width, tmxObject2.height)
-        if self.mapStep == MapStep.MAP3:
+        elif self.mapStep == MapStep.MAP3:
             for building3 in self.listBuildingVille3:
                 tmxObject3 = tmx_data.get_object_by_name(building3.getLibelle())
                 building3.setCollideArea(tmxObject3.x, tmxObject3.y, tmxObject3.width, tmxObject3.height)
@@ -117,7 +97,7 @@ class Game:
         if pressedKeys[pygame.K_UP]:
             self.player.bougerHaut()
             self.player.animation('up')
-            self.player.setDollars(self.player.getDollars()+11111111111111111)
+            self.player.setDollars(self.player.getDollars()+0.01)
             self.player.setDiamonds(self.player.getDiamonds()+0.0001)
         elif pressedKeys[pygame.K_DOWN]:
             self.player.bougerBas()

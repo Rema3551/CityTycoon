@@ -31,6 +31,7 @@ class Affichage:
         game.backup.loadMap(game)
         if game.getMapStep()==MapStep.MAP1:   
             self.tmx_data = pytmx.util_pygame.load_pygame('assets/map/ville1.tmx')
+            self.sprite_sheet = pygame.image.load('assets/Images/player.png')
             car = self.tmx_data.get_object_by_name("car")
             self.carRect = pygame.Rect(car.x, car.y, car.width, car.height)
             signTuto = self.tmx_data.get_object_by_name("signTuto")
@@ -45,6 +46,7 @@ class Affichage:
 
         elif game.getMapStep()==MapStep.MAP2:
             self.tmx_data = pytmx.util_pygame.load_pygame('assets/map/ville2.tmx')
+            self.sprite_sheet = pygame.image.load('assets/Images/player.png')
             boat = self.tmx_data.get_object_by_name("boat")
             self.boatRect = pygame.Rect(boat.x, boat.y, boat.width, boat.height)
             car2 = self.tmx_data.get_object_by_name("car2")
@@ -53,7 +55,7 @@ class Affichage:
             map_data = pyscroll.data.TiledMapData(self.tmx_data)
             map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
             game.start(self.tmx_data)
-            self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=53)
+            self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer = 6)
             self.group.add(game.player)
 
         elif game.getMapStep()==MapStep.MAP3:
@@ -115,9 +117,6 @@ class Affichage:
         for obj in self.tmx_data.objects:
             if obj.name == "collision":
                 self.walls.append(pygame.Rect(obj.x, obj.y, obj.width, obj.height))
-
-        self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=33)
-        self.group.add(game.player)
         
         self.cashDiamond = pygame.image.load("assets/Images/cashDiamond.png").convert_alpha()
         self.acheterBatimentImg = pygame.image.load("assets/Images/acheterBatiment.png")
@@ -193,19 +192,20 @@ class Affichage:
                 for building in game.listBuildingVille1:
                     buildingImg = pygame.image.load(building.getImagePath())
                     buildingImg = pygame.transform.scale(buildingImg,(180,180))
-                    
                     tmxObject = self.tmx_data.get_object_by_name(building.getLibelle())
-                    building.setCollideArea(tmxObject.x, tmxObject.y, tmxObject.width, tmxObject.height)
+                    if building.getLibelle() == "house1_map1" or building.getLibelle() == "house2_map1" or building.getLibelle() == "house3_map1" or building.getLibelle() == "house4_map1":
+                        building.setCollideArea(tmxObject.x, tmxObject.y + 20, tmxObject.width, tmxObject.height)
+                    else:
+                        building.setCollideArea(tmxObject.x, tmxObject.y, tmxObject.width, tmxObject.height)
 
                     if(player.feet.colliderect(building.getCollideArea())):
                         self.screen.blit(buildingImg,(40,560))
-                        #print("player entering in building " + str(building.libelle))
                         # afficher prix batiment.price
-                        textPrice = pygame.font.SysFont('comicsansms', 45).render(str(building.strPrice()), True, self.colorWood)
+                        textPrice = pygame.font.SysFont('comicsansms',65).render(str(building.strPrice()), True, self.colorWood)
                         if building.getLvl() == building.getLvlMax():
                             textLvl = pygame.font.SysFont('comicsansms', 50).render("MAX", True, self.colorWood)
                             self.boutonAmeliorer.draw()
-                            #self.screen.blit(textPrice,(380,727))
+                            #self.screen.blit(textPrice,(475,600))
                             #self.screen.blit(self.cashDiamond,(380,727)) # Faire un détourage pour la piece et le diamant
                             self.screen.blit(textLvl,(600,712))
                             
@@ -214,7 +214,7 @@ class Affichage:
                             if game.player.ownBuilding(building):
                                 #print("player already own the building " + str(building.libelle))
                                 self.boutonAmeliorer.draw()
-                                self.screen.blit(textPrice,(380,727))
+                                self.screen.blit(textPrice,(475,600))
                                 self.screen.blit(textLvl,(600,712))
 
                                 if self.boutonAmeliorer.touched():
@@ -226,7 +226,7 @@ class Affichage:
                                         
                             else:
                                 self.boutonAcheter.draw()
-                                self.screen.blit(textPrice,(380,727))
+                                self.screen.blit(textPrice,(475,600))
                                 self.screen.blit(textLvl,(600,712))
                                 if self.boutonAcheter.touched():
                                     if player.getDollars()>= building.getPrice():
@@ -249,13 +249,12 @@ class Affichage:
 
                     #building.setCollideArea(self.tmx_data.get_object_by_name(building.libelle).x,self.tmx_data.get_object_by_name(building.libelle).y,self.tmx_data.get_object_by_name(building.libelle).width,self.tmx_data.get_object_by_name(building.libelle).height)
                     if(player.feet.colliderect(building.getCollideArea())):
-                        #print("player entering in building " + str(building.libelle))
                         # afficher prix batiment.price
-                        textPrice = pygame.font.SysFont('comicsansms', 45).render(str(building.strPrice()), True, self.colorWood)
+                        textPrice = pygame.font.SysFont('comicsansms', 65).render(str(building.strPrice()), True, self.colorWood)
                         if building.getLvl() == building.getLvlMax():
                             textLvl = pygame.font.SysFont('comicsansms', 50).render("MAX", True, self.colorWood)
                             self.boutonAmeliorer.draw()
-                            #self.screen.blit(textPrice,(380,727))
+                            #self.screen.blit(textPrice,(475,600))
                             #self.screen.blit(self.cashDiamond,(380,727)) # Faire un détourage pour la piece et le diamant
                             self.screen.blit(textLvl,(600,712))
                             self.screen.blit(buildingImg,(40,560))
@@ -264,7 +263,7 @@ class Affichage:
                             if game.player.ownBuilding(building):
                                 #print("player already own the building " + str(building.libelle))
                                 self.boutonAmeliorer.draw()
-                                self.screen.blit(textPrice,(380,727))
+                                self.screen.blit(textPrice,(475,600))
                                 self.screen.blit(textLvl,(600,712))
                                 self.screen.blit(buildingImg,(40,560))
 
@@ -276,7 +275,7 @@ class Affichage:
                                         building.setGain()
                             else:
                                 self.boutonAcheter.draw()
-                                self.screen.blit(textPrice,(380,727))
+                                self.screen.blit(textPrice,(475,600))
                                 self.screen.blit(textLvl,(600,712))
                                 self.screen.blit(buildingImg,(40,560))
                                 if self.boutonAcheter.touched():
@@ -303,13 +302,12 @@ class Affichage:
 
                     #building.setCollideArea(self.tmx_data.get_object_by_name(building.libelle).x,self.tmx_data.get_object_by_name(building.libelle).y,self.tmx_data.get_object_by_name(building.libelle).width,self.tmx_data.get_object_by_name(building.libelle).height)
                     if(player.feet.colliderect(building.getCollideArea())):
-                        #print("player entering in building " + str(building.libelle))
                         # afficher prix batiment.price
-                        textPrice = pygame.font.SysFont('comicsansms', 45).render(str(building.strPrice()), True, self.colorWood)
+                        textPrice = pygame.font.SysFont('comicsansms', 65).render(str(building.strPrice()), True, self.colorWood)
                         if building.getLvl() == building.getLvlMax():
                             textLvl = pygame.font.SysFont('comicsansms', 50).render("MAX", True, self.colorWood)
                             self.boutonAmeliorer.draw()
-                            #self.screen.blit(textPrice,(380,727))
+                            #self.screen.blit(textPrice,(475,600))
                             #self.screen.blit(self.cashDiamond,(380,727)) # Faire un détourage pour la piece et le diamant
                             self.screen.blit(textLvl,(600,712))
                             self.screen.blit(buildingImg,(40,560))
@@ -318,7 +316,7 @@ class Affichage:
                             if game.player.ownBuilding(building):
                                 #print("player already own the building " + str(building.libelle))
                                 self.boutonAmeliorer.draw()
-                                self.screen.blit(textPrice,(380,727))
+                                self.screen.blit(textPrice,(475,600))
                                 self.screen.blit(textLvl,(600,712))
                                 self.screen.blit(buildingImg,(40,560))
 
@@ -330,7 +328,7 @@ class Affichage:
                                         building.setGain()
                             else:
                                 self.boutonAcheter.draw()
-                                self.screen.blit(textPrice,(380,727))
+                                self.screen.blit(textPrice,(475,600))
                                 self.screen.blit(textLvl,(600,712))
                                 self.screen.blit(buildingImg,(40,560))
                                 if self.boutonAcheter.touched():
@@ -370,6 +368,7 @@ class Affichage:
         #Changement de map
         if game.getMapStep() == MapStep.MAP1:
             self.tmx_data = pytmx.util_pygame.load_pygame('assets/map/ville2.tmx')
+            self.sprite_sheet = pygame.image.load('assets/Images/player.png')
             map_data = pyscroll.data.TiledMapData(self.tmx_data)
             map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
             self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=6)
@@ -393,11 +392,12 @@ class Affichage:
         elif game.getMapStep() == MapStep.MAP2:
 
             if object == "car2":
-                
+        
                 self.tmx_data = pytmx.util_pygame.load_pygame('assets/map/ville1.tmx')
+                self.sprite_sheet = pygame.image.load('assets/Images/player.png')
                 map_data = pyscroll.data.TiledMapData(self.tmx_data)
                 map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
-                self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=5)
+                self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer = 42)
                 self.group.add(game.player)
                 self.walls=[]
                 for obj in self.tmx_data.objects:
@@ -451,7 +451,6 @@ class Affichage:
             if object == "house1Entry":
 
                 game.player.sprite_sheet = pygame.image.load('assets/Images/player.png')
-                game.player.image = game.player.get_image(0,0)
                 game.player.image.set_colorkey([0,0,0]) #fait en sorte que ça soit transparent
                 game.player.rect = game.player.image.get_rect()
                 player.images = {
@@ -482,8 +481,8 @@ class Affichage:
                 game.setMapStep(MapStep.HOUSE1)
 
             if object == "boatMap3":
-
                 self.tmx_data = pytmx.util_pygame.load_pygame('assets/map/ville2.tmx')
+                self.sprite_sheet = pygame.image.load('assets/Images/player.png')
                 map_data = pyscroll.data.TiledMapData(self.tmx_data)
                 map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
                 self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=6)
@@ -498,7 +497,7 @@ class Affichage:
                 self.boatRect = pygame.Rect(boat.x, boat.y, boat.width, boat.height)
                 car2 = self.tmx_data.get_object_by_name("car2")
                 self.car2Rect = pygame.Rect(car2.x, car2.y, car2.width, car2.height)
-                spawnMap2 = self.tmx_data.get_object_by_name("spawn_map2")
+                spawnMap2 = self.tmx_data.get_object_by_name("spawn_map2_boat")
                 game.player.position[0] = spawnMap2.x
                 game.player.position[1] = spawnMap2.y
                 game.setMapStep(MapStep.MAP2)
