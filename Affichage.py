@@ -161,14 +161,14 @@ class Affichage:
         self.group.draw(self.screen)
         self.screen.blit(self.cashDiamond,(0,0))
         
-        textRevenuPassif = pygame.font.SysFont('comicsansms', 50).render(player.strRevenuPassif(game), True, self.green)
-        self.screen.blit(textRevenuPassif,(85,25))
+        textRevenuPassif = pygame.font.SysFont('comicsansms', 40).render(player.strRevenuPassif(game), True, self.green)
+        self.screen.blit(textRevenuPassif,(75,30))
 
         
-        textDollars = pygame.font.SysFont('comicsansms', 50).render(player.strDollars(), True, self.green)
-        self.screen.blit(textDollars,(330,25))
-        textDiamonds = pygame.font.SysFont('comicsansms', 50).render(player.strDiamonds(), True, self.green)
-        self.screen.blit(textDiamonds,(575,25))
+        textDollars = pygame.font.SysFont('comicsansms', 45).render(player.strDollars(), True, self.green)
+        self.screen.blit(textDollars,(320,25))
+        textDiamonds = pygame.font.SysFont('comicsansms', 45).render(player.strDiamonds(), True, self.green)
+        self.screen.blit(textDiamonds,(565,25))
         
         self.boutonDiamondVideo.draw()
         if self.boutonDiamondVideo.touched():
@@ -188,7 +188,7 @@ class Affichage:
                 game.setGameStep(GameStep.IDLE)
 
         if game.getGameStep() == GameStep.IDLE:
-            if game.getMapStep() == MapStep.MAP1:
+            if game.getMapStep() == MapStep.MAP1: 
                 for building in game.listBuildingVille1:
                     buildingImg = pygame.image.load(building.getImagePath())
                     buildingImg = pygame.transform.scale(buildingImg,(180,180))
@@ -368,7 +368,7 @@ class Affichage:
         #Changement de map
         if game.getMapStep() == MapStep.MAP1:
             self.tmx_data = pytmx.util_pygame.load_pygame('assets/map/ville2.tmx')
-            self.sprite_sheet = pygame.image.load('assets/Images/player.png')
+            game.player.sprite_sheet = pygame.image.load('assets/Images/player.png')
             map_data = pyscroll.data.TiledMapData(self.tmx_data)
             map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
             self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=6)
@@ -394,7 +394,7 @@ class Affichage:
             if object == "car2":
         
                 self.tmx_data = pytmx.util_pygame.load_pygame('assets/map/ville1.tmx')
-                self.sprite_sheet = pygame.image.load('assets/Images/player.png')
+                game.player.sprite_sheet = pygame.image.load('assets/Images/player.png')
                 map_data = pyscroll.data.TiledMapData(self.tmx_data)
                 map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
                 self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer = 42)
@@ -482,7 +482,7 @@ class Affichage:
 
             if object == "boatMap3":
                 self.tmx_data = pytmx.util_pygame.load_pygame('assets/map/ville2.tmx')
-                self.sprite_sheet = pygame.image.load('assets/Images/player.png')
+                game.player.sprite_sheet = pygame.image.load('assets/Images/player.png')
                 map_data = pyscroll.data.TiledMapData(self.tmx_data)
                 map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
                 self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=6)
@@ -529,7 +529,8 @@ class Affichage:
                 
                 house1Rect = self.tmx_data.get_object_by_name("house1")
                 self.house1Rect = pygame.Rect(house1Rect.x, house1Rect.y, house1Rect.width, house1Rect.height)
-
+                boatMap3Rect = self.tmx_data.get_object_by_name("boatMap3")
+                self.boatMap3Rect = pygame.Rect(boatMap3Rect.x, boatMap3Rect.y, boatMap3Rect.width, boatMap3Rect.height)
                 spawnMap3 = self.tmx_data.get_object_by_name("spawn_map3")
                 game.player.position[0] = spawnMap3.x
                 game.player.position[1] = spawnMap3.y

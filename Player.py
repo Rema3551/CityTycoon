@@ -70,10 +70,15 @@ class Player(pygame.sprite.Sprite):
         dollarsStr = str(int(self.dollars))
         if self.dollars<1000:
             return dollarsStr
+        elif self.dollars<10000:
+            return str(int(self.dollars/1000)) + "K" + dollarsStr[len(dollarsStr)-3] + dollarsStr[len(dollarsStr)-2] + dollarsStr[len(dollarsStr)-1]
         elif self.dollars<1000000:
             return str(int(self.dollars/1000)) + "K" + dollarsStr[len(dollarsStr)-3]
+        elif self.dollars<10000000 :
+            return str(int(self.dollars/1000000)) + "M" + dollarsStr[len(dollarsStr)-6] + dollarsStr[len(dollarsStr)-5] + dollarsStr[len(dollarsStr)-4] 
         elif self.dollars<1000000000 :
             return str(int(self.dollars/1000000)) + "M" + dollarsStr[len(dollarsStr)-6]
+        
         
     
     def getDiamonds(self):
@@ -83,8 +88,12 @@ class Player(pygame.sprite.Sprite):
         diamondsStr = str(int(self.diamonds))
         if self.diamonds<1000:
             return diamondsStr
+        elif self.diamonds<10000:
+            return str(int(self.diamonds/1000)) + "K" + diamondsStr[len(diamondsStr)-3] + diamondsStr[len(diamondsStr)-2] + diamondsStr[len(diamondsStr)-1]
         elif self.diamonds<1000000:
             return str(int(self.diamonds/1000)) + "K" + diamondsStr[len(diamondsStr)-3]
+        elif self.diamonds<10000000 :
+            return str(int(self.diamonds/1000000)) + "M" + diamondsStr[len(diamondsStr)-6] + diamondsStr[len(diamondsStr)-5] + diamondsStr[len(diamondsStr)-4]
         elif self.diamonds<1000000000 : 
             return str(int(self.diamonds/1000000)) + "M" + diamondsStr[len(diamondsStr)-6]
     
@@ -151,12 +160,16 @@ class Player(pygame.sprite.Sprite):
         for batiment in self.listBuilding:
             revenuPassif += batiment.getGain()
         revenusPassifStr = str(int(revenuPassif))
-        if revenuPassif <1000:
+        if revenuPassif <1000 :
             return revenusPassifStr + "/s"
-        elif revenuPassif <1000000:
-            return str(int(revenuPassif/1000)) + "K" + revenusPassifStr[len(revenusPassifStr)-3] + "/s"
-        elif revenuPassif <1000000000:
-            return str(int(revenuPassif/1000)) + "M" + revenusPassifStr[len(revenusPassifStr)-6] + "/s"
+        elif revenuPassif <10000 :
+            return str(int(revenuPassif/1000)) + "K" + revenusPassifStr[len(revenusPassifStr)-3] + revenusPassifStr[len(revenusPassifStr)-2] + revenusPassifStr[len(revenusPassifStr)-1] + "/s"
+        elif revenuPassif <1000000 :
+            return str(int(revenuPassif/1000)) + "K" + revenusPassifStr[len(revenusPassifStr)-3]
+        elif revenuPassif <10000000 :
+            return str(int(revenuPassif/1000000)) + "M" + revenusPassifStr[len(revenusPassifStr)-6] + revenusPassifStr[len(revenusPassifStr)-5] + revenusPassifStr[len(revenusPassifStr)-4] + "/s"
+        elif revenuPassif <1000000000 :
+            return str(int(revenuPassif/1000000)) + "M" + revenusPassifStr[len(revenusPassifStr)-6] + "/s"
             """
             return str(revenuPassif)[len(str(revenuPassif))-2] + "/s" 
         else:

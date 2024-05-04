@@ -60,18 +60,18 @@ class Game:
         self.house3_map1 = Building(1000,500,14,10,3,"house3_map1",BuildingType.HOUSE3_MAP1)
         self.house4_map1 = Building(2500,1000,16,12,3,"house4_map1",BuildingType.HOUSE4_MAP1)
         #Map2 Buildings
-        self.hdv = Building(100000,40000,500,100,5,"hdv",BuildingType.HDV)
-        self.maisonette = Building(10000,2500,25,15,1,"maisonette",BuildingType.MAISONETTE)
-        self.maison = Building(35000,2500,30,16,3,"maison",BuildingType.MAISON)
-        self.tourDeGuet = Building(75000,30000,150,50,3,"tourDeGuet",BuildingType.TOURDEGUET)
-        self.cabane = Building(25000,6500,55,20,2,"cabane",BuildingType.CABANE)
-        self.ecurie = Building(15000,5000,45,18,2,"ecurie",BuildingType.ECURIE)
-        self.terrainDentrainement = Building(50000,50000,46,46,1,"terrainDentrainement",BuildingType.TERRAINDENTRAINEMENT)
-        self.forge = Building(40000,6500,55,20,2,"forge",BuildingType.FORGE)
+        self.hdv = Building(100000,50000,2500,1000,5,"hdv",BuildingType.HDV)
+        self.maisonette = Building(10000,2500,100,35,1,"maisonette",BuildingType.MAISONETTE)
+        self.maison = Building(35000,2500,400,75,3,"maison",BuildingType.MAISON)
+        self.tourDeGuet = Building(75000,30000,1000,500,3,"tourDeGuet",BuildingType.TOURDEGUET)
+        self.cabane = Building(25000,6500,300,50,2,"cabane",BuildingType.CABANE)
+        self.ecurie = Building(15000,5000,150,50,1,"ecurie",BuildingType.ECURIE)
+        self.terrainDentrainement = Building(50000,50000,600,150,1,"terrainDentrainement",BuildingType.TERRAINDENTRAINEMENT)
+        self.forge = Building(40000,6500,500,100,2,"forge",BuildingType.FORGE)
         #Map3 Buildings
-        self.house1 = Building(1500000,50000,550,300,1,"house1",BuildingType.HOUSE1)
-        self.house2 = Building(2500000,60000,750,500,1,"house2",BuildingType.HOUSE2)
-        self.house3 = Building(3000000,75000,1000,750,1,"house3",BuildingType.HOUSE3)
+        self.house1 = Building(1500000,50000,2000,1000,1,"house1",BuildingType.HOUSE1)
+        self.house2 = Building(2500000,60000,3500,2000,1,"house2",BuildingType.HOUSE2)
+        self.house3 = Building(3000000,75000,5000,2500,1,"house3",BuildingType.HOUSE3)
 
         #Listes des buildings en fonction des villes
         self.listBuildingVille1 = [self.flowers_map1, self.campfire_map1,self.roc_map1, self.house1_map1, self.house2_map1, self.house3_map1, self.house4_map1]

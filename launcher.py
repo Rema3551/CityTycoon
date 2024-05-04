@@ -20,7 +20,7 @@ while running:
         if event.type==pygame.QUIT:
             running=False
             pygame.quit()
-            print("Fermeture du jeu")
+            print("Fermeture du jeu" )
             
     
     clock.tick(60)
