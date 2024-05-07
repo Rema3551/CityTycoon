@@ -97,22 +97,22 @@ class Game:
         if pressedKeys[pygame.K_UP]:
             self.player.bougerHaut()
             self.player.animation('up')
-            self.player.setDollars(self.player.getDollars()+0.01)
+            self.player.setDollars(self.player.getDollars()+1110.91)
             self.player.setDiamonds(self.player.getDiamonds()+0.0001)
         elif pressedKeys[pygame.K_DOWN]:
             self.player.bougerBas()
             self.player.animation('down')
-            self.player.setDollars(self.player.getDollars()+0.01)
+            self.player.setDollars(self.player.getDollars()+100000.91)
             self.player.setDiamonds(self.player.getDiamonds()+0.0001)
         elif pressedKeys[pygame.K_LEFT]:
             self.player.bougerGauche()
             self.player.animation('left')
-            self.player.setDollars(self.player.getDollars()+0.01)
+            self.player.setDollars(self.player.getDollars()+14111110.91)
             self.player.setDiamonds(self.player.getDiamonds()+0.0001)
         elif pressedKeys[pygame.K_RIGHT]:
             self.player.bougerDroite()
             self.player.animation('right')
-            self.player.setDollars(self.player.getDollars()+0.01)
+            self.player.setDollars(self.player.getDollars()+111110.91)
             self.player.setDiamonds(self.player.getDiamonds()+0.0001)
 
 

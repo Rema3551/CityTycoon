@@ -237,6 +237,8 @@ class Affichage:
                 #Verification de la collision pour la voiture
                 if player.feet.colliderect(self.carRect):
                     self.switchMap("car",game)
+                if player.feet.colliderect(self.signTutoRect):
+                    self.screen.blit(self.signTutoImg,(250,150))
                     
 
             elif game.getMapStep() == MapStep.MAP2:
