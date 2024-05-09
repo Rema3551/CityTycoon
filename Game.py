@@ -51,27 +51,28 @@ class Game:
 
     def createBuildings(self, tmx_data):
         # TODO : lvl max building
+                         #Exemple : Building(price,nextPrice,gain,nexGain,lvlMax,name,type)
         #Map1 Buildings
-        self.flowers_map1 = Building(30,20,4,4,9,"flowers_map1",BuildingType.FLOWERS_MAP1)
-        self.campfire_map1 = Building(25,25,3,3,1,"campfire_map1",BuildingType.CAMPFIRE_MAP1)
-        self.roc_map1 = Building(5,5,1,1,6,"roc_map1",BuildingType.ROC_MAP1)
-        self.house1_map1 = Building(100,50,8,6,2,"house1_map1",BuildingType.HOUSE1_MAP1)
-        self.house2_map1 = Building(400,200,10,8,3,"house2_map1",BuildingType.HOUSE2_MAP1)
-        self.house3_map1 = Building(1000,500,14,10,3,"house3_map1",BuildingType.HOUSE3_MAP1)
-        self.house4_map1 = Building(2500,1000,16,12,3,"house4_map1",BuildingType.HOUSE4_MAP1)
+        self.roc_map1 =             Building(5,5,1,1,6,"roc_map1",BuildingType.ROC_MAP1)
+        self.campfire_map1 =        Building(75,25,3,3,1,"campfire_map1",BuildingType.CAMPFIRE_MAP1)
+        self.flowers_map1 =         Building(30,20,4,4,9,"flowers_map1",BuildingType.FLOWERS_MAP1)
+        self.house1_map1 =          Building(100,50,8,6,2,"house1_map1",BuildingType.HOUSE1_MAP1)
+        self.house2_map1 =          Building(400,200,10,8,3,"house2_map1",BuildingType.HOUSE2_MAP1)
+        self.house3_map1 =          Building(1000,500,14,10,3,"house3_map1",BuildingType.HOUSE3_MAP1)
+        self.house4_map1 =          Building(2500,1000,40,20,3,"house4_map1",BuildingType.HOUSE4_MAP1)
         #Map2 Buildings
-        self.hdv = Building(100000,50000,2500,1000,5,"hdv",BuildingType.HDV)
-        self.maisonette = Building(10000,2500,100,35,1,"maisonette",BuildingType.MAISONETTE)
-        self.maison = Building(35000,2500,400,75,3,"maison",BuildingType.MAISON)
-        self.tourDeGuet = Building(75000,30000,1000,500,3,"tourDeGuet",BuildingType.TOURDEGUET)
-        self.cabane = Building(25000,6500,300,50,2,"cabane",BuildingType.CABANE)
-        self.ecurie = Building(15000,5000,150,50,1,"ecurie",BuildingType.ECURIE)
+        self.maisonette =           Building(10000,2500,100,35,1,"maisonette",BuildingType.MAISONETTE)
+        self.ecurie =               Building(15000,5000,150,50,1,"ecurie",BuildingType.ECURIE)
+        self.cabane =               Building(25000,6500,300,50,2,"cabane",BuildingType.CABANE)
+        self.maison =               Building(35000,2500,400,75,3,"maison",BuildingType.MAISON)
+        self.forge =                Building(40000,6500,500,100,2,"forge",BuildingType.FORGE)
         self.terrainDentrainement = Building(50000,50000,600,150,1,"terrainDentrainement",BuildingType.TERRAINDENTRAINEMENT)
-        self.forge = Building(40000,6500,500,100,2,"forge",BuildingType.FORGE)
+        self.tourDeGuet =           Building(75000,30000,1000,500,3,"tourDeGuet",BuildingType.TOURDEGUET)
+        self.hdv =                  Building(100000,50000,2500,5000,5,"hdv",BuildingType.HDV)
         #Map3 Buildings
-        self.house1 = Building(1500000,50000,2000,1000,1,"house1",BuildingType.HOUSE1)
-        self.house2 = Building(2500000,60000,3500,2000,1,"house2",BuildingType.HOUSE2)
-        self.house3 = Building(3000000,75000,5000,2500,1,"house3",BuildingType.HOUSE3)
+        self.house1 =               Building(2000000,100000,5000,25000,1,"house1",BuildingType.HOUSE1)
+        self.house2 =               Building(5000000,150000,10000,30000,1,"house2",BuildingType.HOUSE2)
+        self.house3 =               Building(10000000,200000,50000,50000,1,"house3",BuildingType.HOUSE3)
 
         #Listes des buildings en fonction des villes
         self.listBuildingVille1 = [self.flowers_map1, self.campfire_map1,self.roc_map1, self.house1_map1, self.house2_map1, self.house3_map1, self.house4_map1]
@@ -97,23 +98,23 @@ class Game:
         if pressedKeys[pygame.K_UP]:
             self.player.bougerHaut()
             self.player.animation('up')
-            self.player.setDollars(self.player.getDollars()+1110.91)
-            self.player.setDiamonds(self.player.getDiamonds()+0.0001)
+            self.player.setDollars(self.player.getDollars() + 1000)
+            self.player.setDiamonds(self.player.getDiamonds() +0.0001)
         elif pressedKeys[pygame.K_DOWN]:
             self.player.bougerBas()
             self.player.animation('down')
-            self.player.setDollars(self.player.getDollars()+100000.91)
-            self.player.setDiamonds(self.player.getDiamonds()+0.0001)
+            self.player.setDollars(self.player.getDollars() + 0.01)
+            self.player.setDiamonds(self.player.getDiamonds() +0.0001)
         elif pressedKeys[pygame.K_LEFT]:
             self.player.bougerGauche()
             self.player.animation('left')
-            self.player.setDollars(self.player.getDollars()+14111110.91)
-            self.player.setDiamonds(self.player.getDiamonds()+0.0001)
+            self.player.setDollars(self.player.getDollars() + 0.01)
+            self.player.setDiamonds(self.player.getDiamonds() +0.0001)
         elif pressedKeys[pygame.K_RIGHT]:
             self.player.bougerDroite()
             self.player.animation('right')
-            self.player.setDollars(self.player.getDollars()+111110.91)
-            self.player.setDiamonds(self.player.getDiamonds()+0.0001)
+            self.player.setDollars(self.player.getDollars() + 0.01)
+            self.player.setDiamonds(self.player.getDiamonds() + 0.0001)
 
 
     def printGame(self):
@@ -123,26 +124,7 @@ class Game:
         self.affichage.draw(self)
         self.affichage.flip()
         self.backup.save(self)
-        
-
-    def verificationFinVille1(self):
-        if self.player.listBuilding == self.listBuildingVille1 :
-            for building in self.player.listBuilding:
-                if building.getLvl() != building.getLvlMax():
-                    return False
-            return True
-        else: 
-            return False
     
-    def verificationFinVille2(self):
-        if self.player.listBuilding == self.listBuildingVille2 :
-            for building in self.player.listBuilding:
-                if building.getLvl() != building.getLvlMax():
-                    return False
-            return True
-        else: 
-            return False
-
     def restoreMap(self, savedMap):
         self.mapStep = savedMap
 
@@ -165,16 +147,18 @@ class Game:
     def restorePlayer(self,savedPlayer):
         self.player.setDollars(savedPlayer['dollars'])
         self.player.setDiamonds(savedPlayer['diamonds'])
+        self.player.verificationFinVille1(savedPlayer['condition1'])
+        self.player.verificationFinVille2(savedPlayer['condition2'])
         self.player.setPosition(
             savedPlayer['position_x'],
             savedPlayer['position_y']
         )
 
-
     def restoreData(self, restored_data):
         self.restoreMap(restored_data['map'])
         self.restoreBuildings(restored_data['listBuildingsPlayer'])
         self.restorePlayer(restored_data['player'])
+
 
 
 

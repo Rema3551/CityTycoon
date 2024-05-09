@@ -52,7 +52,7 @@ class Building:
         self.price = self.price + (self.nextPrice * self.multiplicator)
     
     def setGain(self):
-        self.gain = self.gain + self.nextGain
+        self.gain += self.getNextGain()
     
     def setLvl(self, nouveauLvl):
         self.lvl = nouveauLvl
@@ -76,9 +76,15 @@ class Building:
         priceStr = str(int(self.price))
         if self.price<1000:
             return priceStr
+        elif self.price<10000:
+            return str(int(self.price/1000)) + "K" + priceStr[len(priceStr)-3] + priceStr[len(priceStr)-2]
         elif self.price<1000000:
             return str(int(self.price/1000)) + "K" + priceStr[len(priceStr)-3]
+        elif self.price<10000000 : 
+            return str(int(self.price/1000000)) + "M" + priceStr[len(priceStr)-6] + priceStr[len(priceStr)-5]
         elif self.price<1000000000 : 
             return str(int(self.price/1000000)) + "M" + priceStr[len(priceStr)-6]
+        elif self.price<10000000000 :
+            return str(int(self.price/1000000000)) + "G" + priceStr[len(priceStr)-9] + priceStr[len(priceStr)-8]
         elif self.price<1000000000000 :
             return str(int(self.price/1000000000)) + "G" + priceStr[len(priceStr)-9]

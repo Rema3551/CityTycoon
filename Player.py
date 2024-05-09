@@ -36,6 +36,8 @@ class Player(pygame.sprite.Sprite):
         }
         self.feet = pygame.Rect(0,0,self.rect.width*0.5,8)
         self.anciennePosition = self.position.copy()
+        self.conditionCar = False
+        self.conditionBoat = False
 
     def sauvegardeLocation(self):
         self.anciennePosition = self.position.copy()
@@ -62,6 +64,18 @@ class Player(pygame.sprite.Sprite):
         image=pygame.Surface([29,41])
         image.blit(self.sprite_sheet,(0,0),(x,y,29,41))
         return image
+    
+    def getVerificationFinVille1(self):
+        return self.conditionCar
+
+    def verificationFinVille1(self, verif):
+        self.conditionCar = verif
+    
+    def getVerificationFinVille2(self):
+        return self.conditionBoat
+    
+    def verificationFinVille2(self, verif):
+        self.conditionBoat = verif
         
     def getDollars(self):
         return self.dollars
@@ -71,11 +85,11 @@ class Player(pygame.sprite.Sprite):
         if self.dollars<1000:
             return dollarsStr
         elif self.dollars<10000:
-            return str(int(self.dollars/1000)) + "K" + dollarsStr[len(dollarsStr)-3] + dollarsStr[len(dollarsStr)-2] + dollarsStr[len(dollarsStr)-1]
+            return str(int(self.dollars/1000)) + "K" + dollarsStr[len(dollarsStr)-3] + dollarsStr[len(dollarsStr)-2]
         elif self.dollars<1000000:
             return str(int(self.dollars/1000)) + "K" + dollarsStr[len(dollarsStr)-3]
         elif self.dollars<10000000 :
-            return str(int(self.dollars/1000000)) + "M" + dollarsStr[len(dollarsStr)-6] + dollarsStr[len(dollarsStr)-5] + dollarsStr[len(dollarsStr)-4] 
+            return str(int(self.dollars/1000000)) + "M" + dollarsStr[len(dollarsStr)-6] + dollarsStr[len(dollarsStr)-5]
         elif self.dollars<1000000000 :
             return str(int(self.dollars/1000000)) + "M" + dollarsStr[len(dollarsStr)-6]
         
@@ -89,11 +103,11 @@ class Player(pygame.sprite.Sprite):
         if self.diamonds<1000:
             return diamondsStr
         elif self.diamonds<10000:
-            return str(int(self.diamonds/1000)) + "K" + diamondsStr[len(diamondsStr)-3] + diamondsStr[len(diamondsStr)-2] + diamondsStr[len(diamondsStr)-1]
+            return str(int(self.diamonds/1000)) + "K" + diamondsStr[len(diamondsStr)-3] + diamondsStr[len(diamondsStr)-2]
         elif self.diamonds<1000000:
             return str(int(self.diamonds/1000)) + "K" + diamondsStr[len(diamondsStr)-3]
         elif self.diamonds<10000000 :
-            return str(int(self.diamonds/1000000)) + "M" + diamondsStr[len(diamondsStr)-6] + diamondsStr[len(diamondsStr)-5] + diamondsStr[len(diamondsStr)-4]
+            return str(int(self.diamonds/1000000)) + "M" + diamondsStr[len(diamondsStr)-6] + diamondsStr[len(diamondsStr)-5]
         elif self.diamonds<1000000000 : 
             return str(int(self.diamonds/1000000)) + "M" + diamondsStr[len(diamondsStr)-6]
     
@@ -163,11 +177,11 @@ class Player(pygame.sprite.Sprite):
         if revenuPassif <1000 :
             return revenusPassifStr + "/s"
         elif revenuPassif <10000 :
-            return str(int(revenuPassif/1000)) + "K" + revenusPassifStr[len(revenusPassifStr)-3] + revenusPassifStr[len(revenusPassifStr)-2] + revenusPassifStr[len(revenusPassifStr)-1] + "/s"
+            return str(int(revenuPassif/1000)) + "K" + revenusPassifStr[len(revenusPassifStr)-3] + revenusPassifStr[len(revenusPassifStr)-2] + "/s"
         elif revenuPassif <1000000 :
-            return str(int(revenuPassif/1000)) + "K" + revenusPassifStr[len(revenusPassifStr)-3]
+            return str(int(revenuPassif/1000)) + "K" + revenusPassifStr[len(revenusPassifStr)-3] + "/s"
         elif revenuPassif <10000000 :
-            return str(int(revenuPassif/1000000)) + "M" + revenusPassifStr[len(revenusPassifStr)-6] + revenusPassifStr[len(revenusPassifStr)-5] + revenusPassifStr[len(revenusPassifStr)-4] + "/s"
+            return str(int(revenuPassif/1000000)) + "M" + revenusPassifStr[len(revenusPassifStr)-6] + revenusPassifStr[len(revenusPassifStr)-5] + "/s"
         elif revenuPassif <1000000000 :
             return str(int(revenuPassif/1000000)) + "M" + revenusPassifStr[len(revenusPassifStr)-6] + "/s"
             """

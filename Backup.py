@@ -9,14 +9,15 @@ class Backup():
             'player' : {
                 'dollars': game.player.getDollars(),
                 'diamonds': game.player.getDiamonds(),
+                'condition1' : game.player.getVerificationFinVille1(),
+                'condition2' : game.player.getVerificationFinVille2(),
                 'position_x' : game.player.position[0],
                 'position_y' : game.player.position[1]
             },
             'listBuildingsPlayer': game.player.getListBuilding(),
-            'map' : game.getMapStep()
+            'map' : game.getMapStep(),
         }
         
-
         # Sauvegarde des données
         with open('data.pickle', 'wb') as file:
             pickle.dump(data, file)

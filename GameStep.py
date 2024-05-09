@@ -6,3 +6,4 @@ class GameStep(Enum):
     """
     IDLE = 0
     BUTTONVIDEO = 1
+    CHANGEMENTMAP = 2
