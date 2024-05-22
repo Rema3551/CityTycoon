@@ -149,7 +149,8 @@ class Affichage:
         self.pubImg = pygame.image.load("assets/Images/buttonPub.png")
         self.buttonYesImg = pygame.image.load("assets/Images/buttonYes.png")
         self.buttonNoImg = pygame.image.load("assets/Images/buttonNo.png")
-        #self.afficheChangementVilleImg = pygame.image.load("assets/Images/afficheChangementVille.png")
+        self.afficheChangementVilleImg = pygame.image.load("assets/Images/afficheProchaineVille.png")
+        self.afficheImpossibleChangementVilleImg = pygame.image.load("assets/Images/afficheImpossibleAllerProchaineVilel.png")
         self.moneyImage = pygame.image.load("assets/Images/money.png")
         self.diamond = pygame.image.load("assets/Images/diamond.png")
 
@@ -195,7 +196,6 @@ class Affichage:
         
         self.boutonDiamondVideo.draw()
         if self.boutonDiamondVideo.touched():
-            print("la video")
             game.setGameStep(GameStep.BUTTONVIDEO)
         
         if game.getGameStep() == GameStep.BUTTONVIDEO:
@@ -204,14 +204,13 @@ class Affichage:
             self.boutonYes.draw()
             self.boutonNo.draw()
             if self.boutonYes.touched():
-                #print("oooooh")
+                #ouvrir le site internet ici
                 game.setGameStep(GameStep.BUTTONVIDEO)
             if self.boutonNo.touched() :
-                #print("purééeeee")
                 game.setGameStep(GameStep.IDLE)
         
         if game.getGameStep() == GameStep.CHANGEMENTMAP:
-            self.boutonPub.draw()
+            self.afficheChangementVilleImg.draw()
             self.boutonYes.draw()
             if self.boutonYes.touched():
                 game.setGameStep(GameStep.CHANGEMENTMAP)
@@ -308,37 +307,17 @@ class Affichage:
                         for building in game.listBuildingVille1:
                             if building.getLvl() == building.getLvlMax():
                                 compteur += 1
-                        game.setGameStep(GameStep.CHANGEMENTMAP)
+                        #game.setGameStep(GameStep.CHANGEMENTMAP)
                         #Changer avec le bon panneau
-                        self.boutonPub.draw()
-                        self.boutonYes.draw()
-                        self.boutonNo.draw()
-                        if self.boutonYes.touched():
-                            if not compteur == condition :
-                                textBat1 = pygame.font.SysFont('comicsansms', 30).render("VOUS DEVEZ AVOIR TOUT", True, (255,255,255))
-                                textBat2 = pygame.font.SysFont('comicsansms', 27).render("LES BATIMENTS AU LVL MAX", True, (255,255,255))
-                                self.screen.blit(textBat1,(200,477))
-                                self.screen.blit(textBat2,(200,510))
-                                pygame.display.flip()
-                                pygame.time.wait(1000)
-                                game.setGameStep(GameStep.IDLE)
-                            elif player.getDollars()>= 10000:
-                                player.verificationFinVille1(True)
-                                game.setGameStep(GameStep.IDLE)
-                                player.addDollars(-10000)
-                                self.switchMap("car",game)
-                            elif player.getDollars() < 10000:
-                                textPrice = pygame.font.SysFont('comicsansms', 50).render("PAS ASSEZ", True, (255,255,255))
-                                self.screen.blit(textPrice,(252,480))
-                                pygame.display.flip()
-                                pygame.time.wait(1000)
-                                game.setGameStep(GameStep.IDLE)
-                            
-                        elif self.boutonNo.touched():
-                            game.setGameStep(GameStep.IDLE)    
-
-                        else:
-                            game.setGameStep(GameStep.IDLE)
+                        if not compteur == condition :
+                            self.screen.blit(self.afficheImpossibleChangementVilleImg,(200,250))
+                        else :
+                            self.screen.blit(self.afficheChangementVilleImg,(200,250))
+                            self.boutonYes.draw()
+                            self.boutonNo.draw()
+                            if self.boutonYes.touched():
+                                    player.verificationFinVille1(True)
+                                    self.switchMap("car",game)
 
                     if player.feet.colliderect(self.signTutoRect):
                         self.screen.blit(self.signTutoImg,(250,150))
@@ -422,37 +401,16 @@ class Affichage:
                         for building in game.listBuildingVille2:
                             if building.getLvl() == building.getLvlMax():
                                 compteur += 1
-                        game.setGameStep(GameStep.CHANGEMENTMAP)
-                        #Changer avec le bon panneau
-                        self.boutonPub.draw()
-                        self.boutonYes.draw()
-                        self.boutonNo.draw()
-                        if self.boutonYes.touched():
-                            if not compteur == condition :
-                                textBat1 = pygame.font.SysFont('comicsansms', 30).render("VOUS DEVEZ AVOIR TOUT", True, (255,255,255))
-                                textBat2 = pygame.font.SysFont('comicsansms', 27).render("LES BATIMENTS AU LVL MAX", True, (255,255,255))
-                                self.screen.blit(textBat1,(200,477))
-                                self.screen.blit(textBat2,(200,510))
-                                pygame.display.flip()
-                                pygame.time.wait(1000)
-                                game.setGameStep(GameStep.IDLE)
-                            elif player.getDollars()>= 1000000:
-                                player.verificationFinVille2(True)
-                                game.setGameStep(GameStep.IDLE)
-                                player.addDollars(-1000000)
-                                self.switchMap("boat",game)
-                            elif player.getDollars() < 1000000:
-                                textPrice = pygame.font.SysFont('comicsansms', 50).render("PAS ASSEZ", True, (255,255,255))
-                                self.screen.blit(textPrice,(252,480))
-                                pygame.display.flip()
-                                pygame.time.wait(1000)
-                                game.setGameStep(GameStep.IDLE)
-                            
-                        elif self.boutonNo.touched():
-                            game.setGameStep(GameStep.IDLE)    
 
-                        else:
-                            game.setGameStep(GameStep.IDLE)
+                        if not compteur == condition :
+                            self.screen.blit(self.afficheImpossibleChangementVilleImg,(200,250))
+                        else :
+                            self.screen.blit(self.afficheChangementVilleImg,(200,250))
+                            self.boutonYes.draw()
+                            self.boutonNo.draw()
+                            if self.boutonYes.touched():
+                                    player.verificationFinVille2(True)
+                                    self.switchMap("boat",game)
 
                 elif player.feet.colliderect(self.car2Rect):
                     self.switchMap("car2",game)
@@ -539,7 +497,7 @@ class Affichage:
                 self.walls.append(pygame.Rect(obj.x, obj.y, obj.width, obj.height))
 
         #Dessiner les calques
-        #self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=4)
+        #self.group = pyscroll.PyscrollGroup(map_layer=map_layer, defa ult_layer=4)
         #self.group.add(game.player)
 
         #Changement de map
