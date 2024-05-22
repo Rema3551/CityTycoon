@@ -7,6 +7,28 @@ from MapStep import *
 from random import *
 
 class Game:
+    """
+    Attributs :
+        -player
+        -backup
+        -gameEnum
+        -mapStep
+        -affichage
+    Méthodes :
+        -mutateurs  (set...())
+        -accesseurs (get...())
+        -start(self,tmx_data)
+        -createPlayer(self, tmx_data)
+        -createBuildings(self, tmx_data)
+        -createBuildingsCollideArea(self,tmx_data)
+        -onInputJoueur(self)
+        -printGame(self)
+        -restoreMap(self, savedMap)
+        -restoreMapData(self,restored_data)
+        -restoreBuildings(self, savedBuildings)
+        -restorePlayer(self,savedPlayer)
+        -restoreData(self, restored_data)
+    """
     def __init__(self):
         self.player = Player()
         self.backup = Backup()
@@ -15,24 +37,30 @@ class Game:
         self.affichage = Affichage(self)
         
     def getGameStep(self):
+        """renvoie l'étape du jeu"""
         return self.gameEnum
     
     def setGameStep(self, newGameStep):
+        """change l'étape du jeu"""
         self.gameEnum = newGameStep
         
     def getMapStep(self):
+        """renvoie l'étape des maps (quelle map)"""
         return self.mapStep
     
     def setMapStep(self, newMapStep):
+        """change l'étape des maps (quelle map)"""
         self.mapStep = newMapStep
 
     def start(self, tmx_data):
+        """fonction pour initialiser le jeu"""
         self.createPlayer(tmx_data)
         self.createBuildings(tmx_data)
         self.backup.load(self)
         self.createBuildingsCollideArea(tmx_data)
         
     def createPlayer(self, tmx_data):
+        """fonction de création du joueur"""
         player_position = tmx_data.get_object_by_name("player")
         self.player = Player(player_position.x, player_position.y)
 
@@ -50,6 +78,7 @@ class Game:
             }
 
     def createBuildings(self, tmx_data):
+        """fonction de création des buildings (il faut les recréer à chaque lancement du jeu)"""
         # TODO : lvl max building
                          #Exemple : Building(price,nextPrice,gain,nexGain,lvlMax,name,type)
         #Map1 Buildings
@@ -80,6 +109,7 @@ class Game:
         self.listBuildingVille3 = [self.house1,self.house2,self.house3]
 
     def createBuildingsCollideArea(self,tmx_data):
+        """fonction de création de la collideArea des buildings (en fonction de la map)"""
         if self.mapStep == MapStep.MAP1: 
             for building1 in self.listBuildingVille1:
                 tmxObject1 = tmx_data.get_object_by_name(building1.getLibelle())
@@ -94,6 +124,7 @@ class Game:
                 building3.setCollideArea(tmxObject3.x, tmxObject3.y, tmxObject3.width, tmxObject3.height)
 
     def onInputJoueur(self):
+        """fonction qui vérifie les actions du joueur"""
         pressedKeys = pygame.key.get_pressed()
         if pressedKeys[pygame.K_UP]:
             self.player.bougerHaut()
@@ -118,6 +149,7 @@ class Game:
 
 
     def printGame(self):
+        """fonction du  jeu (affichage, save backup, input du joueur)"""
         self.player.sauvegardeLocation()
         self.onInputJoueur()
         self.affichage.update(self.player)
@@ -126,12 +158,15 @@ class Game:
         self.backup.save(self)
     
     def restoreMap(self, savedMap):
+        """fonction qui change self.mapStep en fonction de la map enregistrée dans la Backup"""
         self.mapStep = savedMap
 
     def restoreMapData(self,restored_data):
+        """fonction qui change self mapStep en fonction de la map enregistrée dans la Backup"""
         self.restoreMap(restored_data['map'])
 
     def restoreBuildings(self, savedBuildings):
+        """fonction restoreBuilding : restaure les buildings au lancement du jeu grâce à la backup"""
         for building in savedBuildings:
             for i in range (len(self.listBuildingVille1)):
                 if building.libelle == self.listBuildingVille1[i].libelle:
@@ -145,6 +180,7 @@ class Game:
         self.player.setListBuilding(savedBuildings)
 
     def restorePlayer(self,savedPlayer):
+        """fonction restorePlayer : restaure le joueur en fonction des enregistrements fait avec la backup"""
         self.player.setDollars(savedPlayer['dollars'])
         self.player.setDiamonds(savedPlayer['diamonds'])
         self.player.verificationFinVille1(savedPlayer['condition1'])
@@ -155,6 +191,7 @@ class Game:
         )
 
     def restoreData(self, restored_data):
+        """fonction restoreData : prend les élements de la Backup et les utilise dans les fonctions permettant de les restaurer"""
         self.restoreMap(restored_data['map'])
         self.restoreBuildings(restored_data['listBuildingsPlayer'])
         self.restorePlayer(restored_data['player'])

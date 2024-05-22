@@ -11,12 +11,27 @@ import Backup
 class Affichage:
     """
     Attributs:
-        -map
+        -icon
+        -self.screen
+        -self.green 
+        -self.blue
+        -self.colorWood 
+        -player 
+        -map_data
+        -map_layer
+        -self.group
+        -self.tmx_data
+        -self.music
+        -self.walls
+        
     Méthodes:
-        -draw
-        -flip
+        -flip(self)
+        -update(self, player)
+        -draw(self, game:Game)
+        -switchMap(self, object, game:Game)
     """
     def __init__(self, game: Game):
+        """création de l'affichage du jeu en fonction de la map enregistrée"""
         pygame.init()
         pygame.display.set_caption("City Tycoon")
         icon = pygame.image.load('assets/pdp.png')
@@ -122,7 +137,7 @@ class Affichage:
         
 
         self.walls = []
-        
+        #création des collisions
         for obj in self.tmx_data.objects:
             if obj.name == "collision":
                 self.walls.append(pygame.Rect(obj.x, obj.y, obj.width, obj.height))
@@ -513,6 +528,8 @@ class Affichage:
             
             
     def switchMap(self, object, game:Game):
+        """fonction qui permet de changer de map : création des collisions des batiments et elever celles des anciens, création d'autres objets,
+        changement de la taille du joueur"""
         player = game.player
 
         #Liste qui va stocker les rectangles de collision 
@@ -671,7 +688,7 @@ class Affichage:
                 map_data = pyscroll.data.TiledMapData(self.tmx_data)
                 map_layer = pyscroll.orthographic.BufferedRenderer(map_data, self.screen.get_size())
                 self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=6)
-                self.group.add(game.player)
+                #self.group.switchMap(self, object, game:Game).add(game.player)
                 self.walls=[]
                 for obj in self.tmx_data.objects:
                     if obj.type == "collision":

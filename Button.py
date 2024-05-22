@@ -12,6 +12,7 @@ class Bouton():
         self.screen = screen
 
     def touched(self):
+        """fonction pour vérifier que le joueur appuie sur le boutton"""
         action = False
         #prend la position de la souris
         pos = pygame.mouse.get_pos()
@@ -25,5 +26,6 @@ class Bouton():
         return action
     
     def draw(self):
+        """fonction d'affichage du bouton"""
         self.screen.blit(self.image,(self.rect.x, self.rect.y))  
         
