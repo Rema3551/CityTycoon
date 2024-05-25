@@ -486,7 +486,7 @@ class Affichage:
             
             
     def switchMap(self, object, game:Game):
-        """fonction qui permet de changer de map : création des collisions des batiments et elever celles des anciens, création d'autres objets,
+        """fonction qui permet de changer de map : création des collisions des batiments et enlever celles des anciens, création d'autres objets,
         changement de la taille du joueur"""
         player = game.player
 
