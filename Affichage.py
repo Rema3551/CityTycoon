@@ -7,6 +7,7 @@ from GameStep import *
 from MapStep import *
 from Player import *
 import Backup
+import webbrowser
 
 class Affichage:
     """
@@ -40,7 +41,7 @@ class Affichage:
         self.green = (0, 255, 0)
         self.blue = (0, 0, 128)
         self.colorWood = (144,51,42)
-
+        
         player = game.player
         game.backup.loadMap(game)
         if game.getMapStep()==MapStep.MAP1:   
@@ -204,6 +205,7 @@ class Affichage:
             self.boutonYes.draw()
             self.boutonNo.draw()
             if self.boutonYes.touched():
+                webbrowser.open(game.getAd(), 1, True)
                 #ouvrir le site internet ici
                 game.setGameStep(GameStep.BUTTONVIDEO)
             if self.boutonNo.touched() :

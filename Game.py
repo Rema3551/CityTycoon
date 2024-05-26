@@ -5,6 +5,7 @@ from Backup import *
 from GameStep import *
 from MapStep import *
 from random import *
+from Ad import *
 
 class Game:
     """
@@ -32,6 +33,7 @@ class Game:
     def __init__(self):
         self.player = Player()
         self.backup = Backup()
+        self.ad = Ad()
         self.gameEnum = GameStep.IDLE
         self.mapStep = MapStep.MAP1
         self.affichage = Affichage(self)
@@ -196,6 +198,8 @@ class Game:
         self.restoreBuildings(restored_data['listBuildingsPlayer'])
         self.restorePlayer(restored_data['player'])
 
+    def getAd(self):
+        return self.ad.randomAd()
 
 
 
