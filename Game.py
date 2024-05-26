@@ -131,7 +131,7 @@ class Game:
         if pressedKeys[pygame.K_UP]:
             self.player.bougerHaut()
             self.player.animation('up')
-            self.player.setDollars(self.player.getDollars() + 1000)
+            self.player.setDollars(self.player.getDollars() + 0.01)
             self.player.setDiamonds(self.player.getDiamonds() +0.0001)
         elif pressedKeys[pygame.K_DOWN]:
             self.player.bougerBas()

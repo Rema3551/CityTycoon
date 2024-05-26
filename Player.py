@@ -171,6 +171,10 @@ class Player(pygame.sprite.Sprite):
         """ajoute des dollars au joueur"""
         self.dollars+=newDollars
     
+    def addDiamond(self, newDiamonds):
+        """ajoute des dollars au joueur"""
+        self.diamonds+=newDiamonds
+    
     def setDiamonds(self, newDiamants):
         """change les diamants du joueur"""
         self.diamonds = newDiamants

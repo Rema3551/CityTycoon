@@ -206,8 +206,10 @@ class Affichage:
             self.boutonNo.draw()
             if self.boutonYes.touched():
                 webbrowser.open(game.getAd(), 1, True)
-                #ouvrir le site internet ici
-                game.setGameStep(GameStep.BUTTONVIDEO)
+                pygame.time.wait(game.ad.getWaitTime())
+                
+                player.addDiamond(10)
+                game.setGameStep(GameStep.IDLE)
             if self.boutonNo.touched() :
                 game.setGameStep(GameStep.IDLE)
         
