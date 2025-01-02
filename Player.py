@@ -144,8 +144,6 @@ class Player(pygame.sprite.Sprite):
             return diamondsStr
         elif self.diamonds<10000:
             return str(int(self.diamonds/1000)) + "K" + diamondsStr[len(diamondsStr)-3] + diamondsStr[len(diamondsStr)-2]
-        elif self.diamonds<strDiamonds(self):
-            return str(int(self.diamonds/1000)) + "K" + diamondsStr[len(diamondsStr)-3]
         elif self.diamonds<10000000 :
             return str(int(self.diamonds/1000000)) + "M" + diamondsStr[len(diamondsStr)-6] + diamondsStr[len(diamondsStr)-5]
         elif self.diamonds<1000000000 : 
@@ -170,6 +168,10 @@ class Player(pygame.sprite.Sprite):
     def addDollars(self, newDollars):
         """ajoute des dollars au joueur"""
         self.dollars+=newDollars
+    
+    def addDiamond(self, newDiamonds):
+        """ajoute des dollars au joueur"""
+        self.diamonds+=newDiamonds
     
     def setDiamonds(self, newDiamants):
         """change les diamants du joueur"""

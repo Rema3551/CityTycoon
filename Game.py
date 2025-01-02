@@ -5,6 +5,7 @@ from Backup import *
 from GameStep import *
 from MapStep import *
 from random import *
+from Ad import *
 
 class Game:
     """
@@ -32,6 +33,7 @@ class Game:
     def __init__(self):
         self.player = Player()
         self.backup = Backup()
+        self.ad = Ad()
         self.gameEnum = GameStep.IDLE
         self.mapStep = MapStep.MAP1
         self.affichage = Affichage(self)
@@ -129,7 +131,7 @@ class Game:
         if pressedKeys[pygame.K_UP]:
             self.player.bougerHaut()
             self.player.animation('up')
-            self.player.setDollars(self.player.getDollars() + 1000)
+            self.player.setDollars(self.player.getDollars() + 0.01)
             self.player.setDiamonds(self.player.getDiamonds() +0.0001)
         elif pressedKeys[pygame.K_DOWN]:
             self.player.bougerBas()
@@ -196,6 +198,8 @@ class Game:
         self.restoreBuildings(restored_data['listBuildingsPlayer'])
         self.restorePlayer(restored_data['player'])
 
+    def getAd(self):
+        return self.ad.randomAd()
 
 
 
